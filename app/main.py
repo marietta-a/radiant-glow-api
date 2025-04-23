@@ -5,7 +5,7 @@ from bs4 import BeautifulSoup
 import urllib.parse
 import re
 from typing import List
-from foodscraper import FoodScraper
+from app.foodscraper import FoodScraper
 
 app = FastAPI()
 
