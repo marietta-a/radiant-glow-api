@@ -1,6 +1,10 @@
 # Dockerfile
 FROM python:3.13-rc-slim
 
+# Install git
+RUN apt-get update && apt-get install -y git
+
+# Set working directory
 WORKDIR /app
 
 RUN apt-get update && apt-get install -y \
