@@ -1,0 +1,5 @@
+fastapi
+uvicorn
+requests
+beautifulsoup4
+git+https://github.com/gurugaurav/bing_image_downloader
