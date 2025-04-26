@@ -1,0 +1,1935 @@
+[
+  {
+    "prompt": " Italian weight management diets",
+    "response": [
+      {
+        "category": "Italian Low-Calorie Lunch Options (Weight Management)",
+        "description": "Traditional Italian lunch dishes modified for calorie control while maintaining authentic flavors.",
+        "items": [
+          {
+            "label": "Zucchini Noodle Primavera",
+            "emoji": "🥒🇮🇹🍝",
+            "nutrient_proportion": {
+              "protein": "0.25",
+              "carbohydrates": "0.50",
+              "fat": "0.25"
+            },
+            "calories_aggregate": "280 / serving",
+            "health_benefit": [
+              "Low-carb alternative to pasta, reducing calorie intake",
+              "Rich in vitamins A and C from fresh vegetables",
+              "Contains healthy fats from olive oil and pine nuts",
+              "High water content promotes hydration and satiety"
+            ],
+            "health_risk": [
+              "Potential allergic reaction (tree nuts)",
+              "May cause digestive discomfort if eaten raw in large quantities"
+            ],
+            "ingredient": [
+              {
+                "name": "Zucchini (spiralized)",
+                "quantity": "2 medium",
+                "emoji": "🥒"
+              },
+              {
+                "name": "Cherry tomatoes",
+                "quantity": "1/2 cup",
+                "emoji": "🍅"
+              },
+              {
+                "name": "Fresh basil",
+                "quantity": "1/4 cup",
+                "emoji": "🌿"
+              },
+              {
+                "name": "Pine nuts",
+                "quantity": "1 tbsp",
+                "emoji": "🌰"
+              },
+              {
+                "name": "Extra virgin olive oil",
+                "quantity": "1 tbsp",
+                "emoji": "🫒"
+              }
+            ],
+            "recipe": [
+              "Spiralize zucchini into noodle shapes",
+              "Quickly blanch in boiling water for 1 minute",
+              "Toss with halved cherry tomatoes, torn basil leaves",
+              "Toast pine nuts lightly in a dry pan",
+              "Drizzle with olive oil and season with salt and pepper"
+            ],
+            "risk_color": "green"
+          },
+          {
+            "label": "Grilled Eggplant Caprese Stack",
+            "emoji": "🍆🇮🇹🧀",
+            "nutrient_proportion": {
+              "protein": "0.30",
+              "carbohydrates": "0.30",
+              "fat": "0.40"
+            },
+            "calories_aggregate": "320 / serving (2 stacks)",
+            "health_benefit": [
+              "High in antioxidants from eggplant and tomatoes",
+              "Good source of calcium from fresh mozzarella",
+              "Healthy fats from olive oil aid nutrient absorption",
+              "Low glycemic index helps maintain stable blood sugar"
+            ],
+            "health_risk": [
+              "High in histamines (tomatoes, cheese)",
+              "Dairy sensitivity possible"
+            ],
+            "ingredient": [
+              {
+                "name": "Eggplant (sliced 1/2\" thick)",
+                "quantity": "1 medium",
+                "emoji": "🍆"
+              },
+              {
+                "name": "Fresh mozzarella",
+                "quantity": "4 oz",
+                "emoji": "🧀"
+              },
+              {
+                "name": "Tomato (sliced)",
+                "quantity": "1 medium",
+                "emoji": "🍅"
+              },
+              {
+                "name": "Fresh basil leaves",
+                "quantity": "8 large",
+                "emoji": "🌿"
+              },
+              {
+                "name": "Balsamic glaze",
+                "quantity": "1 tsp",
+                "emoji": "🍯"
+              }
+            ],
+            "recipe": [
+              "Grill eggplant slices until tender (about 3 min per side)",
+              "Layer eggplant, tomato slice, mozzarella, and basil leaves",
+              "Repeat to create stack",
+              "Drizzle lightly with balsamic glaze",
+              "Serve at room temperature"
+            ],
+            "risk_color": "yellow"
+          }
+        ]
+      },
+      {
+        "category": "Italian Light Dinner Solutions (Weight Management)",
+        "description": "Evening meals that satisfy Italian culinary cravings while supporting weight loss goals.",
+        "items": [
+          {
+            "label": "Pesto-Stuffed Chicken with Roasted Vegetables",
+            "emoji": "🍗🇮🇹🌿",
+            "nutrient_proportion": {
+              "protein": "0.50",
+              "carbohydrates": "0.20",
+              "fat": "0.30"
+            },
+            "calories_aggregate": "380 / serving",
+            "health_benefit": [
+              "High protein content supports muscle retention during weight loss",
+              "Vegetables provide fiber for digestive health",
+              "Healthy fats from pesto support nutrient absorption",
+              "Low-carb preparation helps maintain ketosis if desired"
+            ],
+            "health_risk": [
+              "Potential allergen (nuts in pesto)",
+              "Undercooked poultry risk if not prepared properly"
+            ],
+            "ingredient": [
+              {
+                "name": "Chicken breast",
+                "quantity": "6 oz",
+                "emoji": "🍗"
+              },
+              {
+                "name": "Basil pesto",
+                "quantity": "2 tbsp",
+                "emoji": "🌿"
+              },
+              {
+                "name": "Zucchini (diced)",
+                "quantity": "1 cup",
+                "emoji": "🥒"
+              },
+              {
+                "name": "Bell peppers (sliced)",
+                "quantity": "1/2 cup",
+                "emoji": "🫑"
+              },
+              {
+                "name": "Olive oil",
+                "quantity": "1 tsp",
+                "emoji": "🫒"
+              }
+            ],
+            "recipe": [
+              "Preheat oven to 400°F (200°C)",
+              "Butterfly chicken breast and spread pesto inside",
+              "Secure with toothpicks and place on baking sheet",
+              "Toss vegetables with olive oil and arrange around chicken",
+              "Roast for 20-25 minutes until chicken reaches 165°F (74°C)"
+            ],
+            "risk_color": "yellow"
+          },
+          {
+            "label": "Seafood Cioppino Light",
+            "emoji": "🍤🇮🇹🍅",
+            "nutrient_proportion": {
+              "protein": "0.45",
+              "carbohydrates": "0.30",
+              "fat": "0.25"
+            },
+            "calories_aggregate": "290 / serving",
+            "health_benefit": [
+              "Rich in omega-3 fatty acids from seafood",
+              "Lyopene from cooked tomatoes supports heart health",
+              "Low-calorie yet satisfying broth-based dish",
+              "Excellent source of iodine and selenium"
+            ],
+            "health_risk": [
+              "Shellfish allergies",
+              "High sodium if using canned ingredients"
+            ],
+            "ingredient": [
+              {
+                "name": "White fish fillet",
+                "quantity": "4 oz",
+                "emoji": "🐟"
+              },
+              {
+                "name": "Shrimp (peeled)",
+                "quantity": "6 large",
+                "emoji": "🍤"
+              },
+              {
+                "name": "Tomato (diced)",
+                "quantity": "1 cup",
+                "emoji": "🍅"
+              },
+              {
+                "name": "White wine",
+                "quantity": "1/4 cup",
+                "emoji": "🍷"
+              },
+              {
+                "name": "Garlic (minced)",
+                "quantity": "2 cloves",
+                "emoji": "🧄"
+              }
+            ],
+            "recipe": [
+              "Sauté garlic in olive oil until fragrant",
+              "Add tomatoes and wine, simmer for 10 minutes",
+              "Add fish and shrimp, cover and cook 5-7 minutes",
+              "Season with Italian herbs and pepper",
+              "Serve with lemon wedge"
+            ],
+            "risk_color": "yellow"
+          }
+        ]
+      },
+      {
+        "category": "Italian Breakfast Alternatives (Weight Management)",
+        "description": "Morning meals inspired by Italian tradition but optimized for portion control and nutrition.",
+        "items": [
+          {
+            "label": "Ricotta and Berry Breakfast Bowl",
+            "emoji": "🥣🇮🇹🫐",
+            "nutrient_proportion": {
+              "protein": "0.35",
+              "carbohydrates": "0.40",
+              "fat": "0.25"
+            },
+            "calories_aggregate": "240 / serving",
+            "health_benefit": [
+              "High protein start to the day reduces snacking",
+              "Antioxidants from berries support cellular health",
+              "Calcium from ricotta promotes bone strength",
+              "Low glycemic impact helps control cravings"
+            ],
+            "health_risk": [
+              "Dairy sensitivity possible",
+              "Natural sugars from fruit"
+            ],
+            "ingredient": [
+              {
+                "name": "Part-skim ricotta",
+                "quantity": "1/2 cup",
+                "emoji": "🧀"
+              },
+              {
+                "name": "Mixed berries",
+                "quantity": "3/4 cup",
+                "emoji": "🫐"
+              },
+              {
+                "name": "Chia seeds",
+                "quantity": "1 tsp",
+                "emoji": "🌱"
+              },
+              {
+                "name": "Lemon zest",
+                "quantity": "1/2 tsp",
+                "emoji": "🍋"
+              },
+              {
+                "name": "Honey",
+                "quantity": "1/2 tsp",
+                "emoji": "🍯"
+              }
+            ],
+            "recipe": [
+              "Mix ricotta with lemon zest",
+              "Top with fresh berries",
+              "Sprinkle chia seeds",
+              "Drizzle lightly with honey",
+              "Let sit 5 minutes before eating"
+            ],
+            "risk_color": "green"
+          },
+          {
+            "label": "Frittata Muffins with Sun-Dried Tomatoes",
+            "emoji": "🧁🇮🇹🍅",
+            "nutrient_proportion": {
+              "protein": "0.45",
+              "carbohydrates": "0.20",
+              "fat": "0.35"
+            },
+            "calories_aggregate": "180 / serving (2 muffins)",
+            "health_benefit": [
+              "Portion-controlled protein source",
+              "Convenient make-ahead breakfast option",
+              "Sun-dried tomatoes provide concentrated nutrients",
+              "Helps maintain muscle mass during calorie restriction"
+            ],
+            "health_risk": [
+              "Egg allergy",
+              "High cholesterol for sensitive individuals"
+            ],
+            "ingredient": [
+              {
+                "name": "Eggs",
+                "quantity": "4 large",
+                "emoji": "🥚"
+              },
+              {
+                "name": "Sun-dried tomatoes",
+                "quantity": "1/4 cup",
+                "emoji": "🍅"
+              },
+              {
+                "name": "Baby spinach",
+                "quantity": "1 cup",
+                "emoji": "🥬"
+              },
+              {
+                "name": "Parmesan cheese",
+                "quantity": "2 tbsp",
+                "emoji": "🧀"
+              },
+              {
+                "name": "Olive oil",
+                "quantity": "1 tsp",
+                "emoji": "🫒"
+              }
+            ],
+            "recipe": [
+              "Preheat oven to 350°F (175°C)",
+              "Whisk eggs with grated parmesan",
+              "Chop tomatoes and spinach, mix into eggs",
+              "Grease muffin tin with olive oil",
+              "Divide mixture into 6 muffin cups",
+              "Bake 15-18 minutes until set"
+            ],
+            "risk_color": "yellow"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "prompt": "Weight management diet categories:\n\n- Calorie-Restricted Diets\n- Low-Carbohydrate Diets\n- Low-Fat Diets\n- High-Protein Diets\n- Plant-Based & Vegan Diets\n- Mediterranean Diet\n- DASH Diet (Dietary Approaches to Stop Hypertension)\n- Flexitarian Diet\n- Meal Replacement Diets\n- Low-Glycemic Index (GI) Diets\n- Anti-Inflammatory Diets\n- Fad/Crash Diets (Short-Term, Often Unsustainable)\n\nFor each category, generate highly nutritional food items (risk color: green — green represents an optimal healthy diet) using the template below:\n\nTemplate:\nPrompt: Generate [Country/Localization] [Diet Category] for Weight Management.\n\nExample:\nPrompt: Generate Italian Meal Replacement Diets for Weight Management.",
+    "response": [
+      {
+        "category": "Calorie-Restricted Italian Diets",
+        "description": "Traditional Italian dishes modified for controlled calorie intake while maintaining nutritional balance.",
+        "items": [
+          {
+            "label": "Zucchini Lasagna Rolls",
+            "emoji": "🥒🇮🇹🧀",
+            "nutrient_proportion": {
+              "protein": "0.35",
+              "carbohydrates": "0.30",
+              "fat": "0.35"
+            },
+            "calories_aggregate": "280 / serving (2 rolls)",
+            "health_benefit": [
+              "75% fewer calories than traditional lasagna",
+              "High in vitamin C and potassium from zucchini",
+              "Contains gut-friendly probiotics from ricotta",
+              "Slow-digesting proteins promote satiety"
+            ],
+            "health_risk": [
+              "Dairy sensitivity possible"
+            ],
+            "ingredient": [
+              {
+                "name": "Zucchini (sliced lengthwise)",
+                "quantity": "1 medium",
+                "emoji": "🥒"
+              },
+              {
+                "name": "Part-skim ricotta",
+                "quantity": "1/2 cup",
+                "emoji": "🧀"
+              },
+              {
+                "name": "Spinach (chopped)",
+                "quantity": "1/2 cup",
+                "emoji": "🥬"
+              },
+              {
+                "name": "Tomato sauce (low-sodium)",
+                "quantity": "1/4 cup",
+                "emoji": "🍅"
+              }
+            ],
+            "recipe": [
+              "Blanch zucchini strips for 1 minute",
+              "Mix ricotta with chopped spinach",
+              "Spread mixture on zucchini strips and roll up",
+              "Top with tomato sauce",
+              "Bake at 375°F (190°C) for 20 minutes"
+            ],
+            "risk_color": "green"
+          }
+        ]
+      },
+      {
+        "category": "Low-Carbohydrate Italian Diets",
+        "description": "Italian favorites reimagined with minimal carbohydrates for blood sugar control.",
+        "items": [
+          {
+            "label": "Parmesan-Crusted Chicken Piccata",
+            "emoji": "🍗🇮🇹🍋",
+            "nutrient_proportion": {
+              "protein": "0.50",
+              "carbohydrates": "0.05",
+              "fat": "0.45"
+            },
+            "calories_aggregate": "320 / serving",
+            "health_benefit": [
+              "Only 3g net carbs per serving",
+              "High in selenium and B vitamins",
+              "Caprylic acid in olive oil supports ketosis",
+              "Lemon provides vitamin C and aids iron absorption"
+            ],
+            "health_risk": [
+              "None when consumed in moderation"
+            ],
+            "ingredient": [
+              {
+                "name": "Chicken breast",
+                "quantity": "6 oz",
+                "emoji": "🍗"
+              },
+              {
+                "name": "Parmesan cheese (grated)",
+                "quantity": "2 tbsp",
+                "emoji": "🧀"
+              },
+              {
+                "name": "Lemon juice",
+                "quantity": "2 tbsp",
+                "emoji": "🍋"
+              },
+              {
+                "name": "Capers",
+                "quantity": "1 tbsp",
+                "emoji": "🌿"
+              }
+            ],
+            "recipe": [
+              "Coat chicken in parmesan",
+              "Pan-fry in olive oil 4-5 minutes per side",
+              "Deglaze pan with lemon juice and capers",
+              "Serve with steamed greens"
+            ],
+            "risk_color": "green"
+          }
+        ]
+      },
+      {
+        "category": "Low-Fat Italian Diets",
+        "description": "Flavorful Italian preparations with minimal added fats.",
+        "items": [
+          {
+            "label": "Bruschetta-Stuffed Tomatoes",
+            "emoji": "🍅🇮🇹🌿",
+            "nutrient_proportion": {
+              "protein": "0.15",
+              "carbohydrates": "0.60",
+              "fat": "0.25"
+            },
+            "calories_aggregate": "150 / serving (2 tomatoes)",
+            "health_benefit": [
+              "Contains only 3g fat per serving",
+              "Rich in lycopene from tomatoes",
+              "Garlic supports cardiovascular health",
+              "High water content promotes satiety"
+            ],
+            "health_risk": [
+              "Nightshade sensitivity possible"
+            ],
+            "ingredient": [
+              {
+                "name": "Beefsteak tomatoes",
+                "quantity": "2 medium",
+                "emoji": "🍅"
+              },
+              {
+                "name": "Whole grain bread crumbs",
+                "quantity": "1/4 cup",
+                "emoji": "🍞"
+              },
+              {
+                "name": "Garlic (minced)",
+                "quantity": "2 cloves",
+                "emoji": "🧄"
+              },
+              {
+                "name": "Fresh basil",
+                "quantity": "1/4 cup",
+                "emoji": "🌿"
+              }
+            ],
+            "recipe": [
+              "Scoop out tomato centers",
+              "Mix pulp with breadcrumbs, garlic and basil",
+              "Stuff tomatoes and bake at 400°F (200°C) for 15 minutes"
+            ],
+            "risk_color": "green"
+          }
+        ]
+      },
+      {
+        "category": "High-Protein Italian Diets",
+        "description": "Protein-rich Italian dishes to support muscle retention during weight loss.",
+        "items": [
+          {
+            "label": "Tuscan White Bean & Tuna Salad",
+            "emoji": "🐟🇮🇹🌱",
+            "nutrient_proportion": {
+              "protein": "0.55",
+              "carbohydrates": "0.25",
+              "fat": "0.20"
+            },
+            "calories_aggregate": "350 / serving",
+            "health_benefit": [
+              "42g protein per serving",
+              "Omega-3 fatty acids support metabolism",
+              "Fiber-rich beans promote gut health",
+              "Complete amino acid profile"
+            ],
+            "health_risk": [
+              "Mercury content in tuna (limit to 2 servings/week)"
+            ],
+            "ingredient": [
+              {
+                "name": "Albacore tuna (water-packed)",
+                "quantity": "5 oz",
+                "emoji": "🐟"
+              },
+              {
+                "name": "Cannellini beans",
+                "quantity": "1/2 cup",
+                "emoji": "🌱"
+              },
+              {
+                "name": "Red onion (thinly sliced)",
+                "quantity": "1/4 cup",
+                "emoji": "🧅"
+              },
+              {
+                "name": "Lemon juice",
+                "quantity": "2 tbsp",
+                "emoji": "🍋"
+              }
+            ],
+            "recipe": [
+              "Flake tuna and mix with beans",
+              "Add onion and lemon juice",
+              "Marinate for 30 minutes before serving"
+            ],
+            "risk_color": "green"
+          }
+        ]
+      },
+      {
+        "category": "Plant-Based & Vegan Italian Diets",
+        "description": "Animal-free Italian meals rich in phytonutrients.",
+        "items": [
+          {
+            "label": "Lentil Bolognese with Whole Wheat Pasta",
+            "emoji": "🌱🇮🇹🍝",
+            "nutrient_proportion": {
+              "protein": "0.25",
+              "carbohydrates": "0.55",
+              "fat": "0.20"
+            },
+            "calories_aggregate": "380 / serving",
+            "health_benefit": [
+              "18g plant-based protein per serving",
+              "Rich in iron and folate from lentils",
+              "Whole wheat provides sustained energy",
+              "Contains cancer-fighting lycopene"
+            ],
+            "health_risk": [
+              "Gluten sensitivity possible"
+            ],
+            "ingredient": [
+              {
+                "name": "Brown lentils (cooked)",
+                "quantity": "1 cup",
+                "emoji": "🌱"
+              },
+              {
+                "name": "Whole wheat pasta",
+                "quantity": "2 oz dry",
+                "emoji": "🍝"
+              },
+              {
+                "name": "Tomato passata",
+                "quantity": "1 cup",
+                "emoji": "🍅"
+              },
+              {
+                "name": "Nutritional yeast",
+                "quantity": "1 tbsp",
+                "emoji": "✨"
+              }
+            ],
+            "recipe": [
+              "Simmer lentils in tomato sauce for 20 minutes",
+              "Cook pasta al dente",
+              "Top with nutritional yeast"
+            ],
+            "risk_color": "green"
+          }
+        ]
+      },
+      {
+        "category": "Mediterranean Diet (Italian Variation)",
+        "description": "Heart-healthy Italian meals following Mediterranean principles.",
+        "items": [
+          {
+            "label": "Sardine & Artichoke Crostini",
+            "emoji": "🐟🇮🇹🍞",
+            "nutrient_proportion": {
+              "protein": "0.30",
+              "carbohydrates": "0.40",
+              "fat": "0.30"
+            },
+            "calories_aggregate": "290 / serving (2 pieces)",
+            "health_benefit": [
+              "Rich in omega-3 and omega-9 fatty acids",
+              "Artichokes support liver function",
+              "Whole grain bread provides fiber",
+              "Contains CoQ10 for cellular energy"
+            ],
+            "health_risk": [
+              "None when consumed in moderation"
+            ],
+            "ingredient": [
+              {
+                "name": "Whole grain baguette",
+                "quantity": "2 slices",
+                "emoji": "🍞"
+              },
+              {
+                "name": "Sardines (in olive oil)",
+                "quantity": "2 fillets",
+                "emoji": "🐟"
+              },
+              {
+                "name": "Marinated artichoke hearts",
+                "quantity": "1/4 cup",
+                "emoji": "🌿"
+              },
+              {
+                "name": "Lemon zest",
+                "quantity": "1/2 tsp",
+                "emoji": "🍋"
+              }
+            ],
+            "recipe": [
+              "Toast bread slices",
+              "Mash sardines with artichokes",
+              "Spread on toast and garnish with lemon zest"
+            ],
+            "risk_color": "green"
+          }
+        ]
+      },
+      {
+        "category": "DASH Diet (Italian Adaptation)",
+        "description": "Italian meals designed to support blood pressure control.",
+        "items": [
+          {
+            "label": "No-Salt-Added Minestrone",
+            "emoji": "🥣🇮🇹🥕",
+            "nutrient_proportion": {
+              "protein": "0.20",
+              "carbohydrates": "0.60",
+              "fat": "0.20"
+            },
+            "calories_aggregate": "220 / serving",
+            "health_benefit": [
+              "Contains 150mg sodium (75% less than traditional)",
+              "High in potassium from vegetables",
+              "Fiber helps regulate blood sugar",
+              "Phytonutrients support endothelial function"
+            ],
+            "health_risk": [
+              "None when consumed in moderation"
+            ],
+            "ingredient": [
+              {
+                "name": "Mixed vegetables (zucchini, carrots, celery)",
+                "quantity": "2 cups",
+                "emoji": "🥕"
+              },
+              {
+                "name": "No-salt-added tomatoes",
+                "quantity": "1 cup",
+                "emoji": "🍅"
+              },
+              {
+                "name": "Fresh herbs (basil, oregano)",
+                "quantity": "2 tbsp",
+                "emoji": "🌿"
+              },
+              {
+                "name": "Garlic",
+                "quantity": "3 cloves",
+                "emoji": "🧄"
+              }
+            ],
+            "recipe": [
+              "Sauté vegetables in olive oil",
+              "Add tomatoes and herbs",
+              "Simmer for 30 minutes"
+            ],
+            "risk_color": "green"
+          }
+        ]
+      },
+      {
+        "category": "Flexitarian Italian Diets",
+        "description": "Mostly plant-based Italian meals with occasional animal proteins.",
+        "items": [
+          {
+            "label": "Mushroom & Lean Beef Polpette",
+            "emoji": "🍄🇮🇹🍖",
+            "nutrient_proportion": {
+              "protein": "0.40",
+              "carbohydrates": "0.30",
+              "fat": "0.30"
+            },
+            "calories_aggregate": "310 / serving (3 pieces)",
+            "health_benefit": [
+              "50% less meat than traditional meatballs",
+              "Mushrooms provide immune-supporting beta-glucans",
+              "Contains metabolism-supporting iron",
+              "Rich in umami flavor compounds"
+            ],
+            "health_risk": [
+              "None when consumed in moderation"
+            ],
+            "ingredient": [
+              {
+                "name": "Ground sirloin (90% lean)",
+                "quantity": "4 oz",
+                "emoji": "🍖"
+              },
+              {
+                "name": "Cremini mushrooms (minced)",
+                "quantity": "1 cup",
+                "emoji": "🍄"
+              },
+              {
+                "name": "Whole wheat breadcrumbs",
+                "quantity": "1/4 cup",
+                "emoji": "🍞"
+              },
+              {
+                "name": "Egg white",
+                "quantity": "1",
+                "emoji": "🥚"
+              }
+            ],
+            "recipe": [
+              "Mix all ingredients",
+              "Form into small balls",
+              "Bake at 400°F (200°C) for 20 minutes"
+            ],
+            "risk_color": "green"
+          }
+        ]
+      },
+      {
+        "category": "Low-Glycemic Index Italian Diets",
+        "description": "Italian meals designed for stable blood sugar response.",
+        "items": [
+          {
+            "label": "Chickpea Farinata with Rosemary",
+            "emoji": "🌾🇮🇹🌿",
+            "nutrient_proportion": {
+              "protein": "0.25",
+              "carbohydrates": "0.50",
+              "fat": "0.25"
+            },
+            "calories_aggregate": "240 / serving",
+            "health_benefit": [
+              "Glycemic index of 35 (low)",
+              "Chickpeas provide resistant starch",
+              "Rosemary contains anti-inflammatory compounds",
+              "High in manganese for metabolism support"
+            ],
+            "health_risk": [
+              "None when consumed in moderation"
+            ],
+            "ingredient": [
+              {
+                "name": "Chickpea flour",
+                "quantity": "1 cup",
+                "emoji": "🌾"
+              },
+              {
+                "name": "Water",
+                "quantity": "1.5 cups",
+                "emoji": "💧"
+              },
+              {
+                "name": "Fresh rosemary",
+                "quantity": "1 tbsp",
+                "emoji": "🌿"
+              },
+              {
+                "name": "Olive oil",
+                "quantity": "1 tbsp",
+                "emoji": "🫒"
+              }
+            ],
+            "recipe": [
+              "Whisk flour and water",
+              "Let rest for 4 hours",
+              "Stir in rosemary and oil",
+              "Bake in cast iron at 450°F (230°C) for 15 minutes"
+            ],
+            "risk_color": "green"
+          }
+        ]
+      },
+      {
+        "category": "Anti-Inflammatory Italian Diets",
+        "description": "Italian meals rich in compounds that reduce inflammation.",
+        "items": [
+          {
+            "label": "Turmeric-Infused Risotto Milanese",
+            "emoji": "🍚🇮🇹✨",
+            "nutrient_proportion": {
+              "protein": "0.15",
+              "carbohydrates": "0.60",
+              "fat": "0.25"
+            },
+            "calories_aggregate": "320 / serving",
+            "health_benefit": [
+              "Curcumin in turmeric reduces inflammation",
+              "Saffron contains mood-supporting compounds",
+              "Arborio rice provides energizing carbohydrates",
+              "Olive oil polyphenols support heart health"
+            ],
+            "health_risk": [
+              "None when consumed in moderation"
+            ],
+            "ingredient": [
+              {
+                "name": "Arborio rice",
+                "quantity": "1/2 cup",
+                "emoji": "🍚"
+              },
+              {
+                "name": "Turmeric",
+                "quantity": "1 tsp",
+                "emoji": "✨"
+              },
+              {
+                "name": "Saffron threads",
+                "quantity": "1 pinch",
+                "emoji": "🌿"
+              },
+              {
+                "name": "Vegetable broth",
+                "quantity": "2 cups",
+                "emoji": "🥕"
+              }
+            ],
+            "recipe": [
+              "Toast rice with turmeric",
+              "Add warm broth gradually",
+              "Finish with saffron",
+              "Stir in olive oil before serving"
+            ],
+            "risk_color": "green"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "prompt": "Categories of diet that fall under weight management: [ Calorie-Restricted Diets, Low-Carbohydrate Diets, Low-Fat Diets,  High-Protein Diets,Plant-Based & Vegan Diets, Mediterranean Diet, DASH Diet (Dietary Approaches to Stop Hypertension, Flexitarian Diet,  Meal Replacement Diets, Low-Glycemic Index (GI Diets, Anti-Inflammatory Diets, Fad/Crash Diets (Short-Term, Often Unsustainable]. for each category, generate highly nutritional Cameroonian food items (risk color green - green represents optimal healthy diet)  (Note calories is per serving but should not include the text / serving)", 
+    "response": [
+      {
+        "category": "Calorie-Restricted Cameroonian Diets",
+        "description": "Traditional dishes modified for controlled calorie intake",
+        "items": [
+          {
+            "label": "Steamed Kwacoco Bible",
+            "emoji": "🍌🇨🇲🌿",
+            "nutrient_proportion": {
+              "protein": "0.15",
+              "carbohydrates": "0.70",
+              "fat": "0.15"
+            },
+            "calories_aggregate": "250",
+            "health_benefit": [
+              "Naturally low in fat",
+              "High fiber content promotes satiety",
+              "Rich in potassium from plantains",
+              "Traditional preparation preserves nutrients"
+            ],
+            "health_risk": ["None"],
+            "ingredient": [
+              {"name": "Grated cocoyam", "quantity": "1 cup", "emoji": "🍠"},
+              {"name": "Plantain", "quantity": "1/2 medium", "emoji": "🍌"},
+              {"name": "Spinach", "quantity": "1/4 cup", "emoji": "🥬"}
+            ],
+            "recipe": [
+              "Mix grated cocoyam with mashed plantain",
+              "Wrap in spinach leaves",
+              "Steam for 45 minutes"
+            ],
+            "risk_color": "green"
+          }
+        ]
+      },
+      {
+        "category": "Low-Carbohydrate Cameroonian Diets",
+        "description": "Traditional meals with reduced carbohydrate content",
+        "items": [
+          {
+            "label": "Grilled Njamah with Pepper Soup",
+            "emoji": "🐟🇨🇲🌶️",
+            "nutrient_proportion": {
+              "protein": "0.60",
+              "carbohydrates": "0.10",
+              "fat": "0.30"
+            },
+            "calories_aggregate": "280",
+            "health_benefit": [
+              "High-quality protein from fish",
+              "Capsaicin in peppers boosts metabolism",
+              "Omega-3 fatty acids support heart health",
+              "Very low glycemic impact"
+            ],
+            "health_risk": ["None"],
+            "ingredient": [
+              {"name": "Catfish", "quantity": "120g", "emoji": "🐟"},
+              {"name": "Scotch bonnet peppers", "quantity": "1", "emoji": "🌶️"},
+              {"name": "Bitterleaf", "quantity": "1/2 cup", "emoji": "🥬"}
+            ],
+            "recipe": [
+              "Marinate fish with spices",
+              "Grill for 5 minutes per side",
+              "Simmer peppers and bitterleaf for soup"
+            ],
+            "risk_color": "green"
+          }
+        ]
+      },
+      {
+        "category": "Low-Fat Cameroonian Diets",
+        "description": "Traditional preparations with minimal added fats",
+        "items": [
+          {
+            "label": "Eru Stew with Skinless Chicken",
+            "emoji": "🥬🇨🇲🍗",
+            "nutrient_proportion": {
+              "protein": "0.50",
+              "carbohydrates": "0.30",
+              "fat": "0.20"
+            },
+            "calories_aggregate": "300",
+            "health_benefit": [
+              "75% less palm oil than traditional preparation",
+              "High in fiber from eru leaves",
+              "Lean protein from skinless poultry",
+              "Rich in iron and calcium"
+            ],
+            "health_risk": ["None"],
+            "ingredient": [
+              {"name": "Eru leaves", "quantity": "1 cup", "emoji": "🥬"},
+              {"name": "Skinless chicken breast", "quantity": "100g", "emoji": "🍗"},
+              {"name": "Waterleaf", "quantity": "1/2 cup", "emoji": "🌿"}
+            ],
+            "recipe": [
+              "Boil chicken with spices",
+              "Add washed eru and waterleaf",
+              "Simmer for 20 minutes"
+            ],
+            "risk_color": "green"
+          }
+        ]
+      },
+      {
+        "category": "High-Protein Cameroonian Diets",
+        "description": "Protein-rich traditional meals for muscle retention",
+        "items": [
+          {
+            "label": "Grasscutter Pepper Soup",
+            "emoji": "🐭🇨🇲🔥",
+            "nutrient_proportion": {
+              "protein": "0.65",
+              "carbohydrates": "0.10",
+              "fat": "0.25"
+            },
+            "calories_aggregate": "320",
+            "health_benefit": [
+              "Extremely high in lean protein",
+              "Contains conjugated linoleic acid (CLA)",
+              "Rich in iron and B vitamins",
+              "Low in saturated fats"
+            ],
+            "health_risk": ["None when properly cooked"],
+            "ingredient": [
+              {"name": "Grasscutter meat", "quantity": "120g", "emoji": "🐭"},
+              {"name": "Peppersoup spices", "quantity": "1 tbsp", "emoji": "🌶️"},
+              {"name": "Uziza leaves", "quantity": "1/4 cup", "emoji": "🌿"}
+            ],
+            "recipe": [
+              "Boil meat until tender",
+              "Add spices and simmer",
+              "Stir in uziza leaves before serving"
+            ],
+            "risk_color": "green"
+          }
+        ]
+      },
+      {
+        "category": "Plant-Based Cameroonian Diets",
+        "description": "Traditional vegan-friendly meals",
+        "items": [
+          {
+            "label": "Koki Beans with Plantain",
+            "emoji": "🌱🇨🇲🍌",
+            "nutrient_proportion": {
+              "protein": "0.30",
+              "carbohydrates": "0.55",
+              "fat": "0.15"
+            },
+            "calories_aggregate": "290",
+            "health_benefit": [
+              "Complete plant-based protein",
+              "High in dietary fiber",
+              "Rich in folate and magnesium",
+              "Naturally cholesterol-free"
+            ],
+            "health_risk": ["None"],
+            "ingredient": [
+              {"name": "Black-eyed peas", "quantity": "1 cup", "emoji": "🌱"},
+              {"name": "Ripe plantain", "quantity": "1/2 medium", "emoji": "🍌"},
+              {"name": "Palm oil", "quantity": "1 tsp", "emoji": "🟠"}
+            ],
+            "recipe": [
+              "Blend beans with spices",
+              "Mix with palm oil",
+              "Wrap in plantain leaves and steam"
+            ],
+            "risk_color": "green"
+          }
+        ]
+      },
+      {
+        "category": "Mediterranean-Inspired Cameroonian Diet",
+        "description": "Local ingredients prepared Mediterranean-style",
+        "items": [
+          {
+            "label": "Banga Soup with Fish",
+            "emoji": "🐟🇨🇲🥥",
+            "nutrient_proportion": {
+              "protein": "0.35",
+              "carbohydrates": "0.35",
+              "fat": "0.30"
+            },
+            "calories_aggregate": "350",
+            "health_benefit": [
+              "Heart-healthy fats from palm fruit",
+              "Rich in omega-3 from fish",
+              "Contains antioxidant-rich spices",
+              "Balanced macronutrient profile"
+            ],
+            "health_risk": ["None"],
+            "ingredient": [
+              {"name": "Palm fruit extract", "quantity": "1/2 cup", "emoji": "🥥"},
+              {"name": "Fresh fish", "quantity": "100g", "emoji": "🐟"},
+              {"name": "Okra", "quantity": "1/4 cup", "emoji": "🟢"}
+            ],
+            "recipe": [
+              "Extract oil from palm fruit",
+              "Add fish and simmer",
+              "Stir in okra last"
+            ],
+            "risk_color": "green"
+          }
+        ]
+      },
+      {
+        "category": "DASH-Friendly Cameroonian Meals",
+        "description": "Traditional dishes modified for blood pressure control",
+        "items": [
+          {
+            "label": "Low-Sodium Ndolé",
+            "emoji": "🥬🇨🇲🥜",
+            "nutrient_proportion": {
+              "protein": "0.40",
+              "carbohydrates": "0.30",
+              "fat": "0.30"
+            },
+            "calories_aggregate": "310",
+            "health_benefit": [
+              "75% less salt than traditional preparation",
+              "High in potassium from bitterleaf",
+              "Magnesium-rich peanuts",
+              "Contains blood pressure-lowering compounds"
+            ],
+            "health_risk": ["None"],
+            "ingredient": [
+              {"name": "Bitterleaf", "quantity": "1 cup", "emoji": "🥬"},
+              {"name": "Unsalted peanuts", "quantity": "2 tbsp", "emoji": "🥜"},
+              {"name": "Lean beef", "quantity": "80g", "emoji": "🥩"}
+            ],
+            "recipe": [
+              "Wash bitterleaf thoroughly",
+              "Brown beef without salt",
+              "Add peanuts and bitterleaf",
+              "Simmer for 20 minutes"
+            ],
+            "risk_color": "green"
+          }
+        ]
+      },
+      {
+        "category": "Flexitarian Cameroonian Diet",
+        "description": "Mostly plant-based with occasional meat",
+        "items": [
+          {
+            "label": "Achu Light with Chicken",
+            "emoji": "🍠🇨🇲🍗",
+            "nutrient_proportion": {
+              "protein": "0.30",
+              "carbohydrates": "0.50",
+              "fat": "0.20"
+            },
+            "calories_aggregate": "330",
+            "health_benefit": [
+              "Reduced palm oil content",
+              "High fiber from cocoyam",
+              "Lean protein from chicken",
+              "Rich in vitamin A and C"
+            ],
+            "health_risk": ["None"],
+            "ingredient": [
+              {"name": "Cocoyam", "quantity": "1 cup", "emoji": "🍠"},
+              {"name": "Skinless chicken", "quantity": "60g", "emoji": "🍗"},
+              {"name": "Yellow soup", "quantity": "1/4 cup", "emoji": "🟡"}
+            ],
+            "recipe": [
+              "Boil and pound cocoyam",
+              "Prepare soup with minimal oil",
+              "Serve with small portion of chicken"
+            ],
+            "risk_color": "green"
+          }
+        ]
+      },
+      {
+        "category": "Low-GI Cameroonian Meals",
+        "description": "Traditional foods with low glycemic impact",
+        "items": [
+          {
+            "label": "Bitterleaf and Unripe Plantain Porridge",
+            "emoji": "🥬🇨🇲🍌",
+            "nutrient_proportion": {
+              "protein": "0.20",
+              "carbohydrates": "0.55",
+              "fat": "0.25"
+            },
+            "calories_aggregate": "270",
+            "health_benefit": [
+              "Glycemic index under 40",
+              "Resistant starch from unripe plantain",
+              "Blood sugar-regulating compounds in bitterleaf",
+              "Slow energy release"
+            ],
+            "health_risk": ["None"],
+            "ingredient": [
+              {"name": "Unripe plantain", "quantity": "1/2 medium", "emoji": "🍌"},
+              {"name": "Bitterleaf", "quantity": "1 cup", "emoji": "🥬"},
+              {"name": "Palm oil", "quantity": "1 tsp", "emoji": "🟠"}
+            ],
+            "recipe": [
+              "Boil diced plantain until soft",
+              "Add washed bitterleaf",
+              "Stir in palm oil",
+              "Simmer for 10 minutes"
+            ],
+            "risk_color": "green"
+          }
+        ]
+      },
+      {
+        "category": "Anti-Inflammatory Cameroonian Foods",
+        "description": "Traditional dishes rich in anti-inflammatory compounds",
+        "items": [
+          {
+            "label": "Turmeric-Infused Peppersoup",
+            "emoji": "🌶️🇨🇲✨",
+            "nutrient_proportion": {
+              "protein": "0.40",
+              "carbohydrates": "0.30",
+              "fat": "0.30"
+            },
+            "calories_aggregate": "290",
+            "health_benefit": [
+              "Curcumin in turmeric reduces inflammation",
+              "Capsaicin from peppers has pain-relieving properties",
+              "Garlic contains allicin with immune benefits",
+              "Ginger aids digestion"
+            ],
+            "health_risk": ["None"],
+            "ingredient": [
+              {"name": "Goat meat", "quantity": "80g", "emoji": "🐐"},
+              {"name": "Fresh turmeric", "quantity": "1 tbsp", "emoji": "✨"},
+              {"name": "Scotch bonnet", "quantity": "1/2 pepper", "emoji": "🌶️"}
+            ],
+            "recipe": [
+              "Boil meat with spices",
+              "Add grated turmeric",
+              "Simmer for 30 minutes"
+            ],
+            "risk_color": "green"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "prompt": "", 
+    "response": ""
+  },
+  {
+    "prompt": "", 
+    "response": ""
+  },
+  {
+    "prompt": "", 
+    "response": ""
+  },
+  {
+    "prompt": "", 
+    "response": ""
+  },
+  {
+    "prompt": "", 
+    "response": ""
+  },
+  {
+    "prompt": "", 
+    "response": ""
+  },
+  {
+    "prompt": "", 
+    "response": ""
+  },
+  {
+    "prompt": "", 
+    "response": ""
+  },
+  {
+    "prompt": "", 
+    "response": ""
+  },
+  {
+    "prompt": "", 
+    "response": ""
+  },
+  {
+    "prompt": "", 
+    "response": ""
+  },
+  {
+    "prompt": "", 
+    "response": ""
+  },
+  {
+    "prompt": "", 
+    "response": ""
+  },
+  {
+    "prompt": "", 
+    "response": ""
+  },
+  {
+    "prompt": "", 
+    "response": ""
+  },
+  {
+    "prompt": "", 
+    "response": ""
+  },
+  {
+    "prompt": "", 
+    "response": ""
+  },
+  {
+    "prompt": "", 
+    "response": ""
+  },
+  {
+    "prompt": "", 
+    "response": ""
+  },
+  {
+    "prompt": "", 
+    "response": ""
+  },
+  {
+    "prompt": "", 
+    "response": ""
+  },
+  {
+    "prompt": "", 
+    "response": ""
+  },
+  {
+    "prompt": "", 
+    "response": ""
+  },
+  {
+    "prompt": "", 
+    "response": ""
+  },
+  {
+    "prompt": "", 
+    "response": ""
+  },
+  {
+    "prompt": "", 
+    "response": ""
+  },
+  {
+    "prompt": "", 
+    "response": ""
+  },
+  {
+    "prompt": "", 
+    "response": ""
+  },
+  {
+    "prompt": "", 
+    "response": ""
+  },
+  {
+    "prompt": "", 
+    "response": ""
+  },
+  {
+    "prompt": "", 
+    "response": ""
+  },
+  {
+    "prompt": "", 
+    "response": ""
+  },
+  {
+    "prompt": "", 
+    "response": ""
+  },
+  {
+    "prompt": "", 
+    "response": ""
+  },
+  {
+    "prompt": "", 
+    "response": ""
+  },
+  {
+    "prompt": "", 
+    "response": ""
+  },
+  {
+    "prompt": "", 
+    "response": ""
+  },
+  {
+    "prompt": "", 
+    "response": ""
+  },
+  {
+    "prompt": "", 
+    "response": ""
+  },
+  {
+    "prompt": "", 
+    "response": ""
+  },
+  {
+    "prompt": "", 
+    "response": ""
+  },
+  {
+    "prompt": "", 
+    "response": ""
+  },
+  {
+    "prompt": "", 
+    "response": ""
+  },
+  {
+    "prompt": "", 
+    "response": ""
+  },
+  {
+    "prompt": "", 
+    "response": ""
+  },
+  {
+    "prompt": "", 
+    "response": ""
+  },
+  {
+    "prompt": "", 
+    "response": ""
+  },
+  {
+    "prompt": "", 
+    "response": ""
+  },
+  {
+    "prompt": "", 
+    "response": ""
+  },
+  {
+    "prompt": "", 
+    "response": ""
+  },
+  {
+    "prompt": "", 
+    "response": ""
+  },
+  {
+    "prompt": "", 
+    "response": ""
+  },
+  {
+    "prompt": "", 
+    "response": ""
+  },
+  {
+    "prompt": "", 
+    "response": ""
+  },
+  {
+    "prompt": "", 
+    "response": ""
+  },
+  {
+    "prompt": "", 
+    "response": ""
+  },
+  {
+    "prompt": "", 
+    "response": ""
+  },
+  {
+    "prompt": "", 
+    "response": ""
+  },
+  {
+    "prompt": "", 
+    "response": ""
+  },
+  {
+    "prompt": "", 
+    "response": ""
+  },
+  {
+    "prompt": "", 
+    "response": ""
+  },
+  {
+    "prompt": "", 
+    "response": ""
+  },
+  {
+    "prompt": "", 
+    "response": ""
+  },
+  {
+    "prompt": "", 
+    "response": ""
+  },
+  {
+    "prompt": "", 
+    "response": ""
+  },
+  {
+    "prompt": "", 
+    "response": ""
+  },
+  {
+    "prompt": "", 
+    "response": ""
+  },
+  {
+    "prompt": "", 
+    "response": ""
+  },
+  {
+    "prompt": "", 
+    "response": ""
+  },
+  {
+    "prompt": "", 
+    "response": ""
+  },
+  {
+    "prompt": "", 
+    "response": ""
+  },
+  {
+    "prompt": "", 
+    "response": ""
+  },
+  {
+    "prompt": "", 
+    "response": ""
+  },
+  {
+    "prompt": "", 
+    "response": ""
+  },
+  {
+    "prompt": "", 
+    "response": ""
+  },
+  {
+    "prompt": "", 
+    "response": ""
+  },
+  {
+    "prompt": "", 
+    "response": ""
+  },
+  {
+    "prompt": "", 
+    "response": ""
+  },
+  {
+    "prompt": "", 
+    "response": ""
+  },
+  {
+    "prompt": "", 
+    "response": ""
+  },
+  {
+    "prompt": "", 
+    "response": ""
+  },
+  {
+    "prompt": "", 
+    "response": ""
+  },
+  {
+    "prompt": "", 
+    "response": ""
+  },
+  {
+    "prompt": "", 
+    "response": ""
+  },
+  {
+    "prompt": "", 
+    "response": ""
+  },
+  {
+    "prompt": "", 
+    "response": ""
+  },
+  {
+    "prompt": "", 
+    "response": ""
+  },
+  {
+    "prompt": "", 
+    "response": ""
+  },
+  {
+    "prompt": "", 
+    "response": ""
+  },
+  {
+    "prompt": "", 
+    "response": ""
+  },
+  {
+    "prompt": "", 
+    "response": ""
+  },
+  {
+    "prompt": "", 
+    "response": ""
+  },
+  {
+    "prompt": "", 
+    "response": ""
+  },
+  {
+    "prompt": "", 
+    "response": ""
+  },
+  {
+    "prompt": "", 
+    "response": ""
+  },
+  {
+    "prompt": "", 
+    "response": ""
+  },
+  {
+    "prompt": "", 
+    "response": ""
+  },
+  {
+    "prompt": "", 
+    "response": ""
+  },
+  {
+    "prompt": "", 
+    "response": ""
+  },
+  {
+    "prompt": "", 
+    "response": ""
+  },
+  {
+    "prompt": "", 
+    "response": ""
+  },
+  {
+    "prompt": "", 
+    "response": ""
+  },
+  {
+    "prompt": "", 
+    "response": ""
+  },
+  {
+    "prompt": "", 
+    "response": ""
+  },
+  {
+    "prompt": "", 
+    "response": ""
+  },
+  {
+    "prompt": "", 
+    "response": ""
+  },
+  {
+    "prompt": "", 
+    "response": ""
+  },
+  {
+    "prompt": "", 
+    "response": ""
+  },
+  {
+    "prompt": "", 
+    "response": ""
+  },
+  {
+    "prompt": "", 
+    "response": ""
+  },
+  {
+    "prompt": "", 
+    "response": ""
+  },
+  {
+    "prompt": "", 
+    "response": ""
+  },
+  {
+    "prompt": "", 
+    "response": ""
+  },
+  {
+    "prompt": "", 
+    "response": ""
+  },
+  {
+    "prompt": "", 
+    "response": ""
+  },
+  {
+    "prompt": "", 
+    "response": ""
+  },
+  {
+    "prompt": "", 
+    "response": ""
+  },
+  {
+    "prompt": "", 
+    "response": ""
+  },
+  {
+    "prompt": "", 
+    "response": ""
+  },
+  {
+    "prompt": "", 
+    "response": ""
+  },
+  {
+    "prompt": "", 
+    "response": ""
+  },
+  {
+    "prompt": "", 
+    "response": ""
+  },
+  {
+    "prompt": "", 
+    "response": ""
+  },
+  {
+    "prompt": "", 
+    "response": ""
+  },
+  {
+    "prompt": "", 
+    "response": ""
+  },
+  {
+    "prompt": "", 
+    "response": ""
+  },
+  {
+    "prompt": "", 
+    "response": ""
+  },
+  {
+    "prompt": "", 
+    "response": ""
+  },
+  {
+    "prompt": "", 
+    "response": ""
+  },
+  {
+    "prompt": "", 
+    "response": ""
+  },
+  {
+    "prompt": "", 
+    "response": ""
+  },
+  {
+    "prompt": "", 
+    "response": ""
+  },
+  {
+    "prompt": "", 
+    "response": ""
+  },
+  {
+    "prompt": "", 
+    "response": ""
+  },
+  {
+    "prompt": "", 
+    "response": ""
+  },
+  {
+    "prompt": "", 
+    "response": ""
+  },
+  {
+    "prompt": "", 
+    "response": ""
+  },
+  {
+    "prompt": "", 
+    "response": ""
+  },
+  {
+    "prompt": "", 
+    "response": ""
+  },
+  {
+    "prompt": "", 
+    "response": ""
+  },
+  {
+    "prompt": "", 
+    "response": ""
+  },
+  {
+    "prompt": "", 
+    "response": ""
+  },
+  {
+    "prompt": "", 
+    "response": ""
+  },
+  {
+    "prompt": "", 
+    "response": ""
+  },
+  {
+    "prompt": "", 
+    "response": ""
+  },
+  {
+    "prompt": "", 
+    "response": ""
+  },
+  {
+    "prompt": "", 
+    "response": ""
+  },
+  {
+    "prompt": "", 
+    "response": ""
+  },
+  {
+    "prompt": "", 
+    "response": ""
+  },
+  {
+    "prompt": "", 
+    "response": ""
+  },
+  {
+    "prompt": "", 
+    "response": ""
+  },
+  {
+    "prompt": "", 
+    "response": ""
+  },
+  {
+    "prompt": "", 
+    "response": ""
+  },
+  {
+    "prompt": "", 
+    "response": ""
+  },
+  {
+    "prompt": "", 
+    "response": ""
+  },
+  {
+    "prompt": "", 
+    "response": ""
+  },
+  {
+    "prompt": "", 
+    "response": ""
+  },
+  {
+    "prompt": "", 
+    "response": ""
+  },
+  {
+    "prompt": "", 
+    "response": ""
+  },
+  {
+    "prompt": "", 
+    "response": ""
+  },
+  {
+    "prompt": "", 
+    "response": ""
+  },
+  {
+    "prompt": "", 
+    "response": ""
+  },
+  {
+    "prompt": "", 
+    "response": ""
+  },
+  {
+    "prompt": "", 
+    "response": ""
+  },
+  {
+    "prompt": "", 
+    "response": ""
+  },
+  {
+    "prompt": "", 
+    "response": ""
+  },
+  {
+    "prompt": "", 
+    "response": ""
+  },
+  {
+    "prompt": "", 
+    "response": ""
+  },
+  {
+    "prompt": "", 
+    "response": ""
+  },
+  {
+    "prompt": "", 
+    "response": ""
+  },
+  {
+    "prompt": "", 
+    "response": ""
+  },
+  {
+    "prompt": "", 
+    "response": ""
+  },
+  {
+    "prompt": "", 
+    "response": ""
+  }
+]

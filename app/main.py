@@ -5,7 +5,7 @@ from bs4 import BeautifulSoup
 import urllib.parse
 import re
 from typing import List
-from app.foodscraper import FoodScraper
+from app import food_generator
 
 app = FastAPI()
 
@@ -56,8 +56,7 @@ async def get_images(query: str, limit: int = 10):
 @app.get("/api/food-search")
 async def search_food(query):
     try:
-     food_scrapper = FoodScraper();
-     return food_scrapper.search_food_items(keyword=query)
+     return food_generator.search_food(query)
     except Exception as e:
         print(e)
         raise HTTPException(status_code=500, detail=str(e))
