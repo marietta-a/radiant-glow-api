@@ -1,4 +1,3 @@
-import json
 import re
 import torch
 from fastapi import HTTPException
@@ -472,20 +471,14 @@ class FoodGenerator:
             messages = [
                 {
                     "role": "system",
-                    "content": """You are a food expert that generates structured JSON output. 
-                    Return ONLY a JSON list of foods starting with the given keyword, formatted like this:
-                    [{"name": "food1", "type": "fruit/vegetable/dairy/etc"}, {"name": "food2", "type": "..."}]""",
+                    "content": "You are a friendly chatbot in charge of generating structured output for food that",
                 },
-                {"role": "user", "content": f"Generate 5 foods starting with '{user_input}' in JSON format"}
+                {"role": "user", "content": "Suggest classes of food that fall under weight management"},
             ]
             prompt = pipe.tokenizer.apply_chat_template(messages, tokenize=False, add_generation_prompt=True)
             outputs = pipe(prompt, max_new_tokens=256, do_sample=True, temperature=0.7, top_k=50, top_p=0.95)
-            raw_output = outputs[0]['generated_text']
-            json_start = raw_output.find('[')
-            json_end = raw_output.rfind(']') + 1
-            json_str = raw_output[json_start:json_end]
-            # return json.loads(json_str)
-            return json_str
+         
+            return outputs[0]["generated_text"]
         except Exception as e:
             print(f"An error occurred: {e}")
             raise HTTPException(status_code=500, detail=str(e))
