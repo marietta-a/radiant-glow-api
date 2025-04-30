@@ -46,7 +46,7 @@ class AIAnalysis:
     def search_food(self, query):
 
         template = """using the sample json format below as a guide. The response should be a json formatted list of foods that start with {query}.
-                        Sample json format:
+                        Sample json output format:
                     [
                         {{
                             "name": "Fufu",
@@ -96,7 +96,7 @@ class AIAnalysis:
         except Exception as e:
          raise HTTPException(status_code=500, detail=str(e))
         
-    def get_diet_suggestions(self, category, category_item):
+    def get_diet_suggestions(self, category, category_item, country=None, state=None, city=None, limit=20):
 
         template = """
             [
@@ -215,7 +215,8 @@ class AIAnalysis:
                 ]
                 }}
             ]
-            using the template above,  generate 18 {category_item} food items (very nutritive - green color range) that fall under {category} category. 
+            using the template above,  generate json formatted output of {limit} {category_item} food items (very nutritive - green color range) that fall under {category} category 
+            using cuisines from {country} {state} {city}. 
             Analyze and ensure items generate meets it's goal with an optimal level of accuracy
             Note:
             health benefits should also indicate illness it may cure and how it meets the goal, {category}, 
@@ -225,11 +226,205 @@ class AIAnalysis:
             use maximum accuracy for computation
         """
 
-        prompt = PromptTemplate(input_variables=["category", 'category_item'], template=template)
+        prompt = PromptTemplate(
+           input_variables=["category", 'category_item', 'country', 'state', 'city', 'limit'], 
+           template=template
+        )
 
         chain = prompt | self.llm
-        response = chain.invoke({"category": f"{category}", 'category_item': f"{category_item}"})
+        response = chain.invoke({"category": f"{category}", 
+                                 'category_item': f"{category_item}",
+                                 'country': f"{country}",
+                                 'state': f"{state}",
+                                 'city': f"{city}",
+                                 'limit': f"{limit}"
+                                 })
         try:
+            print(response.content)
+            return extract_json_list(response.content)
+        except Exception as e:
+         raise HTTPException(status_code=500, detail=str(e))
+
+    def get_object_count(self, query):
+
+        template = """generate a list of distinct labels and the number of times the label occurs in {query}.
+                        output format as shown below:
+                    [
+                        {{
+                            "label": "tomato",
+                            "count": 3
+                        }},
+                        {{
+                            "label": "avocado",
+                            "count": 3
+                        }},
+                        {{
+                            "label": "egg",
+                            "count": 5
+                        }},
+                        {{
+                            "label": "cheese",
+                            "count": 3
+                        }}
+                    ]
+                    """
+
+        prompt = PromptTemplate(input_variables=["query"], template=template)
+
+        chain = prompt | self.tiny_llm
+        response = chain.invoke({"query": f"{query}"})
+        try:
+            print(response.content)
+            return extract_json_list(response.content)
+        except Exception as e:
+         raise HTTPException(status_code=500, detail=str(e))
+        
+        
+    def get_diet_suggestions(self, category, category_item, country=None, state=None, city=None, limit=20):
+
+        template = """
+            [
+                {{
+                "category": "Desserts",
+                "description": "Desserts are sweet, indulgent dishes typically served at the end of a meal",
+                "items": [
+                {{
+                "label": "Baked Pear with Cinnamon",
+                "emoji": "🍐✨🍩",
+                "nutrient_proportion": {{
+                "protein": "0.03",
+                "carbohydrates": "0.9",
+                "fat": "0.07"
+                }},
+                "calories_aggregate": 150 / serving,
+                "health_benefit": [
+                "Fiber",
+                "Vitamins",
+                "Antioxidants"
+                ],
+                "health_risk": [
+                "Potential sugar content",
+                "Possible allergic reaction (to pear)"
+                ],
+                "ingredient": [
+                {{
+                "name": "Pear",
+                "quantity": "1 medium",
+                "emoji", "🍐"
+                }},
+                {{
+                "name": "Cinnamon",
+                "quantity": "1/4 tsp"
+                "emoji", "🍂"
+                }}
+                ],
+                "recipe": [
+                "Core pear and sprinkle with cinnamon.",
+                "Bake at 375F until soft (about 20 minutes)."
+                ],
+                "risk_color": "green"
+                }},
+                {{
+                "label": "Fruit Skewers with a Drizzle of Honey",
+                "emoji": "🍓🍍🍐🍯",
+                "nutrient_proportion": {{
+                "protein": "0.05",
+                "carbohydrates": "0.9",
+                "fat": "0.05"
+                }},
+                "calories_aggregate": 120 / serving,
+                "health_benefit": [
+                "Vitamins",
+                "Minerals",
+                "Hydration"
+                ],
+                "health_risk": [
+                "High sugar content",
+                "Potential for bee sting allergy (honey)"
+                ],
+                "ingredient": [
+                {{
+                "name": "Assorted fruits (grapes, melon, berries)",
+                "quantity": "1 cup",
+                "emoji", "🍇🍉🍓"
+                }},
+                {{
+                "name": "Honey",
+                "quantity": "1 tsp (optional)",
+                "emoji", "🍯"
+                }}
+                ],
+                "recipe": [
+                "Thread fruit onto skewers.",
+                "Drizzle with honey (optional)."
+                ],
+                "risk_color": "green"
+                }},
+                {{
+                "label": "Roasted Sweet Potato with Cinnamon",
+                "emoji": "🍠🍂",
+                "nutrient_proportion": {{
+                "protein": "0.05",
+                "carbohydrates": "0.85",
+                "fat": "0.1"
+                }},
+                "calories_aggregate": 130 / serving,
+                "health_benefit": [
+                "Vitamin A",
+                "Fiber",
+                "Antioxidants"
+                ],
+                "health_risk": [
+                "Potential sugar content",
+                "Oxalates (if prone to kidney stones)"
+                ],
+                "ingredient": [
+                {{
+                "name": "Sweet potato (small)",
+                "quantity": "1",
+                "emoji", "🍠"
+                }},
+                {{
+                "name": "Cinnamon",
+                "quantity": "1/4 tsp",
+                "emoji", "🍂"
+                }}
+                ],
+                "recipe": [
+                "Bake sweet potato until soft.",
+                "Sprinkle with cinnamon."
+                ],
+                "risk_color": "green"
+                }}
+                ]
+                }}
+            ]
+            using the template above,  generate json formatted output of {limit} {category_item} food items (very nutritive - green color range) that fall under {category} category 
+            using cuisines from {country} {state} {city}. 
+            Analyze and ensure items generate meets it's goal with an optimal level of accuracy
+            Note:
+            health benefits should also indicate illness it may cure and how it meets the goal, {category}, 
+            calories_aggregate should be / serving
+            color Must not be null
+            recipe should be detailed. Steps should include all ingredients
+            use maximum accuracy for computation
+        """
+
+        prompt = PromptTemplate(
+           input_variables=["category", 'category_item', 'country', 'state', 'city', 'limit'], 
+           template=template
+        )
+
+        chain = prompt | self.llm
+        response = chain.invoke({"category": f"{category}", 
+                                 'category_item': f"{category_item}",
+                                 'country': f"{country}",
+                                 'state': f"{state}",
+                                 'city': f"{city}",
+                                 'limit': f"{limit}"
+                                 })
+        try:
+            print(response.content)
             return extract_json_list(response.content)
         except Exception as e:
          raise HTTPException(status_code=500, detail=str(e))

@@ -61,14 +61,22 @@ async def search_food(query):
         print(e)
         raise HTTPException(status_code=500, detail=str(e))
     
-@app.get("/api/diet-suggestions")
-async def get_diet_suggestions(category, category_item):
+@app.get("/api/get-diet-suggestions")
+async def get_diet_suggestions(category, category_item, country=None, state=None, city=None, limit=20):
     try:
-     return food_generator.get_diet_suggestions(category, category_item)
+     return food_generator.get_diet_suggestions(category, category_item, country, state, city, limit)
+    except Exception as e:
+        print(e)
+        raise HTTPException(status_code=500, detail=str(e))
+    
+@app.get("/api/get-object-count")
+async def get_object_count(query):
+    try:
+     return food_generator.get_object_count(query)
     except Exception as e:
         print(e)
         raise HTTPException(status_code=500, detail=str(e))
 
-if __name__ == "__main__":
+if __name__ == "__app__ ":
     import uvicorn
     uvicorn.run(app, host="0.0.0.0", port=8000)
