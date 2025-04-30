@@ -5,7 +5,7 @@ from bs4 import BeautifulSoup
 import urllib.parse
 import re
 from typing import List
-from app import food_generator
+from app.app import food_generator
 
 app = FastAPI()
 
