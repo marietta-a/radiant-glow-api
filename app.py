@@ -5,7 +5,8 @@ from bs4 import BeautifulSoup
 import urllib.parse
 import re
 from typing import List
-from .app import food_generator
+
+from ai_analysis import AIAnalysis
 
 app = FastAPI()
 
@@ -15,6 +16,7 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+food_generator = AIAnalysis()
 
 def get_bing_image_urls(query: str, limit: int = 10) -> List[str]:
     """Alternative Bing image URL scraper that doesn't require the downloader package"""
