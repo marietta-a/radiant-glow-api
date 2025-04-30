@@ -12,7 +12,7 @@ class AIAnalysis:
         load_dotenv()
         self.apiKey = getenv("OPENROUTER_API_KEY")
         self.baseUrl = getenv("OPENROUTER_BASE_URL")        
-        self.model = getenv("MODEL")
+        self.model = "microsoft/mai-ds-r1:free"
         self.appUrl = getenv("APP_URL")
         self.appName = getenv("APP_NAME")
         self.max_tokens=100000
