@@ -16,6 +16,7 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
 food_generator = AIAnalysis()
 
 def get_bing_image_urls(query: str, limit: int = 10) -> List[str]:
