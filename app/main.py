@@ -62,7 +62,7 @@ async def search_food(query):
         raise HTTPException(status_code=500, detail=str(e))
     
 @app.get("/api/diet-suggestions")
-async def search_food(category, category_item):
+async def get_diet_suggestions(category, category_item):
     try:
      return food_generator.get_diet_suggestions(category, category_item)
     except Exception as e:
