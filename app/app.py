@@ -6,7 +6,7 @@ import urllib.parse
 import re
 from typing import List
 
-from ai_analysis import AIAnalysis
+from app.ai_analysis import AIAnalysis
 
 app = FastAPI()
 

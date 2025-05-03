@@ -3,7 +3,7 @@ from langchain_core.runnables import RunnableSequence
 from langchain_openai import ChatOpenAI
 from os import getenv
 from dotenv import load_dotenv
-from helper import *
+from app.helper import *
 
 
 class AIAnalysis:
