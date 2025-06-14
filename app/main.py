@@ -19,13 +19,43 @@ app.add_middleware(
 
 food_generator = AIAnalysis()
 
+# def get_bing_image_urls(query: str, limit: int = 10) -> List[str]:
+#     """Alternative Bing image URL scraper that doesn't require the downloader package"""
+#     headers = {
+#         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36"
+#     }
+    
+#     encoded_query = urllib.parse.quote(query)
+#     url = f"https://www.bing.com/images/search?q={encoded_query}"
+    
+#     try:
+#         response = requests.get(url, headers=headers)
+#         response.raise_for_status()
+        
+#         soup = BeautifulSoup(response.text, 'html.parser')
+#         image_elements = soup.find_all('img', {'class': 'mimg'})
+        
+#         urls = []
+#         for img in image_elements[:limit]:
+#             src = img.get('src')
+#             if src and src.startswith('http'):
+#                 # Clean the URL (Bing sometimes appends special parameters)
+#                 clean_url = re.sub(r'&.*$', '', src)
+#                 urls.append(clean_url)
+        
+#         return list(set(urls))[:limit]  # Remove duplicates
+    
+#     except Exception as e:
+#         raise HTTPException(status_code=500, detail=f"Scraping failed: {str(e)}")
+
 def get_bing_image_urls(query: str, limit: int = 10) -> List[str]:
-    """Alternative Bing image URL scraper that doesn't require the downloader package"""
+    """Fetch Bing image URLs for consumables (food, drinks, etc.)"""
     headers = {
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36"
     }
     
-    encoded_query = urllib.parse.quote(query)
+    refined_query = f"{query} food OR dish OR drink"
+    encoded_query = urllib.parse.quote(refined_query)
     url = f"https://www.bing.com/images/search?q={encoded_query}"
     
     try:
@@ -33,14 +63,13 @@ def get_bing_image_urls(query: str, limit: int = 10) -> List[str]:
         response.raise_for_status()
         
         soup = BeautifulSoup(response.text, 'html.parser')
-        image_elements = soup.find_all('img', {'class': 'mimg'})
+        image_elements = soup.find_all('img', {'class': 'mimg'})  # Bing food images tend to use 'mimg' class
         
         urls = []
         for img in image_elements[:limit]:
-            src = img.get('src')
-            if src and src.startswith('http'):
-                # Clean the URL (Bing sometimes appends special parameters)
-                clean_url = re.sub(r'&.*$', '', src)
+            src = img.get('data-src') or img.get('src')  # Prioritize 'data-src' for high-quality images
+            if src and src.startswith('http') and 'bing.net' in src:
+                clean_url = re.sub(r'&.*$', '', src)  # Remove unnecessary parameters
                 urls.append(clean_url)
         
         return list(set(urls))[:limit]  # Remove duplicates
