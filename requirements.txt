@@ -7,3 +7,4 @@ langchain
 langchain-openai
 langchain-community
 beautifulsoup4
+duckduckgo_search
