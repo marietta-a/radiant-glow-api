@@ -3,8 +3,6 @@ from fastapi import HTTPException
 from typing import Dict, Optional
 from app.models.server_response import ServerResponse
 
-from pyparsing import Any
-
 from app.services.nutrition_fact_service import analyze_nutrition_facts, analyze_nutrition_facts_from_image
 
 logger = logging.getLogger(__name__)
