@@ -1,5 +1,4 @@
-
-from http.client import HTTPException
+from fastapi import HTTPException
 from app.models.server_response import ServerResponse
 from app.services.image_generator_service import get_duckduckgo_image_urls
 
