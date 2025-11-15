@@ -133,7 +133,7 @@ IMPORTANT: You must respond with only the JSON object. Do not include any other 
 
 
 
-def analyze_nutrition_facts(food_name: str):
+async def analyze_nutrition_facts(food_name: str):
     prompt = '''
 {
 "id": "27712345",
