@@ -6,8 +6,7 @@ from typing import List
 from duckduckgo_search import DDGS
 
 from app.middleware.nutrition_analysis_middleware import process_nutrion_fact_from_image, process_nutrition_facts
-from app.services.nutrition_fact_service import analyze_nutrition_facts, analyze_nutrition_facts_from_image
-from app.services.image_generator_service import get_duckduckgo_image_urls
+from app.middleware.image_generation_middleware import process_image, process_image_generation
 
 
 app = FastAPI()
@@ -21,15 +20,13 @@ app.add_middleware(
 
 
 
+@app.get("/api/images-generation")
+async def get_images(query: str, limit: int = 10):
+    return await process_image_generation(query=query,limit=limit)
 
 @app.get("/api/images")
 async def get_images(query: str, limit: int = 10):
-    try:
-        urls = await get_duckduckgo_image_urls(query, limit)
-        return {"query": query, "image_urls": urls}
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
-    
+    return await process_image(query=query,limit=limit)
 
 @app.get("/api/nutrition-facts-from-image")
 async def get_nutrition_facts_from_image(image_path: str):
