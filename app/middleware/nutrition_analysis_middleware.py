@@ -5,7 +5,7 @@ from models.server_response import ServerResponse
 
 from pyparsing import Any
 
-from services.nutrition_fact_service import analyze_nutrition_facts, analyze_nutrition_facts_from_image
+from app.services.nutrition_fact_service import analyze_nutrition_facts, analyze_nutrition_facts_from_image
 
 logger = logging.getLogger(__name__)
 

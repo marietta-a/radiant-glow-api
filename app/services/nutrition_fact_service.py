@@ -8,7 +8,7 @@ from config import logger
 from google import genai
 from google.genai import types
 from sqlalchemy import null
-from config import genAiClient, model;
+from app.config import genAiClient, model;
 
 
 def analyze_nutrition_facts_from_image(image_path: str):
