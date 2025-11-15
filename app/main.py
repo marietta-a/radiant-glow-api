@@ -7,7 +7,7 @@ from duckduckgo_search import DDGS
 
 from app.middleware.nutrition_analysis_middleware import process_nutrion_fact_from_image, process_nutrition_facts
 from app.services.nutrition_fact_service import analyze_nutrition_facts, analyze_nutrition_facts_from_image
-from app.image_generatory import get_duckduckgo_image_urls
+from app.services.image_generator_service import get_duckduckgo_image_urls
 
 
 app = FastAPI()
