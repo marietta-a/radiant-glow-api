@@ -4,7 +4,7 @@
 import base64
 import json
 import os
-from config import logger
+from app.config import logger
 from google import genai
 from google.genai import types
 from sqlalchemy import null
