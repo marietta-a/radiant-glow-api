@@ -1,6 +1,6 @@
 
 
-from duckduckgo_search import DDGS
+from ddgs import DDGS
 
 
 async def get_duckduckgo_image_urls(query: str, num_images: int = 2) -> list[str]:
