@@ -3,7 +3,6 @@ from fastapi.middleware.cors import CORSMiddleware
 import requests
 from bs4 import BeautifulSoup
 from typing import List
-from duckduckgo_search import DDGS
 
 from app.middleware.nutrition_analysis_middleware import process_nutrion_fact_from_image, process_nutrition_facts
 from app.middleware.image_generation_middleware import process_image, process_image_generation
