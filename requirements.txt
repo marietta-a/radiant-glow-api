@@ -2,9 +2,6 @@ fastapi
 uvicorn
 requests
 beautifulsoup4
-git+https://github.com/gurugaurav/bing_image_downloader
-langchain
-langchain-openai
-langchain-community
 beautifulsoup4
 duckduckgo_search
+google-genai

@@ -2,14 +2,13 @@ from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 import requests
 from bs4 import BeautifulSoup
-import urllib.parse
-import re
 from typing import List
-import asyncio
-import aiohttp
-import time
-import logging
 from duckduckgo_search import DDGS
+from config import logger
+
+from nutrition_fact_generatory import analyze_nutrition_facts, analyze_nutrition_facts_from_image
+from image_generatory import get_duckduckgo_image_urls
+from http import HTTPStatus
 
 
 app = FastAPI()
@@ -23,19 +22,6 @@ app.add_middleware(
 
 
 
-# Configure logging
-logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger(__name__)
-
-async def get_duckduckgo_image_urls(query: str, num_images: int = 2) -> list[str]:
-    """Search DuckDuckGo Images and return a list of image URLs."""
-    if not isinstance(num_images, int) or num_images <= 0:
-        raise ValueError("num_images must be a positive integer")
-
-    ddgs = DDGS()  # Initialize DuckDuckGo Search
-    results = ddgs.images(query, max_results=num_images)  # Corrected method call
-    return [result["image"] for result in results if "image" in result]
-
 
 @app.get("/api/images")
 async def get_images(query: str, limit: int = 10):
@@ -45,6 +31,58 @@ async def get_images(query: str, limit: int = 10):
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
     
+
+@app.get("/api/nutrition-facts-from-image")
+async def get_nutrition_facts_from_image(image_path: str):
+    try:
+        result = analyze_nutrition_facts_from_image(image_path)
+        return {"image_path": image_path, "nutrition_facts": result}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+ 
+@app.get("/api/nutrition-facts")   
+async def get_nutrition_facts(food_name: str):
+    try:
+        # Validate input
+        if not food_name or not food_name.strip():
+            raise HTTPException(
+                status_code=400,
+                detail="Food name parameter is required and cannot be empty"
+            )
+        
+        
+        # This now returns a dictionary or None
+        result = analyze_nutrition_facts(food_name)
+
+        # Check if the analysis was successful
+        if result is None:
+            raise HTTPException(
+                status_code=422,
+                detail=f"Could not process or find nutrition facts for '{food_name}'. The AI model could not return a valid analysis."
+            )
+        
+        # Validate that we have at least basic structure
+        if not isinstance(result, dict) or 'name' not in result:
+            raise HTTPException(
+                status_code=422,
+                detail=f"Invalid analysis result format for '{food_name}'"
+            )
+        
+        return {
+            "food_name": food_name,
+            "nutrition_facts": result,
+            "status": "success"
+        }
+
+    except HTTPException:
+        # Re-raise HTTP exceptions
+        raise
+    except Exception as e:
+        logger.error(f"Unexpected error for food_name '{food_name}': {e}", exc_info=True)
+        raise HTTPException(
+            status_code=500, 
+            detail=f"An internal server error occurred while processing '{food_name}'"
+        )
 
 if __name__ == "__main__":
     import uvicorn
