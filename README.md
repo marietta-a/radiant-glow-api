@@ -1,4 +1,4 @@
 
 
-## 🚀Image Generator for RadiantGlow
+## 🚀Radiant Glow Api
 
