@@ -1,7 +1,7 @@
 import logging
 from fastapi import HTTPException
 from typing import Dict, Optional
-from models.server_response import ServerResponse
+from app.models.server_response import ServerResponse
 
 from pyparsing import Any
 
