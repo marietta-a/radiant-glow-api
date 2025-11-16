@@ -1,4 +1,4 @@
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, UploadFile, File
 from fastapi.middleware.cors import CORSMiddleware
 import requests
 from bs4 import BeautifulSoup
@@ -27,9 +27,13 @@ async def get_images_generation(query: str, limit: int = 2):
 async def get_images(query: str, limit: int = 2):
     return await process_image(query=query,limit=limit)
 
+# @app.get("/api/nutrition-facts-from-image")
+# async def get_nutrition_facts_from_image(image_path: str):
+#     return await process_nutrion_fact_from_image(image_path=image_path)
+
 @app.get("/api/nutrition-facts-from-image")
-async def get_nutrition_facts_from_image(image_path: str):
-    return await process_nutrion_fact_from_image(image_path=image_path)
+async def get_nutrition_facts_from_image(file: UploadFile = File(...)):
+    return await process_nutrion_fact_from_image(file=file)
  
 @app.get("/api/nutrition-facts")   
 async def get_nutrition_facts(food_name: str):

@@ -7,7 +7,7 @@ from google.genai import types
 from app.config import genAiClient, model;
 
 
-def analyze_nutrition_facts_from_image(image_path: str):
+def analyze_nutrition_facts_from_image(image_bytes: bytes, mime_type: str):
     prompt = '''
 {
 "id": "27712345",
@@ -84,9 +84,13 @@ IMPORTANT: You must respond with only the JSON object. Do not include any other 
                 role="user",
                 parts=[
                     types.Part.from_text(text=prompt),
+                    # types.Part.from_bytes(
+                    #     mime_type="image/jpeg",
+                    #     data=open(image_path, "rb").read(),
+                    # )
                     types.Part.from_bytes(
-                        mime_type="image/jpeg",
-                        data=open(image_path, "rb").read(),
+                        mime_type=mime_type,
+                        data=image_bytes,
                     )
                 ],
             ),
