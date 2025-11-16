@@ -8,10 +8,11 @@ from app.services.nutrition_fact_service import analyze_nutrition_facts, analyze
 logger = logging.getLogger(__name__)
 
 
-async def process_nutrion_fact_from_image(image_path: str):
+async def process_nutrion_fact_from_image(file):
     try:
-        result = analyze_nutrition_facts_from_image(image_path)
-        return ServerResponse(name= image_path, data=result, status="success")
+        image_bytes = await file.read()
+        result = analyze_nutrition_facts_from_image(image_bytes, file.content_type)
+        return ServerResponse(name= file.filename, data=result, status="success")
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
