@@ -115,11 +115,6 @@ IMPORTANT: You must respond with only the JSON object. Do not include any other 
         # Parse the JSON response string into a Python dictionary
         result_dict = json.loads(response.text)
         
-        # Add timestamp-based ID if not present or invalid
-        import time
-        if not result_dict.get('id') or len(str(result_dict.get('id'))) > 16:
-            result_dict['id'] = str(int(time.time()))[-16:]  # Last 16 digits of timestamp
-        
         return result_dict
         
     except json.JSONDecodeError as e:
@@ -225,10 +220,6 @@ IMPORTANT: You must respond with only the JSON object. Do not include any other 
         # Parse the JSON response string into a Python dictionary
         result_dict = json.loads(response.text)
         
-        # Add timestamp-based ID if not present or invalid
-        import time
-        if not result_dict.get('id') or len(str(result_dict.get('id'))) > 16:
-            result_dict['id'] = str(int(time.time()))[-16:]  # Last 16 digits of timestamp
         
         return result_dict
         
