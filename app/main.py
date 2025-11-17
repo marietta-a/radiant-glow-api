@@ -31,8 +31,8 @@ async def get_images(query: str, limit: int = 2):
 # async def get_nutrition_facts_from_image(image_path: str):
 #     return await process_nutrion_fact_from_image(image_path=image_path)
 
-@app.get("/api/nutrition-facts-from-image")
-async def get_nutrition_facts_from_image(file: UploadFile = File(...)):
+@app.post("/api/nutrition-facts-from-image")
+async def retrieve_nutrition_facts_from_image(file: UploadFile = File(...)):
     return await process_nutrion_fact_from_image(file=file)
  
 @app.get("/api/nutrition-facts")   
