@@ -123,11 +123,11 @@ IMPORTANT: You must respond with only the JSON object. Do not include any other 
         return result_dict
         
     except json.JSONDecodeError as e:
-        logger.error(f"Failed to parse JSON response for image '{image_path}': {e}")
+        logger.error(f"Failed to parse JSON response for image: {e}")
         logger.error(f"Raw response: {response.text}")
         return None
     except Exception as e:
-        logger.error(f"Error in analyze_nutrition_facts for image'{image_path}': {e}")
+        logger.error(f"Error in analyze_nutrition_facts for image: {e}")
         return None
     
 
