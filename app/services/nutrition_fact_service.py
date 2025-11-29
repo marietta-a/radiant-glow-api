@@ -5,62 +5,193 @@ import json
 from app.config import logger
 from google.genai import types
 from app.config import genAiClient, model;
+from fastapi import HTTPException
 
 
 def analyze_nutrition_facts_from_image(image_bytes: bytes, mime_type: str):
     prompt = '''
 {
-"id": "27712345",
-"healthBoost": ["heart health boost"],
-"isHealthy": "true",
-"name": "Roasted tiger nuts",
-"servingDescription": "Roasted tiger nuts (28 g)",
-"imageUrl": null,
-"loggedAt": null,
-"updatedAt": null,
-"explanation": "Roasted tiger nuts are a nutritious snack rich in dietary fiber and healthy fats, which can support digestive health and provide sustained energy. They are low in protein but offer essential minerals like potassium and iron, making them a wholesome choice for a balanced diet. Overall, they make a great addition to a healthy lifestyle when enjoyed in moderation.",
-"calories": {
-"amount": 120.0,
-"unit": "",
-"dailyValuePercentage": 8
-},
-"carbs": {
-"amount": 24.0,
-"unit": "g",
-"dailyValuePercentage": 12
-},
-"protein": {
-"amount": 1.0,
-"unit": "g",
-"dailyValuePercentage": 1
-},
-"fat": {
-"amount": 3.0,
-"unit": "g",
-"dailyValuePercentage": 7
-},
-"nutritionFacts": {
-"totalCarbohydrates": { "amount": 24.0, "unit": "g" },
-"dietaryFiber": { "amount": 8.0, "unit": "g" },
-"sugar": { "amount": 5.0, "unit": "g" },
-"addedSugars": { "amount": 0.0, "unit": "g" },
-"sugarAlcohols": { "amount": 0.0, "unit": "g" },
-"netCarbs": { "amount": 16.0, "unit": "g" },
-"protein": { "amount": 1.0, "unit": "g" },
-"totalFat": { "amount": 3.0, "unit": "g" },
-"saturatedFat": { "amount": 0.5, "unit": "g" },
-"transFat": { "amount": 0.0, "unit": "g" },
-"polyunsaturatedFat": { "amount": 1.0, "unit": "g" },
-"monounsaturatedFat": { "amount": 1.5, "unit": "g" },
-"cholesterol": { "amount": 0.0, "unit": "mg" },
-"sodium": { "amount": 5.0, "unit": "mg" },
-"calcium": { "amount": 50.0, "unit": "mg" },
-"iron": { "amount": 1.5, "unit": "mg" },
-"potassium": { "amount": 300.0, "unit": "mg" },
-"vitaminA": { "amount": 0.0, "unit": "IU" },
-"vitaminC": { "amount": 0.0, "unit": "mg" },
-"vitaminD": { "amount": 0.0, "unit": "IU" }
-}
+  "id": "1678887080198",
+  "healthBoost": [
+    "rich in antioxidants",
+    "good source of fiber",
+    "vitamins and minerals"
+  ],
+  "isHealthy": true,
+  "name": "Apple Cranberry Salad with Maple Dressing",
+  "time": "12:00 PM",
+  "servingDescription": "1 large bowl (approx. 400g)",
+  "explanation": "This vibrant salad combines nutrient-dense greens with the natural sweetness of apples and the tartness of cranberries. Packed with vitamins, minerals, and fiber, it supports overall health and provides sustained energy. The maple dressing adds a touch of natural sweetness without being overpowering.",
+  "calories": {
+    "amount": 350,
+    "unit": "kcal",
+    "dailyValuePercentage": 17.5
+  },
+  "carbs": {
+    "amount": 50,
+    "unit": "g",
+    "dailyValuePercentage": 18.2
+  },
+  "protein": {
+    "amount": 6,
+    "unit": "g",
+    "dailyValuePercentage": 12
+  },
+  "fat": {
+    "amount": 15,
+    "unit": "g",
+    "dailyValuePercentage": 19.2
+  },
+  "nutritionFacts": {
+    "totalCarbohydrates": {
+      "amount": 50,
+      "unit": "g"
+    },
+    "dietaryFiber": {
+      "amount": 10,
+      "unit": "g"
+    },
+    "sugar": {
+      "amount": 35,
+      "unit": "g"
+    },
+    "addedSugars": {
+      "amount": 10,
+      "unit": "g"
+    },
+    "sugarAlcohols": {
+      "amount": 0,
+      "unit": "g"
+    },
+    "netCarbs": {
+      "amount": 40,
+      "unit": "g"
+    },
+    "protein": {
+      "amount": 6,
+      "unit": "g"
+    },
+    "totalFat": {
+      "amount": 15,
+      "unit": "g"
+    },
+    "saturatedFat": {
+      "amount": 2,
+      "unit": "g"
+    },
+    "transFat": {
+      "amount": 0,
+      "unit": "g"
+    },
+    "polyunsaturatedFat": {
+      "amount": 4,
+      "unit": "g"
+    },
+    "monounsaturatedFat": {
+      "amount": 9,
+      "unit": "g"
+    },
+    "cholesterol": {
+      "amount": 0,
+      "unit": "mg"
+    },
+    "sodium": {
+      "amount": 200,
+      "unit": "mg"
+    },
+    "calcium": {
+      "amount": 80,
+      "unit": "mg"
+    },
+    "iron": {
+      "amount": 3,
+      "unit": "mg"
+    },
+    "potassium": {
+      "amount": 500,
+      "unit": "mg"
+    },
+    "vitaminA": {
+      "amount": 6000,
+      "unit": "IU"
+    },
+    "vitaminC": {
+      "amount": 50,
+      "unit": "mg"
+    },
+    "vitaminD": {
+      "amount": 0,
+      "unit": "IU"
+    }
+  },
+  "recipe": {
+    "ingredient": [
+      {
+        "name": "mixed greens",
+        "explanation": "Provides vitamins A, C, K, and folate.",
+        "emoji": "🥬",
+        "quantity": "6 cups"
+      },
+      {
+        "name": "apple",
+        "explanation": "Source of fiber and vitamin C.",
+        "emoji": "🍎",
+        "quantity": "1 medium, diced"
+      },
+      {
+        "name": "dried cranberries",
+        "explanation": "Rich in antioxidants.",
+        "emoji": "🍒",
+        "quantity": "1/2 cup"
+      },
+      {
+        "name": "slivered almonds",
+        "explanation": "Provides healthy fats and vitamin E.",
+        "emoji": "🌰",
+        "quantity": "1/4 cup"
+      },
+      {
+        "name": "maple syrup",
+        "explanation": "Natural sweetener.",
+        "emoji": "🍁",
+        "quantity": "2 tablespoons"
+      },
+      {
+        "name": "olive oil",
+        "explanation": "Healthy monounsaturated fats.",
+        "emoji": "🫒",
+        "quantity": "3 tablespoons"
+      },
+      {
+        "name": "apple cider vinegar",
+        "explanation": "Adds tanginess.",
+        "emoji": "🍶",
+        "quantity": "1 tablespoon"
+      },
+      {
+        "name": "Dijon mustard",
+        "explanation": "For flavor.",
+        "emoji": "🍯",
+        "quantity": "1 teaspoon"
+      },
+      {
+        "name": "salt",
+        "emoji": "🧂",
+        "quantity": "1/4 teaspoon"
+      },
+      {
+        "name": "black pepper",
+        "emoji": "🌶️",
+        "quantity": "1/8 teaspoon"
+      }
+    ],
+    "recipe": [
+      "In a large bowl, combine mixed greens, diced apple, dried cranberries, and slivered almonds.",
+      "In a small bowl, whisk together maple syrup, olive oil, apple cider vinegar, Dijon mustard, salt, and pepper until well combined.",
+      "Pour the dressing over the salad and toss gently to coat.",
+      "Serve immediately."
+    ]
+  }
 }
 
 using the template above, analysed the attached food image.
@@ -120,10 +251,10 @@ IMPORTANT: You must respond with only the JSON object. Do not include any other 
     except json.JSONDecodeError as e:
         logger.error(f"Failed to parse JSON response for image: {e}")
         logger.error(f"Raw response: {response.text}")
-        return None
+        raise HTTPException(status_code=500, detail=str(e))
     except Exception as e:
         logger.error(f"Error in analyze_nutrition_facts for image: {e}")
-        return None
+        raise HTTPException(status_code=500, detail=str(e))
     
 
 
@@ -131,57 +262,187 @@ IMPORTANT: You must respond with only the JSON object. Do not include any other 
 async def analyze_nutrition_facts(food_name: str):
     prompt = '''
 {
-"id": "27712345",
-"healthBoost": ["heart health"],
-"isHealthy": "true",
-"name": "Roasted tiger nuts",
-"servingDescription": "Roasted tiger nuts (28 g)",
-"imageUrl": null,
-"loggedAt": null,
-"updatedAt": null,
-"explanation": "Roasted tiger nuts are a nutritious snack rich in dietary fiber and healthy fats, which can support digestive health and provide sustained energy. They are low in protein but offer essential minerals like potassium and iron, making them a wholesome choice for a balanced diet. Overall, they make a great addition to a healthy lifestyle when enjoyed in moderation.",
-"calories": {
-"amount": 120.0,
-"unit": "",
-"dailyValuePercentage": 8
-},
-"carbs": {
-"amount": 24.0,
-"unit": "g",
-"dailyValuePercentage": 12
-},
-"protein": {
-"amount": 1.0,
-"unit": "g",
-"dailyValuePercentage": 1
-},
-"fat": {
-"amount": 3.0,
-"unit": "g",
-"dailyValuePercentage": 7
-},
-"nutritionFacts": {
-"totalCarbohydrates": { "amount": 24.0, "unit": "g" },
-"dietaryFiber": { "amount": 8.0, "unit": "g" },
-"sugar": { "amount": 5.0, "unit": "g" },
-"addedSugars": { "amount": 0.0, "unit": "g" },
-"sugarAlcohols": { "amount": 0.0, "unit": "g" },
-"netCarbs": { "amount": 16.0, "unit": "g" },
-"protein": { "amount": 1.0, "unit": "g" },
-"totalFat": { "amount": 3.0, "unit": "g" },
-"saturatedFat": { "amount": 0.5, "unit": "g" },
-"transFat": { "amount": 0.0, "unit": "g" },
-"polyunsaturatedFat": { "amount": 1.0, "unit": "g" },
-"monounsaturatedFat": { "amount": 1.5, "unit": "g" },
-"cholesterol": { "amount": 0.0, "unit": "mg" },
-"sodium": { "amount": 5.0, "unit": "mg" },
-"calcium": { "amount": 50.0, "unit": "mg" },
-"iron": { "amount": 1.5, "unit": "mg" },
-"potassium": { "amount": 300.0, "unit": "mg" },
-"vitaminA": { "amount": 0.0, "unit": "IU" },
-"vitaminC": { "amount": 0.0, "unit": "mg" },
-"vitaminD": { "amount": 0.0, "unit": "IU" }
-}
+  "id": "1678887080198",
+  "healthBoost": [
+    "rich in antioxidants",
+    "good source of fiber",
+    "vitamins and minerals"
+  ],
+  "isHealthy": true,
+  "name": "Apple Cranberry Salad with Maple Dressing",
+  "time": "12:00 PM",
+  "servingDescription": "1 large bowl (approx. 400g)",
+  "explanation": "This vibrant salad combines nutrient-dense greens with the natural sweetness of apples and the tartness of cranberries. Packed with vitamins, minerals, and fiber, it supports overall health and provides sustained energy. The maple dressing adds a touch of natural sweetness without being overpowering.",
+  "calories": {
+    "amount": 350,
+    "unit": "kcal",
+    "dailyValuePercentage": 17.5
+  },
+  "carbs": {
+    "amount": 50,
+    "unit": "g",
+    "dailyValuePercentage": 18.2
+  },
+  "protein": {
+    "amount": 6,
+    "unit": "g",
+    "dailyValuePercentage": 12
+  },
+  "fat": {
+    "amount": 15,
+    "unit": "g",
+    "dailyValuePercentage": 19.2
+  },
+  "nutritionFacts": {
+    "totalCarbohydrates": {
+      "amount": 50,
+      "unit": "g"
+    },
+    "dietaryFiber": {
+      "amount": 10,
+      "unit": "g"
+    },
+    "sugar": {
+      "amount": 35,
+      "unit": "g"
+    },
+    "addedSugars": {
+      "amount": 10,
+      "unit": "g"
+    },
+    "sugarAlcohols": {
+      "amount": 0,
+      "unit": "g"
+    },
+    "netCarbs": {
+      "amount": 40,
+      "unit": "g"
+    },
+    "protein": {
+      "amount": 6,
+      "unit": "g"
+    },
+    "totalFat": {
+      "amount": 15,
+      "unit": "g"
+    },
+    "saturatedFat": {
+      "amount": 2,
+      "unit": "g"
+    },
+    "transFat": {
+      "amount": 0,
+      "unit": "g"
+    },
+    "polyunsaturatedFat": {
+      "amount": 4,
+      "unit": "g"
+    },
+    "monounsaturatedFat": {
+      "amount": 9,
+      "unit": "g"
+    },
+    "cholesterol": {
+      "amount": 0,
+      "unit": "mg"
+    },
+    "sodium": {
+      "amount": 200,
+      "unit": "mg"
+    },
+    "calcium": {
+      "amount": 80,
+      "unit": "mg"
+    },
+    "iron": {
+      "amount": 3,
+      "unit": "mg"
+    },
+    "potassium": {
+      "amount": 500,
+      "unit": "mg"
+    },
+    "vitaminA": {
+      "amount": 6000,
+      "unit": "IU"
+    },
+    "vitaminC": {
+      "amount": 50,
+      "unit": "mg"
+    },
+    "vitaminD": {
+      "amount": 0,
+      "unit": "IU"
+    }
+  },
+  "recipe": {
+    "ingredient": [
+      {
+        "name": "mixed greens",
+        "explanation": "Provides vitamins A, C, K, and folate.",
+        "emoji": "🥬",
+        "quantity": "6 cups"
+      },
+      {
+        "name": "apple",
+        "explanation": "Source of fiber and vitamin C.",
+        "emoji": "🍎",
+        "quantity": "1 medium, diced"
+      },
+      {
+        "name": "dried cranberries",
+        "explanation": "Rich in antioxidants.",
+        "emoji": "🍒",
+        "quantity": "1/2 cup"
+      },
+      {
+        "name": "slivered almonds",
+        "explanation": "Provides healthy fats and vitamin E.",
+        "emoji": "🌰",
+        "quantity": "1/4 cup"
+      },
+      {
+        "name": "maple syrup",
+        "explanation": "Natural sweetener.",
+        "emoji": "🍁",
+        "quantity": "2 tablespoons"
+      },
+      {
+        "name": "olive oil",
+        "explanation": "Healthy monounsaturated fats.",
+        "emoji": "🫒",
+        "quantity": "3 tablespoons"
+      },
+      {
+        "name": "apple cider vinegar",
+        "explanation": "Adds tanginess.",
+        "emoji": "🍶",
+        "quantity": "1 tablespoon"
+      },
+      {
+        "name": "Dijon mustard",
+        "explanation": "For flavor.",
+        "emoji": "🍯",
+        "quantity": "1 teaspoon"
+      },
+      {
+        "name": "salt",
+        "emoji": "🧂",
+        "quantity": "1/4 teaspoon"
+      },
+      {
+        "name": "black pepper",
+        "emoji": "🌶️",
+        "quantity": "1/8 teaspoon"
+      }
+    ],
+    "recipe": [
+      "In a large bowl, combine mixed greens, diced apple, dried cranberries, and slivered almonds.",
+      "In a small bowl, whisk together maple syrup, olive oil, apple cider vinegar, Dijon mustard, salt, and pepper until well combined.",
+      "Pour the dressing over the salad and toss gently to coat.",
+      "Serve immediately."
+    ]
+  }
 }
 using the template above, analyse ''' + food_name + '''.
 Note:
@@ -226,7 +487,7 @@ IMPORTANT: You must respond with only the JSON object. Do not include any other 
     except json.JSONDecodeError as e:
         logger.error(f"Failed to parse JSON response for '{food_name}': {e}")
         logger.error(f"Raw response: {response.text}")
-        return None
+        raise HTTPException(status_code=500, detail=str(e))
     except Exception as e:
         logger.error(f"Error in analyze_nutrition_facts for '{food_name}': {e}")
-        return None
+        raise HTTPException(status_code=500, detail=str(e))
