@@ -5,9 +5,19 @@ import json
 from app.config import logger
 from google.genai import types
 from app.config import genAiClient, model;
-from fastapi import HTTPException
+from fastapi import HTTPException, Request
 
-async def generate_meal_plan(payload):
+async def generate_meal_plan(payload: Request):
+    # Access attributes
+    data = await payload.json() 
+    calories = data.get("calories")
+    country = data.get("country")
+    state = data.get("state")
+    city = data.get("city")
+    health_goal = data.get("healthGoal")
+    health_goal_prompt = data.get("healthGoalPromptDescription")
+    number_of_suggestions = data.get("numberOfSuggestions")
+
     prompt = '''
 You are an expert nutritionist, a world cuisine specialist, a recipe developer, and a data structuring AI. Your task is to generate a daily meal plan with multiple options for each meal, structured as a single, valid JSON object, tailored to the user's specific health goals and culinary preferences.
 User Inputs:
@@ -79,11 +89,11 @@ JSON
 }
 }
 
-{{CALORIE_TARGET}} ->'''  + payload.calories + '''
-{{HEALTH_GOAL_NAME}} -> ''' + payload.healthGoal + '''
-{{HEALTH_GOAL_DESCRIPTION}} -> ''' + payload.healthGoalPromptDescription +'''
-{{NUMBER_OF_SUGGESTIONS}} -> ''' + payload.numberOfSuggestions + '''
-{{CUISINE_PREFERENCE}} -> ''' + payload.country + ''' (specifically from ''' + payload.state +" " + payload.city + ''')"
+{{CALORIE_TARGET}} ->'''  + calories + '''
+{{HEALTH_GOAL_NAME}} -> ''' + health_goal + '''
+{{HEALTH_GOAL_DESCRIPTION}} -> ''' + health_goal_prompt +'''
+{{NUMBER_OF_SUGGESTIONS}} -> ''' + number_of_suggestions + '''
+{{CUISINE_PREFERENCE}} -> ''' + country + ''' (specifically from ''' + state +" " + city + ''')"
     '''
 
     try:
