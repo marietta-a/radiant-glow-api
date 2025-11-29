@@ -6,6 +6,7 @@ from typing import List
 
 from app.middleware.nutrition_analysis_middleware import process_nutrion_fact_from_image, process_nutrition_facts
 from app.middleware.image_generation_middleware import process_image, process_image_generation
+from app.middleware.meal_plan_generation_middleware import generate_meal_plan
 
 
 app = FastAPI()
@@ -38,6 +39,11 @@ async def retrieve_nutrition_facts_from_image(file: UploadFile = File(...)):
 @app.get("/api/nutrition-facts")   
 async def get_nutrition_facts(food_name: str):
     return await process_nutrition_facts(food_name=food_name)
+
+
+@app.get("/api/meal-plan")
+async def get_meal_plan(payload):
+    return await generate_meal_plan(payload=payload)
     
 if __name__ == "__main__":
     import uvicorn
