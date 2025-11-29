@@ -1,5 +1,5 @@
 import logging
-from fastapi import HTTPException
+from fastapi import HTTPException, Request
 from app.models.server_response import ServerResponse
 from app.services.meal_plan_generation_service import generate_meal_plan
 
@@ -7,7 +7,7 @@ from app.services.meal_plan_generation_service import generate_meal_plan
 logger = logging.getLogger(__name__)
 
 
-async def process_meal_plan_generation(payload):
+async def process_meal_plan_generation(payload: Request):
     try:
         result = generate_meal_plan(payload)
         return ServerResponse(name= payload, data=result, status="success")

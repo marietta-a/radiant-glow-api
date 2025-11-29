@@ -1,4 +1,4 @@
-from fastapi import FastAPI, UploadFile, File
+from fastapi import FastAPI, UploadFile, File, Request
 from fastapi.middleware.cors import CORSMiddleware
 import requests
 from bs4 import BeautifulSoup
@@ -6,7 +6,7 @@ from typing import List
 
 from app.middleware.nutrition_analysis_middleware import process_nutrion_fact_from_image, process_nutrition_facts
 from app.middleware.image_generation_middleware import process_image, process_image_generation
-from app.middleware.meal_plan_generation_middleware import generate_meal_plan
+from app.middleware.meal_plan_generation_middleware import process_meal_plan_generation
 
 
 app = FastAPI()
@@ -41,9 +41,9 @@ async def get_nutrition_facts(food_name: str):
     return await process_nutrition_facts(food_name=food_name)
 
 
-@app.get("/api/meal-plan")
-async def get_meal_plan(payload):
-    return await generate_meal_plan(payload=payload)
+@app.post("/api/meal-plan")
+async def get_meal_plan(payload: Request):
+    return await process_meal_plan_generation(payload=payload)
     
 if __name__ == "__main__":
     import uvicorn
