@@ -4,23 +4,10 @@ import json
 from app.config import logger
 from google.genai import types
 from app.config import genAiClient, model_lite
-from fastapi import HTTPException, Request
+from fastapi import HTTPException
 from app.models.meal_plan_payload import MealPlanPayload
 
 async def generate_meal_plan(payload: MealPlanPayload):
-    # Access attributes
-    # data = await payload.json()
-    # calories = data.get("calories")
-    # country = data.get("country")
-    # state = data.get("state")
-    # city = data.get("city")
-    # health_goal = data.get("healthGoal")
-    # health_goal_prompt = data.get("healthGoalPromptDescription")
-    # number_of_suggestions = data.get("numberOfSuggestions")
-    
-    # # Validate required fields
-    # if not all([calories, country, health_goal, health_goal_prompt, number_of_suggestions]):
-    #     raise HTTPException(status_code=400, detail="Missing required fields")
     
     prompt = f'''
 You are an expert nutritionist, a world cuisine specialist, a recipe developer, and a data structuring AI. Your task is to generate a daily meal plan with multiple options for each meal, structured as a single, valid JSON object, tailored to the user's specific health goals and culinary preferences.
