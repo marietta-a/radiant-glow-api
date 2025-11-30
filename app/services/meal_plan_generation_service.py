@@ -4,7 +4,7 @@
 import json
 from app.config import logger
 from google.genai import types
-from app.config import genAiClient, model;
+from app.config import genAiClient, model_lite;
 from fastapi import HTTPException, Request
 
 async def generate_meal_plan(payload: Request):
@@ -114,7 +114,7 @@ JSON
         logger.info('genAI config completed')
 
         response = genAiClient.models.generate_content(
-            model=model,
+            model=model_lite,
             contents=contents,
             config=generate_content_config,
         )
