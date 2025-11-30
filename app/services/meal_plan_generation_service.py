@@ -138,7 +138,6 @@ JSON Template for EACH Meal Suggestion Object:
             contents=contents,
             config=generate_content_config,
         )
-        print(response.text)
         # Parse the JSON response string into a Python dictionary
         result_dict = json.loads(response.text)
         return result_dict
