@@ -7,6 +7,7 @@ from typing import List
 from app.middleware.nutrition_analysis_middleware import process_nutrion_fact_from_image, process_nutrition_facts
 from app.middleware.image_generation_middleware import process_image, process_image_generation
 from app.middleware.meal_plan_generation_middleware import process_meal_plan_generation
+from app.models.meal_plan_payload import MealPlanPayload
 
 
 app = FastAPI()
@@ -42,7 +43,7 @@ async def get_nutrition_facts(food_name: str):
 
 
 @app.post("/api/meal-plan")
-async def generate_meal_plan(payload: Request):
+async def generate_meal_plan(payload: MealPlanPayload):
     return await process_meal_plan_generation(payload=payload)
     
 if __name__ == "__main__":
