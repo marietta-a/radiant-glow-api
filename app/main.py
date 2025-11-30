@@ -41,7 +41,7 @@ async def get_nutrition_facts(food_name: str):
     return await process_nutrition_facts(food_name=food_name)
 
 
-@app.get("/api/meal-plan")
+@app.post("/api/meal-plan")
 async def get_meal_plan(payload: Request):
     return await process_meal_plan_generation(payload=payload)
     
