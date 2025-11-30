@@ -5,34 +5,35 @@ from app.config import logger
 from google.genai import types
 from app.config import genAiClient, model_lite
 from fastapi import HTTPException, Request
+from app.models.meal_plan_payload import MealPlanPayload
 
-async def generate_meal_plan(payload: Request):
+async def generate_meal_plan(payload: MealPlanPayload):
     # Access attributes
-    data = await payload.json()
-    calories = data.get("calories")
-    country = data.get("country")
-    state = data.get("state")
-    city = data.get("city")
-    health_goal = data.get("healthGoal")
-    health_goal_prompt = data.get("healthGoalPromptDescription")
-    number_of_suggestions = data.get("numberOfSuggestions")
+    # data = await payload.json()
+    # calories = data.get("calories")
+    # country = data.get("country")
+    # state = data.get("state")
+    # city = data.get("city")
+    # health_goal = data.get("healthGoal")
+    # health_goal_prompt = data.get("healthGoalPromptDescription")
+    # number_of_suggestions = data.get("numberOfSuggestions")
     
-    # Validate required fields
-    if not all([calories, country, health_goal, health_goal_prompt, number_of_suggestions]):
-        raise HTTPException(status_code=400, detail="Missing required fields")
+    # # Validate required fields
+    # if not all([calories, country, health_goal, health_goal_prompt, number_of_suggestions]):
+    #     raise HTTPException(status_code=400, detail="Missing required fields")
     
     prompt = f'''
 You are an expert nutritionist, a world cuisine specialist, a recipe developer, and a data structuring AI. Your task is to generate a daily meal plan with multiple options for each meal, structured as a single, valid JSON object, tailored to the user's specific health goals and culinary preferences.
 
 User Inputs:
-Daily Caloric Target: {calories} kcal
-Health Goal Name: {health_goal}
-Health Goal Description: {health_goal_prompt}
-Number of Suggestions per Meal: {number_of_suggestions}
-Cuisine Preference: {country} (specifically from {state}, {city})
+Daily Caloric Target: {payload.calories} kcal
+Health Goal Name: {payload.healthGoal}
+Health Goal Description: {payload.promptDescription}
+Number of Suggestions per Meal: {payload.numberOfSuggestions}
+Cuisine Preference: {payload.country} (specifically from {payload.state}, {payload.city})
 
 Output Constraints & Instructions:
-Main Structure: The root of the output must be a single JSON object with three keys: "breakfast", "lunch", and "dinner". The value for each key must be an array containing exactly {number_of_suggestions} distinct meal suggestion objects.
+Main Structure: The root of the output must be a single JSON object with three keys: "breakfast", "lunch", and "dinner". The value for each key must be an array containing exactly {payload.numberOfSuggestions} distinct meal suggestion objects.
 
 Cuisine and Health Goal Synthesis (CRITICAL):
 Authenticity: All meal suggestions—including their names, ingredients, and recipes—MUST be authentic to the specified Cuisine Preference.
@@ -41,7 +42,7 @@ Justification: In the explanation field for each meal, you must justify your cho
 
 Calorie Distribution: Distribute the Daily Caloric Target approximately evenly across the three meal times (e.g., breakfast ~30%, lunch ~35%, dinner ~35%). Each individual meal option must be a complete meal aiming for this per-meal calorie target.
 
-Variety and Cultural Nuance: Ensure the {number_of_suggestions} options for each meal are distinct. Be mindful of cultural norms (e.g., breakfast in the specified cuisine might be a lighter version of a dinner meal, a porridge, or a specific pastry).
+Variety and Cultural Nuance: Ensure the {payload.numberOfSuggestions} options for each meal are distinct. Be mindful of cultural norms (e.g., breakfast in the specified cuisine might be a lighter version of a dinner meal, a porridge, or a specific pastry).
 
 JSON Template Adherence: Every single meal suggestion object MUST strictly follow the structure and data types provided in the template below.
 
@@ -137,7 +138,7 @@ JSON Template for EACH Meal Suggestion Object:
             contents=contents,
             config=generate_content_config,
         )
-        
+        print(response.text)
         # Parse the JSON response string into a Python dictionary
         result_dict = json.loads(response.text)
         return result_dict
