@@ -9,8 +9,9 @@ logger = logging.getLogger(__name__)
 
 async def process_meal_plan_generation(payload: Request):
     try:
-        result = generate_meal_plan(payload)
-        return ServerResponse(name= payload, data=result, status="success")
+        data = await payload.json()
+        result = await generate_meal_plan(payload)
+        return ServerResponse(name= data, data=result, status="success")
     except Exception as e:
         logger.error(f"Unexpected error from processing image: {e}")
         raise HTTPException(status_code=500, detail=str(e))
