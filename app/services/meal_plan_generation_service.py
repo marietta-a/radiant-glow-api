@@ -29,6 +29,11 @@ Justification: In the explanation field for each meal, you must justify your cho
 
 Calorie Distribution: Distribute the Daily Caloric Target approximately evenly across the three meal times (e.g., breakfast ~30%, lunch ~35%, dinner ~35%). Each individual meal option must be a complete meal aiming for this per-meal calorie target.
 
+Daily Nutritional Strategy: Apply a specific nutritional focus for each meal time to create a balanced daily plan:
+Breakfast: Focus on meals that provide sustained energy and fiber. Within the specified cuisine, this could involve porridges, tubers, or fruit-based dishes.
+Lunch: Emphasize lean protein and a generous serving of vegetables to support muscle maintenance and provide micronutrients.
+Dinner: Design lighter, yet nutrient-rich meals that are easier to digest before rest. Soups and gently cooked vegetable dishes are excellent candidates
+
 Variety and Cultural Nuance: Ensure the {payload.numberOfSuggestions} options for each meal are distinct. Be mindful of cultural norms (e.g., breakfast in the specified cuisine might be a lighter version of a dinner meal, a porridge, or a specific pastry).
 
 JSON Template Adherence: Every single meal suggestion object MUST strictly follow the structure and data types provided in the template below.
