@@ -10,10 +10,14 @@ from app.models.meal_plan_payload import MealPlanPayload
 async def generate_meal_plan(payload: MealPlanPayload):
     
     prompt = f'''
-You are an expert nutritionist, a world cuisine specialist, a recipe developer, and a data structuring AI. Your task is to generate a daily meal plan with multiple options for each meal, structured as a single, valid JSON object, tailored to the user's specific health goals and culinary preferences.
+You are an expert nutritionist, a world cuisine specialist, a recipe developer, and a data structuring AI. Your task is to generate a daily meal plan with multiple options for each meal, structured as a single, valid JSON object, tailored to the user's specific health, culinary, and precise macronutrient goals.
 
 User Inputs:
 Daily Caloric Target: {payload.calories} kcal
+Daily Macronutrient Targets:
+    Carbohydrates: {payload.carbs} g
+    Protein: {payload.protein} g
+    Fat: {payload.fat} g
 Health Goal Name: {payload.healthGoal}
 Health Goal Description: {payload.promptDescription}
 Number of Suggestions per Meal: {payload.numberOfSuggestions}
@@ -22,54 +26,37 @@ Cuisine Preference: {payload.country} (specifically from {payload.state}, {paylo
 Output Constraints & Instructions:
 Main Structure: The root of the output must be a single JSON object with three keys: "breakfast", "lunch", and "dinner". The value for each key must be an array containing exactly {payload.numberOfSuggestions} distinct meal suggestion objects.
 
-Cuisine and Health Goal Synthesis (CRITICAL):
-Authenticity: All meal suggestions—including their names, ingredients, and recipes—MUST be authentic to the specified Cuisine Preference.
-Alignment: You must simultaneously ensure that each meal aligns with the Health Goal. This means selecting dishes from the specified cuisine that naturally contain the nutrients outlined in the Health Goal Description.
-Justification: In the explanation field for each meal, you must justify your choice by explaining how the traditional ingredients within that specific dish contribute to the user's health goal.
+Daily Plan Structure & Macro Targets (CRITICAL):
+    Overall Goal: The sum of macros for any combination of one breakfast, one lunch, and one dinner should closely approximate the user's daily targets ({payload.carbs}g Carbs, {payload.protein}g Protein, {payload.fat}g Fat).
+    Strategic Macro Distribution: Each individual meal option must be designed to fit into a balanced daily structure. Adhere to this nutritional strategy:
+        Breakfast: Focus on sustained energy and fiber. This meal should be higher in complex carbohydrates and moderate in protein.
+        Lunch: Emphasize lean protein and vegetables for satiety and muscle support. This meal should be the highest in protein.
+        Dinner: Design lighter, nutrient-rich meals. This meal should be moderate in protein and lighter on carbohydrates and fats, making it easier to digest.
 
-Calorie Distribution: Distribute the Daily Caloric Target approximately evenly across the three meal times (e.g., breakfast ~30%, lunch ~35%, dinner ~35%). Each individual meal option must be a complete meal aiming for this per-meal calorie target.
+Cuisine and Health Goal Synthesis:
+    Authenticity: All meal suggestions—including their names, ingredients, and recipes—MUST be authentic to the specified Cuisine Preference.
+    Alignment: Simultaneously, each meal must align with the Health Goal by using traditional ingredients rich in the nutrients mentioned in the Health Goal Description.
+    Justification: The `explanation` field must justify the meal choice by connecting its authentic ingredients to both the health goal and its role in the daily macro plan.
 
-Daily Nutritional Strategy: Apply a specific nutritional focus for each meal time to create a balanced daily plan:
-Breakfast: Focus on meals that provide sustained energy and fiber. Within the specified cuisine, this could involve porridges, tubers, or fruit-based dishes.
-Lunch: Emphasize lean protein and a generous serving of vegetables to support muscle maintenance and provide micronutrients.
-Dinner: Design lighter, yet nutrient-rich meals that are easier to digest before rest. Soups and gently cooked vegetable dishes are excellent candidates
-
-Variety and Cultural Nuance: Ensure the {payload.numberOfSuggestions} options for each meal are distinct. Be mindful of cultural norms (e.g., breakfast in the specified cuisine might be a lighter version of a dinner meal, a porridge, or a specific pastry).
+Variety and Cultural Nuance: Ensure the {payload.numberOfSuggestions} options for each meal are distinct and culturally appropriate for the specified cuisine.
 
 JSON Template Adherence: Every single meal suggestion object MUST strictly follow the structure and data types provided in the template below.
 
 JSON Template for EACH Meal Suggestion Object:
 ```json
 {{
-  "id": "string", // Generate a unique placeholder ID (e.g., "meal_lunch_option_1").
-  "healthBoost": ["string"], // List of benefits directly related to the Health Goal.
+  "id": "string",
+  "healthBoost": ["string"],
   "isHealthy": true,
-  "name": "string", // The authentic name of the dish from the specified cuisine.
-  "time": "string", // A suggested time for the meal.
-  "servingDescription": "string", // A descriptive serving size.
-  "explanation": "string", // A 2-3 sentence justification synthesizing the cuisine and health goal.
-  "calories": {{
-    "amount": "number",
-    "unit": "kcal",
-    "dailyValuePercentage": "number"
-  }},
-  "carbs": {{
-    "amount": "number",
-    "unit": "g",
-    "dailyValuePercentage": "number"
-  }},
-  "protein": {{
-    "amount": "number",
-    "unit": "g",
-    "dailyValuePercentage": "number"
-  }},
-  "fat": {{
-    "amount": "number",
-    "unit": "g",
-    "dailyValuePercentage": "number"
-  }},
+  "name": "string",
+  "time": "string", /// time of the day e.g "8:00 AM", "1:00 PM", "6:00 PM"
+  "servingDescription": "string",
+  "explanation": "string",
+  "calories": {{ "amount": "number", "unit": "kcal", "dailyValuePercentage": "number" }},
+  "carbs": {{ "amount": "number", "unit": "g", "dailyValuePercentage": "number" }},
+  "protein": {{ "amount": "number", "unit": "g", "dailyValuePercentage": "number" }},
+  "fat": {{ "amount": "number", "unit": "g", "dailyValuePercentage": "number" }},
   "nutritionFacts": {{
-    // Provide realistic, estimated nutritional values for all fields.
     "totalCarbohydrates": {{ "amount": "number", "unit": "g" }},
     "dietaryFiber": {{ "amount": "number", "unit": "g" }},
     "sugar": {{ "amount": "number", "unit": "g" }},
@@ -94,10 +81,10 @@ JSON Template for EACH Meal Suggestion Object:
   "recipe": {{
     "ingredient": [
       {{
-        "name": "string", // Name of an authentic ingredient (e.g., "Bitterleaf").
-        "explanation": "string", // Brief note on its benefit for the health goal.
-        "emoji": "string", // An appropriate emoji.
-        "quantity": "string" // Estimated quantity.
+        "name": "string",
+        "explanation": "string",
+        "emoji": "string",
+        "quantity": "string"
       }}
     ],
     "recipe": [
