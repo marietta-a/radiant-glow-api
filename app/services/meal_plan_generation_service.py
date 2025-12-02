@@ -9,6 +9,12 @@ from app.models.meal_plan_payload import MealPlanPayload
 
 async def generate_meal_plan(payload: MealPlanPayload):
     
+    cuisineMessage = f'The cuisine preference is {payload.country}'
+    if(payload.state):
+        cuisineMessage += f', specifically from the state of {payload.state}'
+    if(payload.city):
+        cuisineMessage += f', and the city of {payload.city}'
+    
     prompt = f'''
 You are an expert nutritionist, a world cuisine specialist, a recipe developer, and a data structuring AI. Your task is to generate a daily meal plan with multiple options for each meal, structured as a single, valid JSON object, tailored to the user's specific health, culinary, and precise macronutrient goals.
 
@@ -21,7 +27,7 @@ Daily Macronutrient Targets:
 Health Goal Name: {payload.healthGoal}
 Health Goal Description: {payload.promptDescription}
 Number of Suggestions per Meal: {payload.numberOfSuggestions}
-Cuisine Preference: {payload.country} (specifically from {payload.state}, {payload.city})
+{cuisineMessage}
 
 Output Constraints & Instructions:
 Main Structure: The root of the output must be a single JSON object with three keys: "breakfast", "lunch", and "dinner". The value for each key must be an array containing exactly {payload.numberOfSuggestions} distinct meal suggestion objects.
