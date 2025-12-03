@@ -315,6 +315,7 @@ If it is unhealthy, isHealthy should be false
 healthBoost: [top preventive health boost(s) it provides. list of 1–3 concise health benefit tags (e.g., "digestive health", "heart health", "bone strength")]
 use optimal accuracy
 id: should be a unique key (created from timestamp of the current time of prompt generation) with max length of 16
+if the''' + food_name + ''' is incorrectly spelled due to user error, deduce from best match
 
 IMPORTANT: You must respond with only the JSON object. Do not include any other text, explanations, or markdown formatting like ```json
     '''
