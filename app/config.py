@@ -11,7 +11,7 @@ genAiClient = genai.Client(
     api_key=os.environ.get("GEMINI_API_KEY"),
 )
 
-model = "gemini-2.5-flash"
+model = "gemini-2.5-flash-lite"
 model_lite = "gemini-2.0-flash-lite"
 
 
