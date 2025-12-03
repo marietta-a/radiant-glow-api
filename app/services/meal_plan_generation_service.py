@@ -9,14 +9,15 @@ from app.models.meal_plan_payload import MealPlanPayload
 
 async def generate_meal_plan(payload: MealPlanPayload):
     
-    cuisineMessage = f'The cuisine preference is {payload.country}'
+    cuisineMessage = f'Diets should be {payload.country} cuisines'
     if(payload.state):
         cuisineMessage += f', specifically from the state of {payload.state}'
     if(payload.city):
         cuisineMessage += f', and the city of {payload.city}'
     
     prompt = f'''
-You are an expert nutritionist, a world cuisine specialist, a recipe developer, and a data structuring AI. Your task is to generate a daily meal plan with multiple options for each meal, structured as a single, valid JSON object, tailored to the user's specific health, culinary, and precise macronutrient goals.
+You are an expert nutritionist/dietitian, a world cuisine specialist. Your task is to generate a daily meal plan 
+tailored to the user's specific health, culinary, and precise macronutrient goals if provided.
 
 User Inputs:
 Daily Caloric Target: {payload.calories} kcal
@@ -33,9 +34,9 @@ Output Constraints & Instructions:
 Main Structure: The root of the output must be a single JSON object with three keys: "breakfast", "lunch", and "dinner". The value for each key must be an array containing exactly {payload.numberOfSuggestions} distinct meal suggestion objects.
 
 Daily Plan Structure & Macro Targets (CRITICAL):
-    Overall Goal: The sum of macros for any combination of one breakfast, one lunch, and one dinner should closely approximate the user's daily targets ({payload.carbs}g Carbs, {payload.protein}g Protein, {payload.fat}g Fat).
+    Overall Goal: The sum of macros for any combination of one breakfast, one lunch, and one dinner should closely approximate the user's daily targets ({payload.carbs}g Carbs, {payload.protein}g Protein, {payload.fat}g Fat if provided).
     Strategic Macro Distribution: Each individual meal option must be designed to fit into a balanced daily structure. Adhere to this nutritional strategy:
-        Breakfast: Focus on sustained energy and fiber. This meal should be higher in complex carbohydrates and moderate in protein.
+        Breakfast: The best breakfast is one that combines protein, fiber, healthy fats, and some complex carbohydrates
         Lunch: Emphasize lean protein and vegetables for satiety and muscle support. This meal should be the highest in protein.
         Dinner: Design lighter, nutrient-rich meals. This meal should be moderate in protein and lighter on carbohydrates and fats, making it easier to digest.
 
@@ -112,7 +113,6 @@ JSON Template for EACH Meal Suggestion Object:
         ]
         
         generate_content_config = types.GenerateContentConfig(
-            thinking_config=types.ThinkingConfig(thinking_budget=10000),  # Fixed: use positive budget
             response_mime_type="application/json",
         )
         
