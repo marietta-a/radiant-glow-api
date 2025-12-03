@@ -123,6 +123,74 @@ def analyze_nutrition_facts_from_image(image_bytes: bytes, mime_type: str):
       "amount": 0,
       "unit": "IU"
     }
+  },
+  "recipe": {
+    "ingredient": [
+      {
+        "name": "mixed greens",
+        "explanation": "Provides vitamins A, C, K, and folate.",
+        "emoji": "🥬",
+        "quantity": "6 cups"
+      },
+      {
+        "name": "apple",
+        "explanation": "Source of fiber and vitamin C.",
+        "emoji": "🍎",
+        "quantity": "1 medium, diced"
+      },
+      {
+        "name": "dried cranberries",
+        "explanation": "Rich in antioxidants.",
+        "emoji": "🍒",
+        "quantity": "1/2 cup"
+      },
+      {
+        "name": "slivered almonds",
+        "explanation": "Provides healthy fats and vitamin E.",
+        "emoji": "🌰",
+        "quantity": "1/4 cup"
+      },
+      {
+        "name": "maple syrup",
+        "explanation": "Natural sweetener.",
+        "emoji": "🍁",
+        "quantity": "2 tablespoons"
+      },
+      {
+        "name": "olive oil",
+        "explanation": "Healthy monounsaturated fats.",
+        "emoji": "🫒",
+        "quantity": "3 tablespoons"
+      },
+      {
+        "name": "apple cider vinegar",
+        "explanation": "Adds tanginess.",
+        "emoji": "🍶",
+        "quantity": "1 tablespoon"
+      },
+      {
+        "name": "Dijon mustard",
+        "explanation": "For flavor.",
+        "emoji": "🍯",
+        "quantity": "1 teaspoon"
+      },
+      {
+        "name": "salt",
+        "emoji": "🧂",
+        "quantity": "1/4 teaspoon"
+      },
+      {
+        "name": "black pepper",
+        "emoji": "🌶️",
+        "quantity": "1/8 teaspoon"
+      }
+    ],
+    "recipe": [
+      "In a large bowl, combine mixed greens, diced apple, dried cranberries, and slivered almonds.",
+      "In a small bowl, whisk together maple syrup, olive oil, apple cider vinegar, Dijon mustard, salt, and pepper until well combined.",
+      "Pour the dressing over the salad and toss gently to coat.",
+      "Serve immediately."
+    ]
   }
 }
 
@@ -306,6 +374,74 @@ async def analyze_nutrition_facts(food_name: str):
       "amount": 0,
       "unit": "IU"
     }
+  },
+  "recipe": {
+    "ingredient": [
+      {
+        "name": "mixed greens",
+        "explanation": "Provides vitamins A, C, K, and folate.",
+        "emoji": "🥬",
+        "quantity": "6 cups"
+      },
+      {
+        "name": "apple",
+        "explanation": "Source of fiber and vitamin C.",
+        "emoji": "🍎",
+        "quantity": "1 medium, diced"
+      },
+      {
+        "name": "dried cranberries",
+        "explanation": "Rich in antioxidants.",
+        "emoji": "🍒",
+        "quantity": "1/2 cup"
+      },
+      {
+        "name": "slivered almonds",
+        "explanation": "Provides healthy fats and vitamin E.",
+        "emoji": "🌰",
+        "quantity": "1/4 cup"
+      },
+      {
+        "name": "maple syrup",
+        "explanation": "Natural sweetener.",
+        "emoji": "🍁",
+        "quantity": "2 tablespoons"
+      },
+      {
+        "name": "olive oil",
+        "explanation": "Healthy monounsaturated fats.",
+        "emoji": "🫒",
+        "quantity": "3 tablespoons"
+      },
+      {
+        "name": "apple cider vinegar",
+        "explanation": "Adds tanginess.",
+        "emoji": "🍶",
+        "quantity": "1 tablespoon"
+      },
+      {
+        "name": "Dijon mustard",
+        "explanation": "For flavor.",
+        "emoji": "🍯",
+        "quantity": "1 teaspoon"
+      },
+      {
+        "name": "salt",
+        "emoji": "🧂",
+        "quantity": "1/4 teaspoon"
+      },
+      {
+        "name": "black pepper",
+        "emoji": "🌶️",
+        "quantity": "1/8 teaspoon"
+      }
+    ],
+    "recipe": [
+      "In a large bowl, combine mixed greens, diced apple, dried cranberries, and slivered almonds.",
+      "In a small bowl, whisk together maple syrup, olive oil, apple cider vinegar, Dijon mustard, salt, and pepper until well combined.",
+      "Pour the dressing over the salad and toss gently to coat.",
+      "Serve immediately."
+    ]
   }
 }
 using the template above, analyse ''' + food_name + '''.

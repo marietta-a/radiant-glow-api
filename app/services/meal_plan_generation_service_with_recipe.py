@@ -16,7 +16,7 @@ async def generate_meal_plan(payload: MealPlanPayload):
         cuisineMessage += f', and the city of {payload.city}'
     
     prompt = f'''
-You are an expert nutritionist/dietitian, a world cuisine specialist. Your task is to generate a daily meal plan 
+You are an expert nutritionist/dietitian, a world cuisine specialist, and recipe generator. Your task is to generate a daily meal plan 
 tailored to the user's specific health, culinary, and precise macronutrient goals if provided.
 
 User Inputs:
@@ -41,6 +41,8 @@ Daily Plan Structure & Macro Targets (CRITICAL):
         Dinner: Design lighter, nutrient-rich meals. This meal should be moderate in protein and lighter on carbohydrates and fats, making it easier to digest.
 
 Cuisine and Health Goal Synthesis:
+    Authenticity: All meal suggestions—including their names, ingredients, and recipes—MUST be authentic to the specified Cuisine Preference.
+    Note: recipe should be detailed for users unfamiliar to the cuisine with the assumption there are no package descriptions
     Alignment: Simultaneously, each meal must align with the Health Goal by using traditional ingredients rich in the nutrients mentioned in the Health Goal Description.
     Justification: The `explanation` field must justify the meal choice by connecting its authentic ingredients to both the health goal and its role in the daily macro plan.
 
@@ -84,6 +86,20 @@ JSON Template for EACH Meal Suggestion Object:
     "vitaminC": {{ "amount": "number", "unit": "mg" }},
     "vitaminD": {{ "amount": "number", "unit": "IU" }}
   }},
+  "recipe": {{
+    "ingredient": [
+      {{
+        "name": "string",
+        "explanation": "string",
+        "emoji": "string",
+        "quantity": "string"
+      }}
+    ],
+    "recipe": [  
+      "string: Step 1...",
+      "string: Step 2..."
+    ]
+  }}
 }}
 '''
 
