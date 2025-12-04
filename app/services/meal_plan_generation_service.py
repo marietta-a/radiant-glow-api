@@ -6,8 +6,10 @@ from google.genai import types
 from app.config import genAiClient, model_lite
 from fastapi import HTTPException
 from app.models.meal_plan_payload import MealPlanPayload
+import time
 
 async def generate_meal_plan(payload: MealPlanPayload):
+    start = time.time()
     
     cuisineMessage = f'Diets should be {payload.country} cuisines'
     if(payload.state):
@@ -16,8 +18,9 @@ async def generate_meal_plan(payload: MealPlanPayload):
         cuisineMessage += f', and the city of {payload.city}'
     
     prompt = f'''
-You are an expert nutritionist/dietitian, a world cuisine specialist. Your task is to generate a daily meal plan 
-tailored to the user's specific health, culinary, and precise macronutrient goals if provided.
+You are an expert nutritionist, registered dietitian, world‑cuisine specialist, and a highly detailed recipe generator. 
+Your task is to generate a daily meal plan tailored to the user's specific health goals, culinary preferences, and precise 
+macronutrient targets when provided.
 
 User Inputs:
 Daily Caloric Target: {payload.calories} kcal
@@ -31,20 +34,59 @@ Number of Suggestions per Meal: {payload.numberOfSuggestions}
 {cuisineMessage}
 
 Output Constraints & Instructions:
-Main Structure: The root of the output must be a single JSON object with three keys: "breakfast", "lunch", and "dinner". The value for each key must be an array containing exactly {payload.numberOfSuggestions} distinct meal suggestion objects.
+Main Structure:
+    The root of the output must be a single JSON object with three keys: "breakfast", "lunch", and "dinner".
+    Each key must map to an array containing exactly {payload.numberOfSuggestions} distinct meal suggestion objects.
+
+Meal Suggestion Object Structure (MANDATORY FIELDS):
+Each meal suggestion object must contain:
+    - "name": The meal name.
+    - "ingredients": A list of ingredients with exact quantities (grams, ml, cups, or pieces).
+    - "instructions": A step-by-step recipe with clear cooking methods and timing.
+    - "nutrition": Estimated nutrition facts including:
+        * calories
+        * carbohydrates (g)
+        * protein (g)
+        * fat (g)
+        * fiber (g)
+        * key micronutrients relevant to the health goal (e.g., iron, magnesium, omega‑3, potassium).
+    - "explanation": A justification connecting:
+        * how the meal supports the Health Goal,
+        * how the ingredients align with the cuisine,
+        * how the meal fits into the daily macro distribution strategy.
 
 Daily Plan Structure & Macro Targets (CRITICAL):
-    Overall Goal: The sum of macros for any combination of one breakfast, one lunch, and one dinner should closely approximate the user's daily targets ({payload.carbs}g Carbs, {payload.protein}g Protein, {payload.fat}g Fat if provided).
-    Strategic Macro Distribution: Each individual meal option must be designed to fit into a balanced daily structure. Adhere to this nutritional strategy:
-        Breakfast: The best breakfast is one that combines protein, fiber, healthy fats, and some complex carbohydrates
-        Lunch: Emphasize lean protein and vegetables for satiety and muscle support. This meal should be the highest in protein.
-        Dinner: Design lighter, nutrient-rich meals. This meal should be moderate in protein and lighter on carbohydrates and fats, making it easier to digest.
+    Overall Goal:
+        The sum of macros for any combination of one breakfast, one lunch, and one dinner should closely approximate 
+        the user's daily targets ({payload.carbs}g Carbs, {payload.protein}g Protein, {payload.fat}g Fat).
+
+    Strategic Macro Distribution:
+        Breakfast:
+            - Must combine protein, fiber, healthy fats, and complex carbohydrates.
+        Lunch:
+            - Must be the highest-protein meal of the day.
+            - Must emphasize lean protein and vegetables for satiety and muscle support.
+        Dinner:
+            - Must be lighter, nutrient-dense, moderate in protein, and lower in carbs and fats for easier digestion.
 
 Cuisine and Health Goal Synthesis:
-    Alignment: Simultaneously, each meal must align with the Health Goal by using traditional ingredients rich in the nutrients mentioned in the Health Goal Description.
-    Justification: The `explanation` field must justify the meal choice by connecting its authentic ingredients to both the health goal and its role in the daily macro plan.
+    Alignment:
+        Each meal must incorporate culturally authentic ingredients that naturally support the Health Goal described 
+        in {payload.promptDescription}.
+    Justification:
+        The "explanation" field must explicitly connect the meal’s ingredients to:
+            - the health goal,
+            - the cultural/cuisine context,
+            - the macro distribution strategy.
 
-Variety and Cultural Nuance: Ensure the {payload.numberOfSuggestions} options for each meal are distinct and culturally appropriate for the specified cuisine.
+Variety and Cultural Nuance:
+    Ensure the {payload.numberOfSuggestions} options for each meal are distinct, culturally appropriate, and avoid 
+    repeating the same core ingredients unless required by the cuisine.
+
+IMPORTANT:
+    All recipes must be detailed enough for a beginner to cook successfully.
+    All ingredient quantities must be explicit.
+    All nutrition values must be estimated realistically.
 
 JSON Template Adherence: Every single meal suggestion object MUST strictly follow the structure and data types provided in the template below.
 
@@ -84,6 +126,20 @@ JSON Template for EACH Meal Suggestion Object:
     "vitaminC": {{ "amount": "number", "unit": "mg" }},
     "vitaminD": {{ "amount": "number", "unit": "IU" }}
   }},
+  "recipe": {{
+    "ingredient": [
+      {{
+        "name": "string",
+        "explanation": "string",
+        "emoji": "string",
+        "quantity": "string"
+      }}
+    ],
+    "recipe": [  
+      "string: Step 1...",
+      "string: Step 2..."
+    ]
+  }}
 }}
 '''
 
@@ -110,6 +166,12 @@ JSON Template for EACH Meal Suggestion Object:
         )
         # Parse the JSON response string into a Python dictionary
         result_dict = json.loads(response.text)
+
+        end = time.time()
+        elapsed = end - start
+
+        print(f"Elapsed time: {elapsed} seconds")
+
         return result_dict
         
     except json.JSONDecodeError as e:
