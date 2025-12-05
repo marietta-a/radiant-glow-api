@@ -4,7 +4,7 @@
 import json
 from app.config import logger
 from google.genai import types
-from app.config import genAiClient, model;
+from app.config import genAiClient, model, thinking_content_config
 from fastapi import HTTPException
 import time 
 
@@ -230,20 +230,12 @@ IMPORTANT: You must respond with only the JSON object. Do not include any other 
             ),
         ]
 
-        generate_content_config = types.GenerateContentConfig(
-            thinking_config = types.ThinkingConfig(
-                thinking_budget=-1,
-            ),
-            image_config=types.ImageConfig(
-                image_size="1K",
-            ),
-            response_mime_type="application/json",
-        )
+
 
         response = genAiClient.models.generate_content(
             model=model,
             contents=contents,
-            config=generate_content_config,
+            config=thinking_content_config,
         )
         
         # Parse the JSON response string into a Python dictionary
@@ -470,17 +462,12 @@ IMPORTANT: You must respond with only the JSON object. Do not include any other 
             ),
         ]
 
-        generate_content_config = types.GenerateContentConfig(
-            thinking_config=types.ThinkingConfig(thinking_budget=-1),
-            response_mime_type="application/json",
-        )
-
         logger.info('genAI config completed')
 
         response = genAiClient.models.generate_content(
             model=model,
             contents=contents,
-            config=generate_content_config,
+            config=thinking_content_config,
         )
         
         # Parse the JSON response string into a Python dictionary

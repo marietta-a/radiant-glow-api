@@ -3,7 +3,7 @@
 import json
 from app.config import logger
 from google.genai import types
-from app.config import genAiClient, model_lite
+from app.config import genAiClient, model_lite, model, thinking_content_config
 from fastapi import HTTPException
 from app.models.meal_plan_payload import MealPlanPayload
 import time
@@ -153,16 +153,16 @@ JSON Template for EACH Meal Suggestion Object:
             ),
         ]
         
-        generate_content_config = types.GenerateContentConfig(
+        generate_thinking_content_config = types.GenerateContentConfig(
             response_mime_type="application/json",
         )
         
         logger.info('genAI config completed')
         
         response = genAiClient.models.generate_content(
-            model=model_lite,
+            model=model,
             contents=contents,
-            config=generate_content_config,
+            config=thinking_content_config,
         )
         # Parse the JSON response string into a Python dictionary
         result_dict = json.loads(response.text)
