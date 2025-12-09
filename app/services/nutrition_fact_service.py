@@ -11,6 +11,7 @@ import time
 
 def analyze_nutrition_facts_from_image(image_bytes: bytes, mime_type: str):
     
+    start = time.time()
     
     prompt = '''
 {
@@ -197,7 +198,8 @@ def analyze_nutrition_facts_from_image(image_bytes: bytes, mime_type: str):
   }
 }
 
-using the template above, analysed the attached food image.
+using the template above, analysed the attached food image  (ensure high accuracy in recognition by considering colors, textures, and common culinary patterns).
+If unsure, suggest the most probable dish name and ingredients based on the visual data. Avoid assumptions without visual evidence.
 Note:
 
 All fields should be null if it is not in the following categories [edibles, beverages, nutrition, or groceries]
@@ -240,6 +242,10 @@ IMPORTANT: You must respond with only the JSON object. Do not include any other 
         
         # Parse the JSON response string into a Python dictionary
         result_dict = json.loads(response.text)
+        end = time.time()
+        elapsed = end - start
+
+        print(f"Elapsed time: {elapsed} seconds")
         
         return result_dict
         
