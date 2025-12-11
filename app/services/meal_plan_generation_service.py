@@ -84,9 +84,12 @@ Variety and Cultural Nuance:
     repeating the same core ingredients unless required by the cuisine.
 
 IMPORTANT:
+    A MUST: All meal suggested for (breakfast, lunch, and dinner) should {payload.promptDescription}
     All recipes must be detailed enough for a beginner to cook successfully.
     All ingredient quantities must be explicit.
     All nutrition values must be estimated realistically.
+    The cummulative calorie distribution for breakfast, lunch, and dinner should be approximately equal to {payload.calories}
+    The cummulative macronutrients distribution for breakfast, lunch, and dinner should be approximately equal to [fat: {payload.fat}g; protein: {payload.protein}g; carbohydrate: {payload.carbs}g]
 
 JSON Template Adherence: Every single meal suggestion object MUST strictly follow the structure and data types provided in the template below.
 
@@ -153,14 +156,10 @@ JSON Template for EACH Meal Suggestion Object:
             ),
         ]
         
-        generate_thinking_content_config = types.GenerateContentConfig(
-            response_mime_type="application/json",
-        )
-        
         logger.info('genAI config completed')
         
         response = genAiClient.models.generate_content(
-            model=model,
+            model=model_lite,
             contents=contents,
             config=thinking_content_config,
         )
