@@ -12,8 +12,10 @@ genAiClient = genai.Client(
     api_key=os.environ.get("GEMINI_API_KEY"),
 )
 
-model = "gemini-2.5-flash-lite"
-model_lite = "gemini-2.0-flash-lite"
+# model = "gemini-2.5-flash-lite"
+model = "gemini-flash-lite-latest"
+model_lite = "gemini-flash-lite-latest"
+# model_lite = "gemini-2.0-flash-lite"
 
 image_content_config = types.GenerateContentConfig(
     thinking_config = types.ThinkingConfig(

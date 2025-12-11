@@ -15,3 +15,4 @@ class MealPlanPayload(BaseModel):
     healthGoal: str
     promptDescription: str
     numberOfSuggestions: int
+    mealType: str
