@@ -84,7 +84,7 @@ Variety and Cultural Nuance:
     repeating the same core ingredients unless required by the cuisine.
 
 IMPORTANT:
-    A MUST: All meal suggested for (breakfast, lunch, and dinner) should {payload.promptDescription}
+    A MUST: All meal suggested for (breakfast, lunch, and dinner) should {payload.promptDescription} for {payload.healthGoal}
     All recipes must be detailed enough for a beginner to cook successfully.
     All ingredient quantities must be explicit.
     All nutrition values must be estimated realistically.
