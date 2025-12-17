@@ -5,6 +5,7 @@ from bs4 import BeautifulSoup
 from typing import List
 
 from app.middleware.nutrition_analysis_middleware import process_nutrion_fact_from_image, process_nutrition_facts
+from app.middleware.nutrition_analysis_middleware_new import process_nutrion_fact_from_image_new, process_nutrition_facts_new
 from app.middleware.image_generation_middleware import process_image, process_image_generation
 from app.middleware.meal_plan_generation_middleware import process_meal_plan_generation
 from app.models.meal_plan_payload import MealPlanPayload
@@ -37,15 +38,23 @@ async def get_images(query: str, limit: int = 2):
 @app.post("/api/nutrition-facts-from-image")
 async def retrieve_nutrition_facts_from_image(file: UploadFile = File(...)):
     return await process_nutrion_fact_from_image(file=file)
+
+@app.post("/api/nutrition-facts-from-image-new")
+async def retrieve_nutrition_facts_from_image(file: UploadFile = File(...)):
+    return await process_nutrion_fact_from_image_new(file=file)
  
 @app.get("/api/nutrition-facts")   
 async def get_nutrition_facts(food_name: str):
     return await process_nutrition_facts(food_name=food_name)
 
+@app.get("/api/nutrition-facts-new")   
+async def get_nutrition_facts(food_name: str):
+    return await process_nutrition_facts_new(food_name=food_name)
+
 
 @app.post("/api/meal-plan")
 async def generate_meal_plan(payload: MealPlanPayload):
-    return await process_meal_plan_generation(payload=payload)
+    return await  process_meal_plan_generation(payload=payload)
 
 
  
