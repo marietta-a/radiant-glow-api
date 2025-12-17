@@ -215,6 +215,7 @@ If it is unhealthy, isHealthy should be false
 
 healthBoost: the top important list of health boosts for the food (max of 5 words, e.g., heart health boost, eye health boost)
 explanation: for each ingredient, explanation is the nutrient the ingredient is rich in (max 5 words)
+time: is the time of the day appropriate to take the meal (e.g for breakfast: 8:00 AM; lunch: 2:00 PM; dinner: 6:00 PM)
 
 use optimal accuracy
 
@@ -482,6 +483,7 @@ If it is unhealthy, isHealthy should be false
 
 healthBoost: the top important list of health boosts for the food (max of 5 words, e.g., heart health boost, eye health boost)
 explanation: for each ingredient, explanation is the nutrient the ingredient is rich in (max 5 words)
+time: is the time of the day appropriate to take the meal (e.g for breakfast: 8:00 AM; lunch: 2:00 PM; dinner: 6:00 PM)
 
 use optimal accuracy
 
