@@ -9,7 +9,9 @@ from app.middleware.nutrition_analysis_middleware_new import process_nutrion_fac
 from app.middleware.image_generation_middleware import process_image, process_image_generation
 from app.middleware.meal_plan_generation_middleware import process_meal_plan_generation
 from app.models.meal_plan_payload import MealPlanPayload
+from app.models.category_item_payload import CategoryItemPayload
 from app.middleware.recipe_generation_middleware import process_recipe
+from app.middleware.category_item_nutri_fact_middleware import process_health_goal_category_items
 
 
 app = FastAPI()
@@ -57,10 +59,18 @@ async def generate_meal_plan(payload: MealPlanPayload):
     return await  process_meal_plan_generation(payload=payload)
 
 
+
+#health goal category data
+@app.post("/api/health-goal-category-data")
+async def generate_health_goal_category_data(payload: CategoryItemPayload):
+    return await  process_health_goal_category_items(payload=payload)
  
 @app.get("/api/recipe")   
 async def get_recipe(food_name: str):
     return await process_recipe(food_name=food_name)
+
+
+
     
 if __name__ == "__main__":
     import uvicorn
