@@ -34,6 +34,7 @@ JSON Output Template:
 code
 ```json
 {{
+  "name": {food_name},
   "ingredient": [
     {{
       "name": "string",
