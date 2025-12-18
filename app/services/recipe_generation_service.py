@@ -24,7 +24,7 @@ Strict JSON Format: The output MUST be a single JSON object with two top-level k
 Ingredient Details:
 The ingredient key must contain an array of objects.
 List all necessary ingredients for {food_name}
-For each ingredient object, provide the name, a helpful explanation (with a max of 8 words) of its purpose or health benefit (if applicable), an appropriate emoji, and a realistic quantity.
+For each ingredient object, provide the name, a helpful explanation (with a max of 5 words) of its purpose or health benefit (if applicable), an appropriate emoji, and a realistic quantity.
 Recipe Steps:
 The recipe key must contain an array of strings.
 Provide clear, step-by-step instructions. Structure the steps logically.
