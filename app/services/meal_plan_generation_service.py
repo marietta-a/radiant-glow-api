@@ -102,7 +102,6 @@ JSON Template for EACH Meal Suggestion Object:
   "name": "string",
   "time": "string", /// time of the day e.g "8:00 AM", "1:00 PM", "6:00 PM"
   "servingDescription": "string",
-  "explanation": "string",
   "calories": {{ "amount": "number", "unit": "kcal", "dailyValuePercentage": "number" }},
   "carbs": {{ "amount": "number", "unit": "g", "dailyValuePercentage": "number" }},
   "protein": {{ "amount": "number", "unit": "g", "dailyValuePercentage": "number" }},
@@ -128,20 +127,6 @@ JSON Template for EACH Meal Suggestion Object:
     "vitaminA": {{ "amount": "number", "unit": "IU" }},
     "vitaminC": {{ "amount": "number", "unit": "mg" }},
     "vitaminD": {{ "amount": "number", "unit": "IU" }}
-  }},
-  "recipe": {{
-    "ingredient": [
-      {{
-        "name": "string",
-        "explanation": "string",
-        "emoji": "string",
-        "quantity": "string"
-      }}
-    ],
-    "recipe": [  
-      "string: Step 1...",
-      "string: Step 2..."
-    ]
   }}
 }}
 '''

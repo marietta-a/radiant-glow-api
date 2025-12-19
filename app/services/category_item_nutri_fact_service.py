@@ -24,8 +24,8 @@ async def analyze_category_item_nutri_fact(payload: CategoryItemPayload):
   "id": "health_goal_radiant_glow_01",
   "loggedAt": "2024-05-21T10:00:00.000Z",
   "updatedAt": "2024-05-21T10:05:00.000Z",
-  "healthGoal": 1,
-  "description": "Radiant Glow",
+  "healthGoal": {payload.healthGoalId},
+  "description": {payload.healthGoal},
   "isSelected": true,
   "foodLogEntryCategories": [
     {{
@@ -72,9 +72,8 @@ async def analyze_category_item_nutri_fact(payload: CategoryItemPayload):
             "vitaminC": {{"amount": 150.0, "unit": "mg"}},
             "vitaminD": {{"amount": 50.0, "unit": "IU"}}
           }},
-          "recipe": null,
           "healthBenefit": ["High in Vitamin C", "Rich in Antioxidants"],
-          "healthRisk": null
+          "healthRisk": []
         }},
         {{
           "id": "food_entry_salmon_02",
@@ -113,9 +112,8 @@ async def analyze_category_item_nutri_fact(payload: CategoryItemPayload):
             "vitaminC": {{"amount": 20.0, "unit": "mg"}},
             "vitaminD": {{"amount": 500.0, "unit": "IU"}}
           }},
-          "recipe": null,
           "healthBenefit": ["High in Omega-3s", "Excellent source of Vitamin D"],
-          "healthRisk": null
+          "healthRisk": []
         }}
       ]
     }}
@@ -124,13 +122,14 @@ async def analyze_category_item_nutri_fact(payload: CategoryItemPayload):
 
 Using the template above as the output format sample:
 
-Generate the top {payload.numberOfSuggestions} foodLogEntries (diets) for "{payload.healthGoal}:{payload.category}" .
+Generate the top {payload.numberOfSuggestions} foodLogEntries (diets) for "{payload.healthGoal} Diets" .
 
 For each item:
-- Ensure it aligns with Radiant Glow Diets: Vitamin C–Rich Foods.
+- Ensure it aligns with {payload.healthGoal}:{payload.category}.
 - Provide calories per serving.
 - Specify illnesses it may help prevent or manage.
 - Ensure optimal health value.
+- if the attributes healthRisk and healthBenefit has no data, return an empty lists
 
 IMPORTANT: Respond with **only** the JSON object. No explanations, no markdown, no commentary.
 """
