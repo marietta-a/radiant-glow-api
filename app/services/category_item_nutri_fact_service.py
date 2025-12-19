@@ -72,9 +72,8 @@ async def analyze_category_item_nutri_fact(payload: CategoryItemPayload):
             "vitaminC": {{"amount": 150.0, "unit": "mg"}},
             "vitaminD": {{"amount": 50.0, "unit": "IU"}}
           }},
-          "recipe": null,
           "healthBenefit": ["High in Vitamin C", "Rich in Antioxidants"],
-          "healthRisk": null
+          "healthRisk": []
         }},
         {{
           "id": "food_entry_salmon_02",
@@ -113,9 +112,8 @@ async def analyze_category_item_nutri_fact(payload: CategoryItemPayload):
             "vitaminC": {{"amount": 20.0, "unit": "mg"}},
             "vitaminD": {{"amount": 500.0, "unit": "IU"}}
           }},
-          "recipe": null,
           "healthBenefit": ["High in Omega-3s", "Excellent source of Vitamin D"],
-          "healthRisk": null
+          "healthRisk": []
         }}
       ]
     }}
@@ -131,6 +129,7 @@ For each item:
 - Provide calories per serving.
 - Specify illnesses it may help prevent or manage.
 - Ensure optimal health value.
+- if the attributes healthRisk and healthBenefit has no data, return an empty lists
 
 IMPORTANT: Respond with **only** the JSON object. No explanations, no markdown, no commentary.
 """
