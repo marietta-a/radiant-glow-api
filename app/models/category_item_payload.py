@@ -8,6 +8,8 @@ class CategoryItemPayload(BaseModel):
     healthGoalId: int
     healthGoal: str
     category: str
+    categoryId: int
+    description: str
     numberOfSuggestions: int
     country: str
     state: str

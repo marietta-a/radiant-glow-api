@@ -32,8 +32,9 @@ async def analyze_category_item_nutri_fact(payload: CategoryItemPayload):
       "id": "fec_antioxidants_01",
       "loggedAt": "2024-05-21T10:00:00.000Z",
       "updatedAt": "2024-05-21T10:05:00.000Z",
-      "item": "Antioxidant-Rich Foods",
-      "description": "Foods high in antioxidants help protect your skin from damage caused by free radicals.",
+      "item": {payload.category},
+      "categoryId": {payload.categoryId},
+      "description": {payload.description},
       "items": [
         {{
           "id": "food_entry_berries_01",
@@ -122,16 +123,41 @@ async def analyze_category_item_nutri_fact(payload: CategoryItemPayload):
 
 Using the template above as the output format sample:
 
-Generate the top {payload.numberOfSuggestions} foodLogEntries (diets) for "{payload.healthGoal} Diets" .
+Generate exactly {payload.numberOfSuggestions} food log entries (diets) for the health goal: "{payload.healthGoal}" in the category: "{payload.category}".
 
-For each item:
-- Ensure it aligns with {payload.healthGoal}:{payload.category}.
-- Provide calories per serving.
-- Specify illnesses it may help prevent or manage.
-- Ensure optimal health value.
-- if the attributes healthRisk and healthBenefit has no data, return an empty lists
+CRITICAL REQUIREMENTS:
+1. The output MUST follow the exact JSON structure shown above
+2. Generate {payload.numberOfSuggestions} items inside the "items" array
+3. Each item should have:
+   - A unique ID starting with "food_entry_"
+   - A realistic name and serving description
+   - Explanation linking it to {payload.healthGoal}
+   - Health boost tags relevant to {payload.healthGoal}
+   - Complete nutritional information including calories, carbs, protein, fat
+   - Detailed nutrition facts matching real foods
+   - Health benefits and risks (empty arrays if none)
 
-IMPORTANT: Respond with **only** the JSON object. No explanations, no markdown, no commentary.
+SPECIFIC INSTRUCTIONS FOR {payload.healthGoal} - {payload.category}:
+- Focus on foods that specifically support {payload.healthGoal}
+- Ensure nutritional values are realistic for {payload.category} foods
+- Include foods that help prevent or manage illnesses related to {payload.healthGoal}
+- Consider {cuisineMessage} in food selection
+- Health benefits should be relevant to {payload.healthGoal}
+- If no health risks exist, use empty array []
+
+NUTRITION GUIDELINES:
+- Provide realistic calorie amounts per serving
+- Ensure macronutrient ratios are appropriate for {payload.healthGoal}
+- Include detailed micronutrients where applicable
+- Daily value percentages should be realistic
+
+FORMAT REQUIREMENTS:
+- Use null for missing image URLs
+- Times should be in format like "8:00 AM"
+- All measurements should have appropriate units
+- Use empty arrays [] for healthRisk/healthBenefit if no data
+
+IMPORTANT: Respond with ONLY the JSON object matching the template structure. No explanations, no markdown, no commentary outside the JSON.
 """
 
 
