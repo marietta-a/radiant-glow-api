@@ -3,7 +3,7 @@
 import json
 from app.config import logger
 from google.genai import types
-from app.config import genAiClient, model_lite
+from app.config import genAiClient, model_lite, thinking_content_config
 from fastapi import HTTPException
 import time
 
@@ -61,17 +61,17 @@ Now, generate the complete recipe for {food_name}.
             ),
         ]
         
-        generate_content_config = types.GenerateContentConfig(
-            thinking_config=types.ThinkingConfig(thinking_budget=10000),  # Fixed: use positive budget
-            response_mime_type="application/json",
-        )
+        # generate_content_config = types.GenerateContentConfig(
+        #     thinking_config=thinking_content_config,  # Fixed: use positive budget
+        #     response_mime_type="application/json",
+        # )
         
         logger.info('genAI config completed')
         
         response = genAiClient.models.generate_content(
             model=model_lite,
             contents=contents,
-            config=generate_content_config,
+            config=thinking_content_config,
         )
         # Parse the JSON response string into a Python dictionary
         result_dict = json.loads(response.text)
