@@ -30,7 +30,7 @@ async def get_images_generation(query: str, limit: int = 2):
     return await process_image_generation(query=query,limit=limit)
 
 @app.get("/api/images")
-async def get_images(query: str, limit: int = 2):
+async def get_images(query: str, limit: int = 1):
     return await process_image(query=query,limit=limit)
 
 # @app.get("/api/nutrition-facts-from-image")
