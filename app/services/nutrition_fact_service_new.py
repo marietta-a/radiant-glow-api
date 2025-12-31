@@ -5,7 +5,7 @@ import json
 import time
 from app.config import logger
 from google.genai import types
-from app.config import genAiClient, model;
+from app.config import genAiClient, model, image_content_config;
 from fastapi import HTTPException
 
 
@@ -188,7 +188,7 @@ IMPORTANT: You must respond with only the JSON object. Do not include any other 
         response = genAiClient.models.generate_content(
             model=model,
             contents=contents,
-            config=generate_content_config,
+            config=image_content_config,
         )
         
         # Parse the JSON response string into a Python dictionary

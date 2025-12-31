@@ -73,8 +73,8 @@ async def analyze_category_item_nutri_fact(payload: CategoryItemPayload):
             "vitaminC": {{"amount": 150.0, "unit": "mg"}},
             "vitaminD": {{"amount": 50.0, "unit": "IU"}}
           }},
-          "healthBenefit": ["High in Vitamin C", "Rich in Antioxidants"],
-          "healthRisk": []
+          "healthBenefit": [ "Packed with Vitamin C from berries to boost collagen production and brighten skin", "Rich in antioxidants (anthocyanins, flavonoids) that protect against free radical damage", "Spinach provides Vitamin A and iron, supporting skin cell turnover and oxygenation", "High fiber content aids digestion, reducing skin dullness linked to poor gut health", "Hydrating base (water or plant milk) helps maintain skin moisture balance", "Contains Vitamin K from spinach, which supports skin healing and reduces inflammation", "Natural sweetness reduces reliance on refined sugar, lowering risk of skin glycation" ], 
+          "healthRisk": [ "Potential pesticide residues if berries and spinach are not organic", "Excessive consumption may cause bloating due to high fiber", "Oxalates in spinach can contribute to kidney stone risk in sensitive individuals", "Added sweeteners (if used) may counteract skin benefits by promoting inflammation" ]
         }},
         {{
           "id": "food_entry_salmon_02",
@@ -113,8 +113,8 @@ async def analyze_category_item_nutri_fact(payload: CategoryItemPayload):
             "vitaminC": {{"amount": 20.0, "unit": "mg"}},
             "vitaminD": {{"amount": 500.0, "unit": "IU"}}
           }},
-          "healthBenefit": ["High in Omega-3s", "Excellent source of Vitamin D"],
-          "healthRisk": []
+          "healthBenefit": [ "Rich in Omega-3 fatty acids that reduce skin inflammation", "Excellent source of Vitamin D for skin cell renewal", "High in antioxidants (from asparagus) that protect against free radical damage", "Supports collagen production through protein content", "Provides Vitamin E which helps maintain skin elasticity", "Contains selenium that aids in skin repair and protection", "Hydrating properties from asparagus to keep skin supple" ], 
+          "healthRisk": [ "Potential mercury exposure from salmon if consumed excessively", "Risk of overcooking leading to loss of nutrients", "Possible pesticide residues in asparagus if not organic", "High sodium if seasoned heavily" ]
         }}
       ]
     }}
