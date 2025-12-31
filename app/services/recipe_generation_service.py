@@ -61,11 +61,6 @@ Now, generate the complete recipe for {food_name}.
             ),
         ]
         
-        # generate_content_config = types.GenerateContentConfig(
-        #     thinking_config=thinking_content_config,  # Fixed: use positive budget
-        #     response_mime_type="application/json",
-        # )
-        
         logger.info('genAI config completed')
         
         response = genAiClient.models.generate_content(
