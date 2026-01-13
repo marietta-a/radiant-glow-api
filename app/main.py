@@ -23,7 +23,12 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+#region glamorous API Endpoints
 
+#endregion
+
+
+#region Radiant Glow Diet API Endpoints
 
 @app.get("/api/images-generation")
 async def get_images_generation(query: str, limit: int = 2):
@@ -69,6 +74,7 @@ async def generate_health_goal_category_data(payload: CategoryItemPayload):
 async def get_recipe(food_name: str):
     return await process_recipe(food_name=food_name)
 
+#endregion
 
 
     

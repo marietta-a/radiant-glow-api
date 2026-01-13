@@ -8,3 +8,9 @@ pyparsing
 dotenv
 ddgs
 python-multipart
+supabase
+torch 
+torchvision 
+opencv-python 
+numpy
+git+https://github.com/facebookresearch/segment-anything-2.git
