@@ -12,6 +12,7 @@ from app.models.meal_plan_payload import MealPlanPayload
 from app.models.category_item_payload import CategoryItemPayload
 from app.middleware.recipe_generation_middleware import process_recipe
 from app.middleware.category_item_nutri_fact_middleware import process_health_goal_category_items
+from app.middleware.glamorous.wardrobe_analyzer_middleware import process_wardrobe_analyzer
 
 
 app = FastAPI()
@@ -25,6 +26,9 @@ app.add_middleware(
 
 #region glamorous API Endpoints
 
+@app.post("/api/wardrobe-analyzer")
+async def analyze_wardrobe(file: UploadFile = File(...)):
+    return await process_wardrobe_analyzer(file=file)
 #endregion
 
 

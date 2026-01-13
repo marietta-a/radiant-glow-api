@@ -11,6 +11,11 @@ load_dotenv()
 genAiClient = genai.Client(
     api_key=os.environ.get("GEMINI_API_KEY"),
 )
+genAiKey = os.environ.get("GEMINI_API_KEY")
+
+supabaseUrl=os.environ.get("SUPABASE_URL")
+supabaseAnonKey=os.environ.get("SUPABASE_ANON_API_KEY")
+supabaseUserId=os.environ.get("SUPABASE_USER_ID")
 
 # model = "gemini-2.5-flash-lite"
 model = "gemini-flash-lite-latest"
