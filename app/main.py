@@ -1,17 +1,18 @@
-from fastapi import FastAPI, UploadFile, File, Request
+from fastapi import Depends, FastAPI, UploadFile, File, Request
 from fastapi.middleware.cors import CORSMiddleware
-import requests
-from bs4 import BeautifulSoup
-from typing import List
-
+from app.helper import parse_profile
+from app.middleware.middleware import global_exception_handler
 from app.middleware.nutrition_analysis_middleware import process_nutrion_fact_from_image, process_nutrition_facts
 from app.middleware.nutrition_analysis_middleware_new import process_nutrion_fact_from_image_new, process_nutrition_facts_new
 from app.middleware.image_generation_middleware import process_image, process_image_generation
 from app.middleware.meal_plan_generation_middleware import process_meal_plan_generation
+from app.models.mavita.mavita_payloads import BioReportRequest, RecipeRequest, UserProfile
 from app.models.meal_plan_payload import MealPlanPayload
 from app.models.category_item_payload import CategoryItemPayload
 from app.middleware.recipe_generation_middleware import process_recipe
 from app.middleware.category_item_nutri_fact_middleware import process_health_goal_category_items
+from app.middleware.glamorous.fashion_trend_middleware import process_fashion_trend
+from app.services.mavita.mavita_service import analyze_meal_image, generate_bio_report, generate_longevity_plate
 
 
 app = FastAPI()
@@ -24,6 +25,41 @@ app.add_middleware(
 )
 
 
+app.add_exception_handler(Exception, global_exception_handler)
+
+#region mavita endpoints
+@app.post("/analyze-meal")
+async def analyze_meal(
+    file: UploadFile = File(...),
+    profile: UserProfile = Depends(parse_profile)
+):
+    image_bytes = await file.read()
+    return analyze_meal_image(image_bytes, file.content_type, profile)
+
+@app.post("/generate-recipes")
+async def get_recipes(request: RecipeRequest):
+    # If this fails, the global_exception_handler catches it automatically
+    recipes = generate_longevity_plate(request.goal, request.cuisine)
+    return recipes
+
+@app.post("/generate-report")
+async def get_bio_report(request: BioReportRequest):
+    meals_dict = [meal.model_dump() for meal in request.meals]
+    profile_dict = request.profile.model_dump()
+    
+    report = generate_bio_report(meals_dict, profile_dict)
+    return {"report": report}
+#endregion
+
+#region glamorous API Endpoints
+
+@app.get("/api/fashion-trend")
+async def fashion_trend():
+    return await process_fashion_trend()
+#endregion
+
+
+#region Radiant Glow Diet API Endpoints
 
 @app.get("/api/images-generation")
 async def get_images_generation(query: str, limit: int = 2):
@@ -69,6 +105,7 @@ async def generate_health_goal_category_data(payload: CategoryItemPayload):
 async def get_recipe(food_name: str):
     return await process_recipe(food_name=food_name)
 
+#endregion
 
 
     

@@ -1,7 +1,9 @@
 import json
 import re
 
-from fastapi import HTTPException
+from fastapi import Form, HTTPException
+
+from app.models.mavita.mavita_payloads import UserProfile
 
 
 def extract_json_list(text):
@@ -44,3 +46,6 @@ def extract_json_list(text):
         raise HTTPException(status_code=500, detail=str(e))
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
+    
+def parse_profile(profile: str = Form(...)) -> UserProfile:
+    return UserProfile.model_validate_json(profile)
