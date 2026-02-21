@@ -11,7 +11,6 @@ from app.models.meal_plan_payload import MealPlanPayload
 from app.models.category_item_payload import CategoryItemPayload
 from app.middleware.recipe_generation_middleware import process_recipe
 from app.middleware.category_item_nutri_fact_middleware import process_health_goal_category_items
-from app.middleware.glamorous.fashion_trend_middleware import process_fashion_trend
 from app.services.mavita.mavita_service import analyze_meal_image, generate_bio_report, generate_longevity_plate
 
 
@@ -53,9 +52,7 @@ async def get_bio_report(request: BioReportRequest):
 
 #region glamorous API Endpoints
 
-@app.get("/api/fashion-trend")
-async def fashion_trend():
-    return await process_fashion_trend()
+
 #endregion
 
 
