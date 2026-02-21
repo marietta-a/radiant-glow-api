@@ -13,4 +13,5 @@ torch
 torchvision 
 opencv-python 
 numpy
-git+https://github.com/facebookresearch/segment-anything-2.git
+apscheduler
+pydantic

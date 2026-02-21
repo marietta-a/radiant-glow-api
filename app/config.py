@@ -21,6 +21,7 @@ supabaseUserId=os.environ.get("SUPABASE_USER_ID")
 model = "gemini-flash-lite-latest"
 model_lite = "gemini-flash-lite-latest"
 # model_lite = "gemini-2.0-flash-lite"
+mavita_model = "gemini-3-flash-preview"
 
 image_content_config = types.GenerateContentConfig(
     thinking_config = types.ThinkingConfig(
