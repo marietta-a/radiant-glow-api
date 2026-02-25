@@ -27,7 +27,7 @@ app.add_middleware(
 app.add_exception_handler(Exception, global_exception_handler)
 
 #region mavita endpoints
-@app.post("/analyze-meal")
+@app.post("/api/analyze-meal")
 async def analyze_meal(
     file: UploadFile = File(...),
     profile: UserProfile = Depends(parse_profile)
@@ -35,13 +35,13 @@ async def analyze_meal(
     image_bytes = await file.read()
     return analyze_meal_image(image_bytes, file.content_type, profile)
 
-@app.post("/generate-recipes")
-async def get_recipes(request: RecipeRequest):
+@app.post("/api/generate-longevity-plate")
+async def get_longevity_plate(request: RecipeRequest):
     # If this fails, the global_exception_handler catches it automatically
     recipes = generate_longevity_plate(request.goal, request.cuisine)
     return recipes
 
-@app.post("/generate-report")
+@app.post("/api/generate-report")
 async def get_bio_report(request: BioReportRequest):
     meals_dict = [meal.model_dump() for meal in request.meals]
     profile_dict = request.profile.model_dump()
