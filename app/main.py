@@ -11,7 +11,7 @@ from app.models.meal_plan_payload import MealPlanPayload
 from app.models.category_item_payload import CategoryItemPayload
 from app.middleware.recipe_generation_middleware import process_recipe
 from app.middleware.category_item_nutri_fact_middleware import process_health_goal_category_items
-from app.services.mavita.mavita_service import analyze_meal_image, generate_bio_report, generate_longevity_plate
+from app.services.mavita.mavita_service import analyze_meal_image, process_bio_report, process_longevity_plate
 
 
 app = FastAPI()
@@ -38,7 +38,7 @@ async def analyze_meal(
 @app.post("/api/generate-longevity-plate")
 async def generate_longevity_plate(request: RecipeRequest):
     # If this fails, the global_exception_handler catches it automatically
-    recipes = generate_longevity_plate(request.goal, request.cuisine)
+    recipes = process_longevity_plate(request)
     return recipes
 
 @app.post("/api/generate-report")
@@ -46,7 +46,7 @@ async def get_bio_report(request: BioReportRequest):
     meals_dict = [meal.model_dump() for meal in request.meals]
     profile_dict = request.profile.model_dump()
     
-    report = generate_bio_report(meals_dict, profile_dict)
+    report = process_bio_report(meals_dict, profile_dict)
     return {"report": report}
 #endregion
 
