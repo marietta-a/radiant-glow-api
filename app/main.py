@@ -36,7 +36,7 @@ async def analyze_meal(
     return analyze_meal_image(image_bytes, file.content_type, profile)
 
 @app.post("/api/generate-longevity-plate")
-async def get_longevity_plate(request: RecipeRequest):
+async def generate_longevity_plate(request: RecipeRequest):
     # If this fails, the global_exception_handler catches it automatically
     recipes = generate_longevity_plate(request.goal, request.cuisine)
     return recipes
