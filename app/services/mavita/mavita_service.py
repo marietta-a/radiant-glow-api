@@ -6,7 +6,7 @@ from fastapi import HTTPException
 from app.config import logger
 from google.genai import types
 from app.config import mavita_model, genAiClient, image_content_config
-from app.models.mavita.mavita_payloads import UserProfile;
+from app.models.mavita.mavita_payloads import RecipeRequest, UserProfile;
 
 def analyze_meal_image(base64_image: bytes, mime_type: str, profile: UserProfile):
     start = time.time()
@@ -112,7 +112,7 @@ def analyze_meal_image(base64_image: bytes, mime_type: str, profile: UserProfile
         print(f"Clinical Interpretation Error: {e}")
         raise Exception("Precision mismatch. Please capture a clearer, well-lit image.")
 
-def generate_longevity_plate(goal: str, cuisine: str) -> List[Dict[str, Any]]:
+def process_longevity_plate(request: RecipeRequest):
     start = time.time()
     recipe_schema = {
         "type": "array",
@@ -128,7 +128,7 @@ def generate_longevity_plate(goal: str, cuisine: str) -> List[Dict[str, Any]]:
         }
     }
 
-    prompt = f"As a Medical Nutritionist, generate 3 clinical recipes for '{goal}' in '{cuisine}' style. Focus on metabolic synergy and biological longevity. The output should use the folloiwng template: '{recipe_schema}'"
+    prompt = f"As a Medical Nutritionist, generate 3 clinical recipes for '{request.goal}' in '{request.cuisine}' style. Focus on metabolic synergy and biological longevity. The output should use the folloiwng template: '{recipe_schema}'"
 
     try:
         contents = [
@@ -166,7 +166,7 @@ def generate_longevity_plate(goal: str, cuisine: str) -> List[Dict[str, Any]]:
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
-def generate_bio_report(meals: List[Dict[str, Any]], profile: Dict[str, Any]) -> str:
+def process_bio_report(meals: List[Dict[str, Any]], profile: Dict[str, Any]) -> str:
     start = time.time()
     
     # Format the meal history for the prompt
