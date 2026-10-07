@@ -11,7 +11,7 @@ logger = logging.getLogger(__name__)
 async def process_nutrion_fact_from_image(file):
     try:
         image_bytes = await file.read()
-        result = analyze_nutrition_facts_from_image(image_bytes, file.content_type)
+        result = await analyze_nutrition_facts_from_image(image_bytes, file.content_type)
         return ServerResponse(name= file.filename, data=result, status="success")
     except Exception as e:
         logger.error(f"Unexpected error from processing image: {e}")

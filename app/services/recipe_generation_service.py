@@ -1,9 +1,7 @@
 # To run this code you need to install the following dependencies:
-# pip install google-genai
 import json
 from app.config import logger
-from google.genai import types
-from app.config import genAiClient, model_lite
+from app.config import generate_json_text, model_lite
 from fastapi import HTTPException
 
 async def get_recipe(food_name: str):
@@ -44,35 +42,20 @@ Now, generate the complete recipe for {food_name}.
 '''
 
     try:
-        contents = [
-            types.Content(
-                role="user",
-                parts=[
-                    types.Part.from_text(text=prompt),
-                ],
-            ),
-        ]
+        response_text = ""
         
-        generate_content_config = types.GenerateContentConfig(
-            thinking_config=types.ThinkingConfig(thinking_budget=10000),  # Fixed: use positive budget
-            response_mime_type="application/json",
-        )
         
         logger.info('genAI config completed')
         
-        response = genAiClient.models.generate_content(
-            model=model_lite,
-            contents=contents,
-            config=generate_content_config,
-        )
+        response_text = await generate_json_text(prompt, model=model_lite)
         # Parse the JSON response string into a Python dictionary
-        result_dict = json.loads(response.text)
+        result_dict = json.loads(response_text)
         print(result_dict)
         return result_dict
         
     except json.JSONDecodeError as e:
         logger.error(f"Failed to parse JSON response: {e}")
-        logger.error(f"Raw response: {response.text}")
+        logger.error(f"Raw response: {response_text}")
         raise HTTPException(status_code=500, detail="Failed to generate valid meal plan response")
     except AttributeError as e:
         logger.error(f"Attribute error - possible missing response: {e}")

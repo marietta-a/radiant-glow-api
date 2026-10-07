@@ -1,15 +1,13 @@
 # To run this code you need to install the following dependencies:
-# pip install google-genai
 
 import json
 from app.config import logger
-from google.genai import types
-from app.config import genAiClient, model, thinking_content_config
+from app.config import generate_json_text, model
 from fastapi import HTTPException
 import time 
 
 
-def analyze_nutrition_facts_from_image(image_bytes: bytes, mime_type: str):
+async def analyze_nutrition_facts_from_image(image_bytes: bytes, mime_type: str):
     
     start = time.time()
     
@@ -215,33 +213,14 @@ IMPORTANT: You must respond with only the JSON object. Do not include any other 
     '''
 
     try:
-        contents = [
-            types.Content(
-                role="user",
-                parts=[
-                    types.Part.from_text(text=prompt),
-                    # types.Part.from_bytes(
-                    #     mime_type="image/jpeg",
-                    #     data=open(image_path, "rb").read(),
-                    # )
-                    types.Part.from_bytes(
-                        mime_type=mime_type,
-                        data=image_bytes,
-                    )
-                ],
-            ),
-        ]
+        response_text = ""
 
 
 
-        response = genAiClient.models.generate_content(
-            model=model,
-            contents=contents,
-            config=thinking_content_config,
-        )
+        response_text = await generate_json_text(prompt, image_bytes=image_bytes, mime_type=mime_type)
         
         # Parse the JSON response string into a Python dictionary
-        result_dict = json.loads(response.text)
+        result_dict = json.loads(response_text)
         end = time.time()
         elapsed = end - start
 
@@ -251,7 +230,7 @@ IMPORTANT: You must respond with only the JSON object. Do not include any other 
         
     except json.JSONDecodeError as e:
         logger.error(f"Failed to parse JSON response for image: {e}")
-        logger.error(f"Raw response: {response.text}")
+        logger.error(f"Raw response: {response_text}")
         raise HTTPException(status_code=500, detail=str(e))
     except Exception as e:
         logger.error(f"Error in analyze_nutrition_facts for image: {e}")
@@ -459,25 +438,14 @@ IMPORTANT: You must respond with only the JSON object. Do not include any other 
     '''
 
     try:
-        contents = [
-            types.Content(
-                role="user",
-                parts=[
-                    types.Part.from_text(text=prompt),
-                ],
-            ),
-        ]
+        response_text = ""
 
         logger.info('genAI config completed')
 
-        response = genAiClient.models.generate_content(
-            model=model,
-            contents=contents,
-            config=thinking_content_config,
-        )
+        response_text = await generate_json_text(prompt, model=model)
         
         # Parse the JSON response string into a Python dictionary
-        result_dict = json.loads(response.text)
+        result_dict = json.loads(response_text)
         
         end = time.time()
         elapsed = end - start
@@ -488,7 +456,7 @@ IMPORTANT: You must respond with only the JSON object. Do not include any other 
         
     except json.JSONDecodeError as e:
         logger.error(f"Failed to parse JSON response for '{food_name}': {e}")
-        logger.error(f"Raw response: {response.text}")
+        logger.error(f"Raw response: {response_text}")
         raise HTTPException(status_code=500, detail=str(e))
     except Exception as e:
         logger.error(f"Error in analyze_nutrition_facts for '{food_name}': {e}")

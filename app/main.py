@@ -23,7 +23,7 @@ app.add_middleware(
 
 
 @app.get("/api/images-generation")
-async def get_images_generation(query: str, limit: int = 2):
+async def get_images_generation(query: str, limit: int = 1):
     return await process_image_generation(query=query,limit=limit)
 
 @app.get("/api/images")
