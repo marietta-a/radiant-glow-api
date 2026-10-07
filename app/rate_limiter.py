@@ -29,6 +29,13 @@ class RateLimiter:
     def record(self) -> None:
         self._calls.append(time.monotonic())
 
+    def try_acquire(self) -> bool:
+        """Take a slot if one is free right now; never waits."""
+        if self._wait_time() > 0:
+            return False
+        self.record()
+        return True
+
     async def wait_for_capacity(self) -> None:
         while (wait := self._wait_time()) > 0:
             await asyncio.sleep(wait)

@@ -8,12 +8,16 @@ from typing import Any
 from fastapi import HTTPException
 
 from app.config import generate_json_text, logger
+from app.services.image_generator_service import get_image_url_if_available
 
 MAX_NAME_LENGTH = 2500
 
 NUTRITION_JSON_TEMPLATE = '''{
+  "label": "string (name of the dish/item)",
   "dish": "string",
+  "count": 1,
   "isProcessable": true,
+  "isEdibleDrinkable": true,
   "message": null,
   "emoji": "string",
   "nutrient_proportion": {"protein": "0.30", "carbohydrates": "0.50", "fat": "0.20"},
@@ -23,6 +27,7 @@ NUTRITION_JSON_TEMPLATE = '''{
   "ingredient": [
     {
       "name": "string",
+      "description": "string (max 5 words: its purpose or health benefit)",
       "quantity": "string",
       "emoji": "string",
       "risk_color": "green | yellow | red",
@@ -33,16 +38,18 @@ NUTRITION_JSON_TEMPLATE = '''{
     }
   ],
   "recipe": ["string"],
-  "risk_color": "green | yellow | red"
+  "risk_color": "green | yellow | red",
+  "image_path": null
 }'''
 
 NOT_PROCESSABLE_RULE = (
-    'If the request is not food or drink, or is unsafe to eat or drink, set isProcessable=false and put the '
-    'reason in message. For every other field use "" for strings, "0.00" for proportions, [] for lists and '
+    'If the request is not food or drink, or is unsafe to eat or drink, set isProcessable=false and isEdibleDrinkable=false and put '
+    'the reason in message. For every other field use "" for strings, "0.00" for proportions, [] for lists and '
     '"green" for risk_color. If it is processable, message must be null.'
 )
 
 NUTRITION_RULES = f'''- {NOT_PROCESSABLE_RULE}
+- label and dish are both the name of the dish/item; count is 1 unless several of it are present. isEdibleDrinkable is true when it is processable.
 - calories_aggregate is a string in kcal/serving, e.g. "350 kcal/serving".
 - nutrient_proportion values are strings that add up to about 1.00, e.g. "0.40".
 - Keep it concise: 2-3 health_benefit and 2-3 health_risk items per dish and per ingredient, one short sentence each.
@@ -96,8 +103,11 @@ def unwrap_list(data: Any, key: str) -> list:
 
 def not_processable(message: str | None) -> dict:
     return {
+        "label": "",
         "dish": "",
+        "count": 0,
         "isProcessable": False,
+        "isEdibleDrinkable": False,
         "message": message,
         "emoji": "",
         "nutrient_proportion": {},
@@ -119,3 +129,58 @@ def extract_svg(text: str | None) -> str | None:
     if not match or _UNSAFE_SVG.search(match.group(0)):
         return None
     return match.group(0)
+
+
+REQUIRED_NUTRITION_FIELDS = (
+    "label", "dish", "isProcessable", "emoji", "nutrient_proportion", "calories_aggregate",
+    "health_benefit", "health_risk", "ingredient", "recipe", "risk_color",
+)
+_NUTRITION_DEFAULTS: dict[str, Any] = {
+    "label": "", "dish": "", "count": 1, "isEdibleDrinkable": True, "message": None, "emoji": "",
+    "nutrient_proportion": {}, "calories_aggregate": "", "health_benefit": [], "health_risk": [],
+    "ingredient": [], "recipe": [], "risk_color": "yellow",
+}
+
+
+def _is_complete(result: dict) -> bool:
+    return all(result.get(f) not in (None, "", [], {}) for f in REQUIRED_NUTRITION_FIELDS)
+
+
+async def generate_nutrition(prompt: str, *, attempts: int = 3, **llm_kwargs) -> dict:
+    """Run a nutrition prompt and return one result object with every field the app reads.
+
+    The model sometimes drops fields (e.g. recipe, risk_color), so incomplete answers are retried;
+    after the last attempt the best one is returned with the missing fields defaulted.
+    """
+    best: dict | None = None
+    for _ in range(attempts):
+        results = unwrap_list(await llm_json(prompt, **llm_kwargs), "results")
+        if not results or not isinstance(results[0], dict):
+            continue
+        result = results[0]
+        if result.get("isProcessable") is False:
+            return not_processable(result.get("message"))
+        if best is None or sum(f in result for f in REQUIRED_NUTRITION_FIELDS) > sum(f in best for f in REQUIRED_NUTRITION_FIELDS):
+            best = result
+        if _is_complete(result):
+            break
+    if best is None:
+        raise HTTPException(status_code=502, detail="The AI model returned no results")
+    for key, default in _NUTRITION_DEFAULTS.items():
+        if best.get(key) is None:
+            best[key] = default
+    best["label"] = best["label"] or best["dish"]
+    best["dish"] = best["dish"] or best["label"]
+    best["image_path"] = await find_dish_image(best["label"])
+    return best
+
+
+async def find_dish_image(dish: str) -> str | None:
+    """Image URL for the dish, looked up after the model responds; None if no provider has capacity."""
+    if not dish:
+        return None
+    try:
+        return await get_image_url_if_available(f"{dish} food dish")
+    except Exception as e:
+        logger.warning(f"Image lookup failed for '{dish}': {e}")
+        return None

@@ -3,7 +3,7 @@ from __future__ import annotations
 
 from app.config import model, vision_model
 from app.services.radiantglow.common import (
-    NUTRITION_JSON_TEMPLATE, NUTRITION_RULES, llm_json, not_processable, unwrap_list,
+    NUTRITION_JSON_TEMPLATE, NUTRITION_RULES, generate_nutrition,
 )
 
 
@@ -17,10 +17,4 @@ Rules:
 
 Return a single JSON object with this shape:
 {NUTRITION_JSON_TEMPLATE}'''
-    data = await llm_json(prompt, model=vision_model, image_bytes=image_bytes, mime_type=mime_type)
-    results = unwrap_list(data, "results")
-    if not results:
-        raise ValueError("Model returned no results")
-    if results[0].get("isProcessable") is False:
-        return [not_processable(results[0].get("message"))]
-    return results
+    return [await generate_nutrition(prompt, model=vision_model, image_bytes=image_bytes, mime_type=mime_type)]

@@ -20,7 +20,7 @@ CACHE_MAX_ENTRIES = 1000
 DDG_PROXY_ATTEMPTS = 4
 QUEUE_TIMEOUT = 45  # max seconds a request waits in the queue for provider capacity
 PROVIDER_CONCURRENCY = 5  # simultaneous in-flight calls per provider
-LAST_RESORT = {"duckduckgo"}  # slow/unreliable: only tried after every other provider fails
+PRIORITY = {"wikimedia": 0, "duckduckgo": 2}  # lower is tried first; everything else is 1 (duckduckgo is slow/unreliable)
 
 
 class RateLimitedError(Exception):
@@ -175,6 +175,7 @@ _PROVIDERS = [
     ("brave", "BRAVE_API_KEY", _search_brave, (1, 1.1)),
 ]
 
+_limiters = {name: RateLimiter(calls, period) for name, _key, _fn, (calls, period) in _PROVIDERS}
 _blocked_until: dict[str, float] = {}
 _cache: dict[tuple[str, int], tuple[float, list[str]]] = {}
 
@@ -204,18 +205,21 @@ def _configured_names() -> set[str]:
     return {name for name, key_env, _fn, _limit in _PROVIDERS if _is_configured(key_env)}
 
 
+def _rank(name: str) -> int:
+    return PRIORITY.get(name, 1)
+
+
 def _eligible(job: _Job, name: str) -> bool:
     if name in job.tried:
         return False
-    if name in LAST_RESORT:
-        # Only after every healthy primary provider has already been tried for this job.
-        now = time.monotonic()
-        primary = {
-            n for n, key_env, _fn, _limit in _PROVIDERS
-            if n not in LAST_RESORT and _is_configured(key_env) and _blocked_until.get(n, 0) <= now
-        }
-        return primary <= job.tried
-    return True
+    # Only after every healthy provider ranked above it (see PRIORITY) has been tried.
+    now = time.monotonic()
+    rank = _rank(name)
+    higher = {
+        n for n, key_env, _fn, _limit in _PROVIDERS
+        if _rank(n) < rank and _is_configured(key_env) and _blocked_until.get(n, 0) <= now
+    }
+    return higher <= job.tried
 
 
 def _ensure_workers() -> None:
@@ -229,7 +233,7 @@ def _ensure_workers() -> None:
     _worker_tasks.clear()
     for name, key_env, fn, (calls, period) in _PROVIDERS:
         if _is_configured(key_env):
-            _worker_tasks.append(loop.create_task(_provider_worker(name, fn, RateLimiter(calls, period))))
+            _worker_tasks.append(loop.create_task(_provider_worker(name, fn, _limiters[name])))
 
 
 async def _provider_worker(name: str, fn, limiter: RateLimiter) -> None:
@@ -324,3 +328,39 @@ async def get_image_urls(query: str, num_images: int = 2) -> list[str]:
 async def get_duckduckgo_image_urls(query: str, num_images: int = 2) -> list[str]:
     """Kept for backwards compatibility; now distributes across all providers."""
     return await get_image_urls(query, num_images)
+
+
+
+# Unsplash is skipped here: its terms require showing photographer credit next to the photo, and a
+# bare image_path string has nowhere to carry it.
+NO_CREDIT_REQUIRED = {"wikimedia", "pexels", "pixabay", "brave", "duckduckgo"}
+
+
+async def get_image_url_if_available(query: str) -> str | None:
+    """One image URL for the query, or None. Never queues or waits for rate limit capacity.
+
+    Tries each configured, healthy provider that is under its rate limit right now (wikimedia first,
+    duckduckgo last); returns None when every provider is exhausted or fails.
+    """
+    cache_key = (query.strip().lower(), 1)
+    cached = _cache.get(cache_key)
+    if cached and cached[1] and time.monotonic() - cached[0] < CACHE_TTL:
+        return cached[1][0]
+
+    for name, key_env, fn, _limit in sorted(_PROVIDERS, key=lambda p: _rank(p[0])):
+        if name not in NO_CREDIT_REQUIRED or not _is_configured(key_env):
+            continue
+        if _blocked_until.get(name, 0) > time.monotonic() or not _limiters[name].try_acquire():
+            continue
+        try:
+            urls = await asyncio.to_thread(fn, query, 1)
+        except Exception as e:
+            _blocked_until[name] = time.monotonic() + RATE_LIMIT_COOLDOWN
+            logger.warning("Image provider %s failed (%s); cooling down", name, e)
+            continue
+        if urls:
+            if len(_cache) >= CACHE_MAX_ENTRIES:
+                _cache.pop(next(iter(_cache)))
+            _cache[cache_key] = (time.monotonic(), urls[:1])
+            return urls[0]
+    return None

@@ -3,7 +3,7 @@ from __future__ import annotations
 
 from app.config import model_lite
 from app.services.radiantglow.common import (
-    NUTRITION_JSON_TEMPLATE, NUTRITION_RULES, clean_name, llm_json, not_processable, unwrap_list,
+    NUTRITION_JSON_TEMPLATE, NUTRITION_RULES, clean_name, generate_nutrition,
 )
 
 
@@ -21,9 +21,4 @@ Return a single JSON object with this shape:
 {NUTRITION_JSON_TEMPLATE}
 
 Generate the recipe and nutrition data for: {item}'''
-    results = unwrap_list(await llm_json(prompt, model=model_lite), "results")
-    if not results:
-        raise ValueError("Model returned no results")
-    if results[0].get("isProcessable") is False:
-        return not_processable(results[0].get("message"))
-    return results[0]
+    return await generate_nutrition(prompt, model=model_lite)
