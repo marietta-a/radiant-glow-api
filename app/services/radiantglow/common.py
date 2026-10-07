@@ -8,7 +8,6 @@ from typing import Any
 from fastapi import HTTPException
 
 from app.config import generate_json_text, logger
-from app.services.image_generator_service import get_image_url_if_available
 
 MAX_NAME_LENGTH = 2500
 
@@ -38,8 +37,7 @@ NUTRITION_JSON_TEMPLATE = '''{
     }
   ],
   "recipe": ["string"],
-  "risk_color": "green | yellow | red",
-  "image_path": null
+  "risk_color": "green | yellow | red"
 }'''
 
 NOT_PROCESSABLE_RULE = (
@@ -171,16 +169,5 @@ async def generate_nutrition(prompt: str, *, attempts: int = 3, **llm_kwargs) ->
             best[key] = default
     best["label"] = best["label"] or best["dish"]
     best["dish"] = best["dish"] or best["label"]
-    best["image_path"] = await find_dish_image(best["label"])
     return best
 
-
-async def find_dish_image(dish: str) -> str | None:
-    """Image URL for the dish, looked up after the model responds; None if no provider has capacity."""
-    if not dish:
-        return None
-    try:
-        return await get_image_url_if_available(f"{dish} food dish")
-    except Exception as e:
-        logger.warning(f"Image lookup failed for '{dish}': {e}")
-        return None
