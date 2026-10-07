@@ -3,7 +3,6 @@ uvicorn
 requests
 beautifulsoup4
 beautifulsoup4
-google-genai
 pyparsing
 dotenv
 ddgs
@@ -15,3 +14,4 @@ opencv-python
 numpy
 apscheduler
 pydantic
+google-genai

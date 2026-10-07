@@ -5,7 +5,7 @@ import json
 import time
 from app.config import logger
 from google.genai import types
-from app.config import genAiClient, model, image_content_config;
+from app.config import genAiClient, gemini_model as model, image_content_config;
 from fastapi import HTTPException
 
 

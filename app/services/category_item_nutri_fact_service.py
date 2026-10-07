@@ -4,7 +4,7 @@
 import json
 from app.config import logger
 from google.genai import types
-from app.config import genAiClient, model, thinking_content_config
+from app.config import genAiClient, gemini_model as model, thinking_content_config
 from fastapi import HTTPException
 import time 
 from app.models.category_item_payload import CategoryItemPayload;

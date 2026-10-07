@@ -1,9 +1,7 @@
 # To run this code you need to install the following dependencies:
-# pip install google-genai
 import json
 from app.config import logger
-from google.genai import types
-from app.config import genAiClient, model_lite, model, thinking_content_config
+from app.config import generate_json_text, model_lite, model
 from fastapi import HTTPException
 from app.models.meal_plan_payload import MealPlanPayload
 import time
@@ -132,24 +130,13 @@ JSON Template for EACH Meal Suggestion Object:
 '''
 
     try:
-        contents = [
-            types.Content(
-                role="user",
-                parts=[
-                    types.Part.from_text(text=prompt),
-                ],
-            ),
-        ]
+        response_text = ""
         
         logger.info('genAI config completed')
         
-        response = genAiClient.models.generate_content(
-            model=model_lite,
-            contents=contents,
-            config=thinking_content_config,
-        )
+        response_text = await generate_json_text(prompt, model=model_lite)
         # Parse the JSON response string into a Python dictionary
-        result_dict = json.loads(response.text)
+        result_dict = json.loads(response_text)
 
         end = time.time()
         elapsed = end - start
@@ -160,7 +147,7 @@ JSON Template for EACH Meal Suggestion Object:
         
     except json.JSONDecodeError as e:
         logger.error(f"Failed to parse JSON response: {e}")
-        logger.error(f"Raw response: {response.text}")
+        logger.error(f"Raw response: {response_text}")
         raise HTTPException(status_code=500, detail="Failed to generate valid meal plan response")
     except AttributeError as e:
         logger.error(f"Attribute error - possible missing response: {e}")
