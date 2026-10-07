@@ -40,9 +40,11 @@ supabaseUserId = os.environ.get("SUPABASE_USER_ID")
 gemini_model = "gemini-flash-lite-latest"
 mavita_model = "gemini-3-flash-preview"
 
+# ImageConfig.image_size only exists in newer google-genai releases (not available on Python 3.9).
+_image_config = types.ImageConfig(image_size="1K") if "image_size" in types.ImageConfig.model_fields else None
 image_content_config = types.GenerateContentConfig(
     thinking_config=types.ThinkingConfig(thinking_budget=0),
-    image_config=types.ImageConfig(image_size="1K"),
+    image_config=_image_config,
     response_mime_type="application/json",
 )
 thinking_content_config = types.GenerateContentConfig(
@@ -94,8 +96,14 @@ def _generate_json_text_sync(prompt: str, model_name: str, image_bytes: bytes | 
             logger.warning(f"LLM rate limited, retrying in {wait}s")
             time.sleep(min(wait, 20))
             continue
+        # The model sometimes returns an empty/invalid JSON generation; a retry normally succeeds
+        if response.status_code == 400 and "json_validate_failed" in response.text and attempt < LLM_MAX_RETRIES - 1:
+            logger.warning(f"LLM returned invalid JSON for {model_name}, retrying")
+            continue
+        if not response.ok:
+            logger.error(f"LLM request failed ({response.status_code}) for {model_name}: {response.text[:500]}")
         response.raise_for_status()
-        text = response.json()["choices"][0]["message"]["content"].strip()
+        text =response.json()["choices"][0]["message"]["content"].strip()
         # Some models wrap JSON in markdown fences despite JSON mode
         return re.sub(r"^```(?:json)?\s*|\s*```$", "", text)
 
