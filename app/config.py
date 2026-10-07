@@ -29,8 +29,9 @@ model_lite = os.environ.get("LLM_MODEL_LITE", "openai/gpt-oss-20b")
 vision_model = os.environ.get("LLM_VISION_MODEL", "qwen/qwen3.8-27b")
 
 # Gemini is still used by the Mavita and category-item nutrition services.
-genAiClient = genai.Client(api_key=os.environ.get("GEMINI_API_KEY"))
 genAiKey = os.environ.get("GEMINI_API_KEY")
+# Optional: only created when a key is set, so Groq-only setups can still start.
+genAiClient = genai.Client(api_key=genAiKey) if genAiKey else None
 
 supabaseUrl = os.environ.get("SUPABASE_URL")
 supabaseAnonKey = os.environ.get("SUPABASE_ANON_API_KEY")
