@@ -24,6 +24,8 @@ class RateLimiter:
             self._calls.popleft()
         if len(self._calls) < self.max_calls:
             return 0.0
+        if not self._calls:  # max_calls <= 0: nothing is ever allowed
+            return self.period
         return self._calls[0] + self.period - now
 
     def record(self) -> None:

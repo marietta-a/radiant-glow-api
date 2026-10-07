@@ -9,7 +9,7 @@ from app.models.radiantglow.payloads import (
 )
 from app.models.server_response import ServerResponse
 from app.services.radiantglow import (
-    category_service, image_analysis_service, insights_service, item_service,
+    category_service, image_analysis_service, image_search_service, insights_service, item_service,
     meal_items_service, recipe_service, recipe_store_service,
 )
 from app.services.radiantglow.common import MAX_NAME_LENGTH, clean_name
@@ -78,6 +78,11 @@ async def dish_items(dish: str = Query(..., max_length=MAX_NAME_LENGTH)):
 @router.get("/search")
 async def search(q: str = Query("", max_length=MAX_NAME_LENGTH)):
     return _ok(q, await item_service.search_items(q))
+
+
+@router.get("/image-path")
+async def image_path(item: str = Query(..., max_length=MAX_NAME_LENGTH)):
+    return _ok(item, await image_search_service.search_image(item))
 
 
 @router.get("/item-svg")
