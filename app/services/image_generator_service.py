@@ -331,24 +331,25 @@ async def get_duckduckgo_image_urls(query: str, num_images: int = 2) -> list[str
 
 
 
-# Unsplash is skipped here: its terms require showing photographer credit next to the photo, and a
-# bare image_path string has nowhere to carry it.
-NO_CREDIT_REQUIRED = {"wikimedia", "pexels", "pixabay", "brave", "duckduckgo"}
-
-
 async def get_image_url_if_available(query: str) -> str | None:
-    """One image URL for the query, or None. Never queues or waits for rate limit capacity.
+    """One image URL for the query, or None. See find_image_if_available."""
+    return (await find_image_if_available(query))[0]
 
-    Tries each configured, healthy provider that is under its rate limit right now (wikimedia first,
-    duckduckgo last); returns None when every provider is exhausted or fails.
+
+async def find_image_if_available(query: str) -> tuple[str | None, dict | None]:
+    """(image URL, attribution) for the query; (None, None) if nothing is available.
+
+    Never queues or waits for rate limit capacity: tries each configured, healthy provider that is
+    under its rate limit right now (wikimedia first, duckduckgo last) and gives up when all are
+    exhausted or fail. The attribution is set for Unsplash photos, which must be credited in the UI.
     """
     cache_key = (query.strip().lower(), 1)
     cached = _cache.get(cache_key)
     if cached and cached[1] and time.monotonic() - cached[0] < CACHE_TTL:
-        return cached[1][0]
+        return _served(cached[1][0])
 
     for name, key_env, fn, _limit in sorted(_PROVIDERS, key=lambda p: _rank(p[0])):
-        if name not in NO_CREDIT_REQUIRED or not _is_configured(key_env):
+        if not _is_configured(key_env):
             continue
         if _blocked_until.get(name, 0) > time.monotonic() or not _limiters[name].try_acquire():
             continue
@@ -362,5 +363,10 @@ async def get_image_url_if_available(query: str) -> str | None:
             if len(_cache) >= CACHE_MAX_ENTRIES:
                 _cache.pop(next(iter(_cache)))
             _cache[cache_key] = (time.monotonic(), urls[:1])
-            return urls[0]
-    return None
+            return _served(urls[0])
+    return None, None
+
+
+def _served(url: str) -> tuple[str, dict | None]:
+    _track_unsplash_downloads([url])
+    return url, get_image_credits([url]).get(url)

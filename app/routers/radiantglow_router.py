@@ -82,7 +82,7 @@ async def search(q: str = Query("", max_length=MAX_NAME_LENGTH)):
 
 @router.get("/image-path")
 async def image_path(item: str = Query(..., max_length=MAX_NAME_LENGTH)):
-    return _ok(item, {"image_path": await image_search_service.search_image_path(item)})
+    return _ok(item, await image_search_service.search_image(item))
 
 
 @router.get("/item-svg")
