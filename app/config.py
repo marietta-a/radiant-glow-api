@@ -9,6 +9,8 @@ import time
 
 import requests
 from dotenv import load_dotenv
+from google import genai
+from google.genai import types
 
 from app.rate_limiter import RateLimiter
 
@@ -25,6 +27,27 @@ LLM_API_KEY = os.environ.get("LLM_API_KEY") or os.environ.get("GROQ_API_KEY")
 model = os.environ.get("LLM_MODEL", "openai/gpt-oss-120b")
 model_lite = os.environ.get("LLM_MODEL_LITE", "openai/gpt-oss-20b")
 vision_model = os.environ.get("LLM_VISION_MODEL", "qwen/qwen3.8-27b")
+
+# Gemini is still used by the Mavita and category-item nutrition services.
+genAiClient = genai.Client(api_key=os.environ.get("GEMINI_API_KEY"))
+genAiKey = os.environ.get("GEMINI_API_KEY")
+
+supabaseUrl = os.environ.get("SUPABASE_URL")
+supabaseAnonKey = os.environ.get("SUPABASE_ANON_API_KEY")
+supabaseUserId = os.environ.get("SUPABASE_USER_ID")
+
+gemini_model = "gemini-flash-lite-latest"
+mavita_model = "gemini-3-flash-preview"
+
+image_content_config = types.GenerateContentConfig(
+    thinking_config=types.ThinkingConfig(thinking_budget=0),
+    image_config=types.ImageConfig(image_size="1K"),
+    response_mime_type="application/json",
+)
+thinking_content_config = types.GenerateContentConfig(
+    thinking_config=types.ThinkingConfig(thinking_budget=0),
+    response_mime_type="application/json",
+)
 
 # Groq's free tier allows ~30 requests/minute per model; stay under it and queue the rest.
 LLM_REQUESTS_PER_MINUTE = int(os.environ.get("LLM_REQUESTS_PER_MINUTE", 25))

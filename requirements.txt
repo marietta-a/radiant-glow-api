@@ -7,3 +7,11 @@ pyparsing
 dotenv
 ddgs
 python-multipart
+supabase
+torch 
+torchvision 
+opencv-python 
+numpy
+apscheduler
+pydantic
+google-genai

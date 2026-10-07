@@ -3,29 +3,36 @@ import json
 from app.config import logger
 from app.config import generate_json_text, model_lite
 from fastapi import HTTPException
+import time
 
 async def get_recipe(food_name: str):
     
+    start = time.time()
     prompt = f'''
 The Prompt
-You are a recipe generation AI. Your task is to generate the ingredients and recipe steps for a specific dish and format the output as a single, valid JSON object.
-Dish to Generate:
-"Fruit Skewers with a Roasted Sweet Potato with Cinnamon"
+
+IMPORTANT:
+NOTE: INORDER TO GENERATE RECIPE, ENSURE {food_name} IS A CONSUMABLE ITEM. IF IT IS NONCONSUMABLE, OUTPUT SHOULD BE NULL
+
+You are a recipe generation AI. Your task is to generate the ingredients and recipe steps for {food_name} and format the output as a single, valid JSON object.
+Item to Generate: {food_name}
+
 Output Constraints & Instructions:
 Strict JSON Format: The output MUST be a single JSON object with two top-level keys: ingredient and recipe.
 Ingredient Details:
 The ingredient key must contain an array of objects.
-List all necessary ingredients for both the fruit skewers and the roasted sweet potato.
-For each ingredient object, provide the name, a helpful explanation of its purpose or health benefit (if applicable), an appropriate emoji, and a realistic quantity.
+List all necessary ingredients for {food_name}
+For each ingredient object, provide the name, a helpful explanation (with a max of 5 words) of its purpose or health benefit (if applicable), an appropriate emoji, and a realistic quantity.
 Recipe Steps:
 The recipe key must contain an array of strings.
-Provide clear, step-by-step instructions. Structure the steps logically, such as preparing and roasting the sweet potato first, then assembling the fruit skewers while it cooks.
-The final step should describe how to serve the two components together.
+Provide clear, step-by-step instructions. Structure the steps logically.
+The final step should describe how to serve the components together.
 Template Adherence: Strictly follow the JSON structure provided below.
 JSON Output Template:
 code
 ```json
 {{
+  "name": {food_name},
   "ingredient": [
     {{
       "name": "string",
@@ -38,6 +45,7 @@ code
     "string"
   ]
 }}
+
 Now, generate the complete recipe for {food_name}.
 '''
 
