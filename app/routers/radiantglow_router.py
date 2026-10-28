@@ -81,8 +81,11 @@ async def search(q: str = Query("", max_length=MAX_NAME_LENGTH)):
 
 
 @router.get("/image-path")
-async def image_path(item: str = Query(..., max_length=MAX_NAME_LENGTH)):
-    return _ok(item, await image_search_service.search_image(item))
+async def image_path(
+    item: str = Query(..., max_length=MAX_NAME_LENGTH),
+    provider: str | None = Query(None, pattern="^[a-z]{1,20}$"),
+):
+    return _ok(item, await image_search_service.search_image(item, provider))
 
 
 @router.get("/item-svg")

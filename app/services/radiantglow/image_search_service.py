@@ -6,7 +6,7 @@ from app.services.image_generator_service import find_image_if_available
 from app.services.radiantglow.common import clean_name
 
 
-async def get_image(item: str) -> dict:
+async def get_image(item: str, provider: str | None = None) -> dict:
     """{"image_path": url | None, "credit": attribution | None} for the item.
 
     credit is set for Unsplash photos and must be shown next to them ("Photo by <photographer> on
@@ -15,7 +15,7 @@ async def get_image(item: str) -> dict:
     item = (item or "").strip()
     if item:
         try:
-            url, credit = await find_image_if_available(f"{item} food dish")
+            url, credit = await find_image_if_available(f"{item} food dish", provider)
             return {"image_path": url, "credit": credit}
         except Exception as e:
             logger.warning(f"Image lookup failed for '{item}': {e}")
@@ -27,6 +27,6 @@ async def get_image_path(item: str) -> str | None:
     return (await get_image(item))["image_path"]
 
 
-async def search_image(item: str) -> dict:
+async def search_image(item: str, provider: str | None = None) -> dict:
     """Same as get_image for user input: rejects empty or oversized names first."""
-    return await get_image(clean_name(item, "item"))
+    return await get_image(clean_name(item, "item"), provider)

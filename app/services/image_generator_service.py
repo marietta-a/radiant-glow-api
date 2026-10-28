@@ -336,19 +336,22 @@ async def get_image_url_if_available(query: str) -> str | None:
     return (await find_image_if_available(query))[0]
 
 
-async def find_image_if_available(query: str) -> tuple[str | None, dict | None]:
+async def find_image_if_available(query: str, provider: str | None = None) -> tuple[str | None, dict | None]:
     """(image URL, attribution) for the query; (None, None) if nothing is available.
 
     Never queues or waits for rate limit capacity: tries each configured, healthy provider that is
     under its rate limit right now (wikimedia first, duckduckgo last) and gives up when all are
     exhausted or fail. The attribution is set for Unsplash photos, which must be credited in the UI.
+    With `provider`, only that provider is tried (e.g. "unsplash", whose photos the app shows with credit).
     """
-    cache_key = (query.strip().lower(), 1)
+    cache_key = (query.strip().lower(), 1) if provider is None else (query.strip().lower(), 1, provider)
     cached = _cache.get(cache_key)
     if cached and cached[1] and time.monotonic() - cached[0] < CACHE_TTL:
         return _served(cached[1][0])
 
     for name, key_env, fn, _limit in sorted(_PROVIDERS, key=lambda p: _rank(p[0])):
+        if provider is not None and name != provider:
+            continue
         if not _is_configured(key_env):
             continue
         if _blocked_until.get(name, 0) > time.monotonic() or not _limiters[name].try_acquire():
